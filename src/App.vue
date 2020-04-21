@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="wrapper">
-      <navigation></navigation>
+      <navigation :cartLength="GET_CART_LENGTH"></navigation>
       <div class="content">
         <router-view/>
       </div>
@@ -14,7 +14,7 @@
 
 import Navigation from './components/Home/Navigation'
 import Footer from './components/Home/Footer'
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 export default {
   components: {
     Navigation,
@@ -26,16 +26,20 @@ export default {
     }
   },
   computed: {
+    ...mapGetters([
+      'GET_CART_LENGTH'
+    ])
 
   },
   methods: {
     ...mapActions([
-      'GET_CART_ID_FROM_API'
+      'GET_CART_ID_FROM_API',
+      'GET_CART_LIST_FROM_API'
     ])
   },
   mounted () {
     this.GET_CART_ID_FROM_API()
-    console.log('asdasd')
+    this.GET_CART_LIST_FROM_API()
   }
 }
 </script>

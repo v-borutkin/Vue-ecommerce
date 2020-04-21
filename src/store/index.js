@@ -11,7 +11,7 @@ import comments from './comments'
 import cart from './cart'
 
 Vue.use(Vuex)
-export default new Vuex.Store({
+export default new Vuex.Store({ // TODO сделать единый отлов ошибок
   namespaced: true,
   state: {},
   mutations: {},

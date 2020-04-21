@@ -16,7 +16,7 @@
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
             <router-link class="ml-2 mt-2" to="/cart">
-              <button class="btn btn-primary">Корзина</button>
+              <button class="btn btn-primary"> {{cartLength}} Корзина</button>
             </router-link>
           <b-nav-item-dropdown right v-if="IS_AUTH">
             <!-- Using 'button-content' slot -->
@@ -41,6 +41,7 @@
 import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'Navigation',
+  props: ['cartLength'],
   computed: {
     getLinks () {
       return this.$store.getters.getNavLinks // TODO пофиксить

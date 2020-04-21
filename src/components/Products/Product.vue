@@ -19,7 +19,7 @@
           <b-card-text>
             {{product.short_text}}
           </b-card-text>
-          <b-button variant="outline-success" @click="addCart(product.id)">
+          <b-button variant="outline-success" @click="ADD_TO_CART(product.id)">
             To cart
           </b-button>
         </b-card>
@@ -39,11 +39,7 @@ export default {
   methods: {
     ...mapActions([
       'ADD_TO_CART'
-    ]),
-    addCart (id) {
-      this.ADD_TO_CART(id)
-      this.$emit('click', id)
-    }
+    ])
   }
 }
 </script>

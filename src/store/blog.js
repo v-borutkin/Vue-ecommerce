@@ -43,6 +43,9 @@ export default {
     GET_POST: state => { // TODO фикс
       return state.post
     },
+    /**
+     * @return {number}
+     */
     GET_PAGINATION_COUNT (state) {
       return state.paginationCount
     }

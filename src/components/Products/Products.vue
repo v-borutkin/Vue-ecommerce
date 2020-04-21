@@ -1,6 +1,5 @@
 <template>
     <b-container >
-      {{clickAdd}}
       <b-col>
         <div class="d-flex flex-row flex-wrap">
           <div v-for="product in GET_PRODUCTS" :key="product.id">
