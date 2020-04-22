@@ -7,9 +7,8 @@ Vue.use(Vuex)
 export default {
   state: {
     cartId: '',
-    cartList: [
-
-    ]
+    totalPrice: 0,
+    cartList: []
   },
   mutations: {
     SET_CART_ID (state, payload) {
@@ -20,12 +19,15 @@ export default {
     }
   },
   getters: {
+    GET_TOTAL_PRICE (state) {
+      state.cartList.forEach(item => {
+        state.totalPrice += item.amount * item.quantity
+      })
+      return state.totalPrice
+    },
     getCartId (state) {
       return state.cartId
     },
-    /**
-     * @return {number}
-     */
     GET_CART_LENGTH (state) {
       return state.cartList.length
     },

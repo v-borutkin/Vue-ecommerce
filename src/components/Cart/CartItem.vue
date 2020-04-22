@@ -1,5 +1,4 @@
 <template>
-  <div class="container">
     <div v-if="GET_CART_LIST.length" class="card shopping-cart">
       <div class="card-body">
         <!-- PRODUCT -->
@@ -36,54 +35,30 @@
           </div>
         </div>
         <hr>
-        <!-- END PRODUCT -->
       </div>
-      <div class="card-footer">
-        <div class="coupon col-md-5 col-sm-5 no-padding-left pull-left">
-          <div class="row">
-            <div class="col-6">
-              <input type="text" class="form-control" placeholder="cupone code">
-            </div>
-            <div class="col-6">
-              <input type="submit" class="btn btn-info" value="Use cupone">
-            </div>
-          </div>
-        </div>
-        <div class="pull-right" style="margin: 10px">
-          <button class="btn btn-success pull-right">Оформить заказ</button>
-          <div class="pull-right" style="margin: 5px">
-            Total price: <b>{{GET_TOTAL_PRICE}}</b>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div v-else class="card">
-      <h2>Пустая корзина</h2>
-    </div>
-  </div>
+    </div>ё
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
-export default {
-  name: 'Cart',
-  data () {
-    return {
-      count: 1
+  import { mapGetters, mapActions } from 'vuex'
+  export default {
+    name: 'Cart',
+    data () {
+      return {
+        count: 1
+      }
+    },
+    methods: {
+      ...mapActions([
+        'DELETE_FROM_CART'
+      ])
+    },
+    computed: {
+      ...mapGetters([
+        'GET_TOTAL_PRICE'
+      ])
     }
-  },
-  methods: {
-    ...mapActions([
-      'DELETE_FROM_CART'
-    ])
-  },
-  computed: {
-    ...mapGetters([
-      'GET_CART_LIST',
-      'GET_TOTAL_PRICE'
-    ])
   }
-}
 </script>
 
 <style scoped>
