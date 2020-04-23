@@ -6,34 +6,19 @@
       <h6>{{ GET_POST.author }}</h6>
       <p>{{ GET_POST.text }}</p>
     </b-card>
-    <div class="container bootstrap snippet" v-if="GET_COMMENTS.length">
-        <div class="col-md-12">
-          <div class="blog-comment">
-            <h3 class="text-success mt-3">Comments</h3>
-            <hr/>
-            <ul class="comments">
-              <li class="clearfix" v-for="comment in GET_COMMENTS" :key="comment.id">
-                <img src="https://bootdey.com/img/Content/user_1.jpg" class="avatar" alt="">
-                <div class="post-comments">
-                  <p class="meta">{{comment.created_date | datefilter}} <a href="#">{{comment.author}}</a> says : <i class="pull-right"><a href="#"><small>Reply</small></a></i></p>
-                  <p>
-                    {{comment.text}}
-                  </p>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-    </div>
+    <comments   v-if="GET_COMMENTS.length" :comments="GET_COMMENTS"/>
   </b-container>
 </template>
 
 <script>
+import Comments from './Comments'
 import { mapActions, mapGetters } from 'vuex'
 export default {
   props: ['id'],
   name: 'Post',
-
+  components: {
+    Comments
+  },
   data () {
     return {
     }
@@ -43,11 +28,6 @@ export default {
       'GET_POST_FROM_API',
       'GET_COMMENTS_FROM_API'
     ])
-  },
-  filters: {
-    datefilter (value) {
-      return value.toString().replace('T', ' ').substr(0, 19)
-    }
   },
   computed: {
     ...mapGetters([

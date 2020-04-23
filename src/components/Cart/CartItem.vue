@@ -36,29 +36,29 @@
         </div>
         <hr>
       </div>
-    </div>ё
+    </div>
 </template>
 
 <script>
-  import { mapGetters, mapActions } from 'vuex'
-  export default {
-    name: 'Cart',
-    data () {
-      return {
-        count: 1
-      }
-    },
-    methods: {
-      ...mapActions([
-        'DELETE_FROM_CART'
-      ])
-    },
-    computed: {
-      ...mapGetters([
-        'GET_TOTAL_PRICE'
-      ])
+import { mapGetters, mapActions } from 'vuex'
+export default {
+  name: 'Cart',
+  data () {
+    return {
+      count: 1
     }
+  },
+  methods: {
+    ...mapActions([
+      'DELETE_FROM_CART'
+    ])
+  },
+  computed: {
+    ...mapGetters([
+      'GET_TOTAL_PRICE'
+    ])
   }
+}
 </script>
 
 <style scoped>

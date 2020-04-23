@@ -1,5 +1,5 @@
 <template>
-
+<h1>регистратион</h1>
 </template>
 
 <script>
