@@ -19,7 +19,7 @@ export default {
     }
   },
   actions: {
-    async AUTH ({ commit }, { username, password }) {
+    async AUTH ({ commit, dispatch }, { username, password }) {
       try {
         const postsApi = await Axios.post('/rest-auth/login/', {
           username: username,
@@ -28,13 +28,15 @@ export default {
         if (postsApi.data.key) {
           localStorage.setItem('token', postsApi.data.key)
           commit('AUTH', true)
+          dispatch('GET_CART_LIST_FROM_API')
         }
       } catch (e) {
       }
     },
-    LOGOUT ({ commit }) {
+    LOGOUT ({ commit, dispatch }) {
       commit('AUTH', false)
       localStorage.removeItem('token')
+      dispatch('CART_LIST_CLEAR')
     },
     TO_AUTH ({ commit }) {
       commit('AUTH', true)

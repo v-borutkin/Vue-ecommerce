@@ -16,6 +16,9 @@ export default {
     },
     SET_CART_LIST (state, payload) {
       state.cartList = payload
+    },
+    CART_LIST_CLEAR (state, payload) {
+      state.cartList = payload
     }
   },
   getters: {
@@ -56,6 +59,9 @@ export default {
     async DELETE_FROM_CART ({ commit, dispatch }, payload) {
       await Axios.delete(`/cart-edit/${payload}`)
       dispatch('GET_CART_LIST_FROM_API')
+    },
+    async CART_LIST_CLEAR ({ commit }) {
+      commit('CART_LIST_CLEAR', [])
     }
   }
 }

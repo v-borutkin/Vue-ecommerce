@@ -60,7 +60,7 @@ export default {
     border: 1px solid #eee;
     margin-bottom: 20px;
     margin-left: 85px;
-    margin-right: 0px;
+    margin-right: 0;
     padding: 10px 20px;
     position: relative;
     -webkit-border-radius: 4px;
@@ -69,7 +69,6 @@ export default {
     border-radius: 4px;
     background: #fff;
     color: #6b6e80;
-    position: relative;
   }
 
   .blog-comment .meta {
