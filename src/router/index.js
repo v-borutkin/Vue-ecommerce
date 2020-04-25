@@ -1,21 +1,21 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '@/components/Home/home'
-import Posts from '@/components/Blog/Posts'
-import Products from '@/components/Products/Products'
-import Post from '@/components/Blog/Post'
-import FavoriteList from '@/components/Favorite/FavoriteList'
-import FavoriteItem from '@/components/Favorite/FavoriteItem'
-import ProductCard from '@/components/Products/ProductCard'
-import Auth from '@/components/auth/Auth'
-import Cart from '@/components/Cart/Cart'
+const Posts = () => import('@/components/Blog/Posts')
+const Products = () => import('@/components/Products/Products')
+const Post = () => import('@/components/Blog/Post')
+const FavoriteList = () => import('@/components/Favorite/FavoriteList')
+const FavoriteItem = () => import('@/components/Favorite/FavoriteItem')
+const ProductCard = () => import('@/components/Products/ProductCard')
+const Auth = () => import('@/components/auth/Auth')
+const Cart = () => import('@/components/Cart/Cart')
+const Home = () => import('@/components/Home/home')
 
 Vue.use(VueRouter)
 
 const routes = [
 
   { path: '/', name: 'Home', component: Home },
-  { path: '/blog', name: 'Posts', component: Posts },
+  { path: '/blog', name: 'Blog', component: Posts },
   { path: '/products', name: 'Products', component: Products },
   { path: '/products/:id', name: 'Product', component: ProductCard, props: true },
   { path: '/blog/:id', name: 'Post', component: Post, props: true },

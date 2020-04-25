@@ -6,7 +6,11 @@
       <h6>{{ GET_POST.author }}</h6>
       <p>{{ GET_POST.text }}</p>
     </b-card>
-    <comments   v-if="GET_COMMENTS.length" :comments="GET_COMMENTS"/>
+    <comments   v-if="GET_COMMENTS.length"
+                :comments="GET_COMMENTS"
+                v-on:click="click"
+                v-on:sendMessage="sendmessage"
+    />
   </b-container>
 </template>
 
@@ -27,12 +31,21 @@ export default {
     ...mapActions([
       'GET_POST_FROM_API',
       'GET_COMMENTS_FROM_API'
-    ])
+    ]),
+    click () {
+      if (!this.IS_AUTH) {
+        alert('Для отправки комментария авторизуйтесь')
+      }
+    },
+    sendMessage (message) {
+      console.log(message)
+    }
   },
   computed: {
     ...mapGetters([
       'GET_POST',
-      'GET_COMMENTS'
+      'GET_COMMENTS',
+      'IS_AUTH'
     ])
   },
   mounted () {

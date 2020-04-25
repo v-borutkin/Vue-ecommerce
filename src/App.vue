@@ -3,9 +3,11 @@
     <div class="wrapper">
       <navigation :cartLength="GET_CART_LENGTH"></navigation>
       <div class="content">
-        <router-view/>
+        <keep-alive include="Products, Home, Cart">
+          <router-view/>
+        </keep-alive>
       </div>
-        <footer-component></footer-component>
+        <footer-component />
     </div>
   </div>
 

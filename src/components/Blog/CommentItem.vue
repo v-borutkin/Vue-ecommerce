@@ -3,12 +3,17 @@
     <li class="clearfix">
       <img src="https://bootdey.com/img/Content/user_1.jpg" class="avatar" alt="">
       <div class="post-comments">
-        <p class="meta">{{comment.created_date | datefilter}} <a href="#">{{comment.author}}</a> says : <i class="pull-right"><a href="#"><small>Reply</small></a></i></p>
-        <comment-item
-          :comment="comment.child_comment"
+        <p class="meta">{{ Comment.created_date  }}
+          <a href="#">{{ Comment.author }}</a> says :
+          <a href="#">
+            <small>Reply</small>
+          </a>
+        </p>
+        <comment-item v-if="Comment.child_comment"
+          :comment="Comment.child_comment"
         />
         <p>
-          {{comment.text}}
+          {{Comment.text}}
         </p>
       </div>
     </li>
@@ -18,10 +23,15 @@
 <script>
 export default {
   name: 'CommentItem',
-  props: ['comment'], // TODO фикс
+  props: {
+    Comment: {
+      type: Object,
+      required: true
+    }
+  },
   filters: {
-    datefilter (value) {
-      return value.toString().replace('T', ' ').substr(0, 19)
+    dateFilter (value) {
+      return value.replace('T', ' ').substr(0, 19)
     }
   }
 }

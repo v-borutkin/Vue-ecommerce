@@ -9,56 +9,37 @@
             class="mb-2 item"
           >
             <div>
-              <skeleton
-                v-if="isLoading"
-                width="20rem"
-                height="200px"
-                style="margin-left: -20px; margin-top: -20px;"
-              />
-              <img v-else :src="post.image" alt="Card image">
+              <img :src="post.image" alt="Card image">
             </div>
 
               <b-card-title class="mt-2">
-                <skeleton
-                  v-if="isLoading"
-                />
-                <router-link v-else :to="'blog/' + post.id">{{post.title}}</router-link>
+                <router-link :to="'blog/' + post.id">{{post.title}}</router-link>
               </b-card-title>
 
             <b-card-sub-title class="mb-3">
-              <skeleton
-                v-if="isLoading"
-              />
-              <a v-else href="#">Автомобиль</a>
+              <a href="#">Автомобиль</a>
             </b-card-sub-title>
-            <skeleton
-              v-if="isLoading"
-              height="100px"
-            />
-              <b-card-text v-else>
+              <b-card-text>
                 {{post.short_text}}
               </b-card-text>
           </b-card>
         </div>
       </b-col>
-    <div>
-      <v-pagination v-model="currentPage"
+      <v-pagination
+                    v-model="currentPage"
                     :page-count="GET_PAGINATION_COUNT"
                     :classes="bootstrapPaginationClasses" >
-
       </v-pagination>
-    </div>
     </b-container>
 </template>
 
 <script>
-import skeleton from '../skeleton'
-import vPagination from 'vue-plain-pagination'
 import { mapActions, mapGetters } from 'vuex'
+import vPagination from 'vue-plain-pagination'
 
 export default {
   components: {
-    skeleton, vPagination
+    vPagination
   },
   data () {
     return {
@@ -88,9 +69,6 @@ export default {
     ]),
     fetchPostsFromApi () {
       this.GET_POSTS_FROM_API(1)
-      setTimeout(() => { // TODO зафиксить
-        this.isLoading = false
-      }, 1000)
     }
   },
   watch: {
