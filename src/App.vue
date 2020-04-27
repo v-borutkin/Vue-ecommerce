@@ -36,12 +36,19 @@ export default {
   methods: {
     ...mapActions([
       'GET_CART_ID_FROM_API',
-      'GET_CART_LIST_FROM_API'
+      'GET_CART_LIST_FROM_API',
+      'TO_AUTH'
     ])
   },
   mounted () {
-    this.GET_CART_ID_FROM_API()
-    this.GET_CART_LIST_FROM_API()
+    if (localStorage.getItem('token')) {
+      this.TO_AUTH()
+      this.GET_CART_ID_FROM_API()
+      this.GET_CART_LIST_FROM_API()
+    }
+    if (localStorage.getItem('user')) {
+
+    }
   }
 }
 </script>

@@ -22,7 +22,7 @@
             <!-- Using 'button-content' slot -->
             <template v-slot:button-content>
               <b-avatar variant="info" src="https://placekitten.com/300/300"></b-avatar>
-                <em>Петя</em>
+                <em>{{GET_USER.userName}}</em>
             </template>
             <b-dropdown-item href="#">Профиль</b-dropdown-item>
             <b-dropdown-item href="#" @click="userLogout">Выйти</b-dropdown-item>
@@ -47,21 +47,16 @@ export default {
       return this.$store.getters.getNavLinks // TODO пофиксить
     },
     ...mapGetters([
-      'IS_AUTH'
+      'IS_AUTH',
+      'GET_USER'
     ])
   },
   methods: {
     ...mapActions([
-      'LOGOUT',
-      'TO_AUTH'
+      'LOGOUT'
     ]),
     userLogout () {
       this.LOGOUT()
-    }
-  },
-  created () {
-    if (localStorage.getItem('token')) {
-      this.TO_AUTH()
     }
   }
 }

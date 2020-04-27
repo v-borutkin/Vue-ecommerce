@@ -7,16 +7,37 @@ Vue.use(Vuex)
 
 export default {
   state: {
-    isAuth: ''
+    isAuth: '',
+    user: {
+      userId: 0,
+      userName: ''
+    }
   },
   getters: {
     IS_AUTH (state) {
       return state.isAuth
+    },
+    GET_USER (state) {
+      return state.user
     }
   },
   mutations: {
-    AUTH (state, payload) {
+    IS_AUTH (state, payload) {
       state.isAuth = payload
+    },
+    AUTH (state, payload) {
+      state.user.userId = payload.id
+      localStorage.setItem('userId', payload.id)
+
+      state.user.userName = payload.username
+      localStorage.setItem('userName', payload.username)
+    },
+    UPDATE_USER (state, payload) {
+      const userName = localStorage.getItem('userName')
+      const userId = localStorage.getItem('userId')
+
+      state.user.userId = userId
+      state.user.userName = userName
     }
   },
   actions: {
@@ -36,17 +57,19 @@ export default {
       }).then(response => {
         localStorage.setItem('token', response.data.key)
         dispatch('GET_CART_LIST_FROM_API')
-        commit('AUTH', true)
+        commit('IS_AUTH', true)
+        commit('AUTH', response.data.user)
         router.push('/')
       })
     },
     LOGOUT ({ commit, dispatch }) {
-      commit('AUTH', false)
+      commit('IS_AUTH', false)
       localStorage.removeItem('token')
       dispatch('CART_LIST_CLEAR')
     },
     TO_AUTH ({ commit }) {
-      commit('AUTH', true)
+      commit('IS_AUTH', true)
+      commit('UPDATE_USER')
     }
   }
 }
