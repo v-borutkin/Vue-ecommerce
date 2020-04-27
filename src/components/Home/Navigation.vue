@@ -29,7 +29,7 @@
           </b-nav-item-dropdown>
           <div v-else class="flex flex-row">
             <router-link to="/auth" class="ml-2">Войти</router-link>
-            <router-link to="/register" class="ml-2">Регистрация</router-link>
+            <router-link to="/registration" class="ml-2">Регистрация</router-link>
           </div>
         </b-navbar-nav>
       </b-collapse>

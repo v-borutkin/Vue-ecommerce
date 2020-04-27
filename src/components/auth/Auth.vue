@@ -19,6 +19,9 @@
       <button class="btn btn-lg btn-primary btn-block" type="submit" @click.prevent="login">Sign in</button>
       <p class="mt-5 mb-3 text-muted">&copy; 2017-2019</p>
     </form>
+    <div v-if="errors">
+      <p style="color: red" v-for="(error, key) in errors" :key="key">{{error[0]}}</p>
+    </div>
   </b-container>
 </template>
 
@@ -29,7 +32,8 @@ export default {
   data () {
     return {
       username: '',
-      password: ''
+      password: '',
+      errors: []
     }
   },
   methods: {
@@ -40,6 +44,8 @@ export default {
       this.AUTH({
         username: this.username,
         password: this.password
+      }).catch(error => {
+        this.errors = error.response.data
       })
     }
   }

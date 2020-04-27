@@ -24,9 +24,10 @@ export default {
       }
     },
 
-    async SET_COMMENT_TO_API ({ commit, dispatch }, { text, moderation, author, post }) {
-      await Axios.post('http://77.66.177.88:8181/api/v1/comments/', {
-        text, moderation, author, post
+    async SET_COMMENT_TO_API ({ commit, dispatch }, { text, childrenId = '' }) {
+      const id = childrenId || ''
+      await Axios.post(`http://77.66.177.88:8181/api/v1/comments/${id}`, {
+        text
       })
     }
   },

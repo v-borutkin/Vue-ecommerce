@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+const Registration = () => import('@/components/auth/Registration')
 const Posts = () => import('@/components/Blog/Posts')
 const Products = () => import('@/components/Products/Products')
 const Post = () => import('@/components/Blog/Post')
@@ -9,6 +10,7 @@ const ProductCard = () => import('@/components/Products/ProductCard')
 const Auth = () => import('@/components/auth/Auth')
 const Cart = () => import('@/components/Cart/Cart')
 const Home = () => import('@/components/Home/home')
+const RegistrationConform = () => import('@/components/auth/RegistrationConfirm')
 
 Vue.use(VueRouter)
 
@@ -22,7 +24,9 @@ const routes = [
   { path: '/favorite/', name: 'Favorite', component: FavoriteList },
   { path: '/favorite/:id', name: 'FavoriteItem', component: FavoriteItem },
   { path: '/auth', name: 'Auth', component: Auth },
-  { path: '/cart', name: 'Cart', component: Cart }
+  { path: '/registration', name: 'Registration', component: Registration },
+  { path: '/cart', name: 'Cart', component: Cart },
+  { path: '/accounts/confirm-email/:token', name: 'RegistrationConfirm', component: RegistrationConform, props: true }
 ]
 
 const router = new VueRouter({

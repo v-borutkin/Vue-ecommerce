@@ -9,7 +9,7 @@
     <comments   v-if="GET_COMMENTS.length"
                 :comments="GET_COMMENTS"
                 v-on:click="click"
-                v-on:sendMessage="sendmessage"
+                v-on:sendMessage="sendMessage"
     />
   </b-container>
 </template>
@@ -30,7 +30,8 @@ export default {
   methods: {
     ...mapActions([
       'GET_POST_FROM_API',
-      'GET_COMMENTS_FROM_API'
+      'GET_COMMENTS_FROM_API',
+      'SET_COMMENT_TO_API'
     ]),
     click () {
       if (!this.IS_AUTH) {
@@ -38,7 +39,12 @@ export default {
       }
     },
     sendMessage (message) {
-      console.log(message)
+      if (this.IS_AUTH) {
+        this.SET_COMMENT_TO_API({
+          text: message,
+          childrenId: false
+        })
+      }
     }
   },
   computed: {
