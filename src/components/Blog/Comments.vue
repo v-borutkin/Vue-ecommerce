@@ -16,7 +16,7 @@
               <input type="submit"
                      class="btn btn-sm btn-primary pull-left mt-1"
                      value="Добавить"
-                     @click="sendComment"
+                     @click="sendMessage"
               >
             </div>
           </div>
@@ -26,6 +26,7 @@
             v-for="comment in comments"
             :key="comment.id"
             :Comment="comment"
+            v-on:sendReplyComment="sendReply"
           />
         </ul>
       </div>
@@ -35,7 +36,7 @@
 
 <script>
 import CommentItem from './CommentItem'
-
+import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'Comments',
   props: ['comments', 'id'],
@@ -44,15 +45,49 @@ export default {
   },
   data () {
     return {
-      message: ''
+      message: '',
+      isChild: false,
+      childId: ''
     }
   },
+  computed: {
+    ...mapGetters([
+      'IS_AUTH',
+      'GET_USER'
+    ])
+  },
   methods: {
-    userClickForTextarea () {
-      this.$emit('click')
+    ...mapActions([
+      'SET_COMMENT_TO_API',
+      'GET_COMMENTS_FROM_API'
+    ]),
+    sendReply (id) {
+      console.log(id)
+      this.childId = id
     },
-    sendComment () {
-      this.$emit('sendMessage', this.message)
+    userClickForTextarea () {
+      if (!this.IS_AUTH) {
+        alert('Для отправки комментария авторизуйтесь')
+      }
+    },
+    sendMessage () {
+      if (this.IS_AUTH) {
+        let clildId = ''
+        if (this.childId) {
+          clildId = this.childId
+        }
+        this.SET_COMMENT_TO_API({
+          text: this.message,
+          post: this.id,
+          author: this.GET_USER.userId,
+          childrenId: clildId
+        }).then(response => {
+          this.GET_COMMENTS_FROM_API(this.id)
+          this.message = ''
+        }).catch(error => {
+          alert(`произошла ошибка + ${error.response}`)
+        })
+      }
     }
   }
 }

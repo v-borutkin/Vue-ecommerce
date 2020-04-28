@@ -8,8 +8,7 @@
     </b-card>
     <comments   v-if="GET_COMMENTS.length"
                 :comments="GET_COMMENTS"
-                v-on:click="click"
-                v-on:sendMessage="sendMessage"
+                :id="id"
     />
   </b-container>
 </template>
@@ -32,31 +31,19 @@ export default {
       'GET_POST_FROM_API',
       'GET_COMMENTS_FROM_API',
       'SET_COMMENT_TO_API'
-    ]),
-    click () {
-      if (!this.IS_AUTH) {
-        alert('Для отправки комментария авторизуйтесь')
-      }
-    },
-    sendMessage (message) {
-      if (this.IS_AUTH) {
-        this.SET_COMMENT_TO_API({
-          text: message,
-          childrenId: false
-        })
-      }
-    }
+    ])
   },
   computed: {
     ...mapGetters([
       'GET_POST',
       'GET_COMMENTS',
-      'IS_AUTH'
+      'IS_AUTH',
+      'GET_USER'
     ])
   },
   mounted () {
-    this.GET_POST_FROM_API(parseInt(this.id))
-    this.GET_COMMENTS_FROM_API(parseInt(this.id))
+    this.GET_POST_FROM_API(this.id)
+    this.GET_COMMENTS_FROM_API(this.id)
   }
 }
 </script>

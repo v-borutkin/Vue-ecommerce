@@ -1,12 +1,12 @@
 <template>
   <div>
     <li class="clearfix">
-      <img src="https://bootdey.com/img/Content/user_1.jpg" class="avatar" alt="">
+      <img src="https://bootdey.com/img/Content/user_1.jpg" class="avatar" alt="">пше
       <div class="post-comments">
-        <p class="meta">{{ Comment.created_date  }}
+        <p class="meta">{{ Comment.created_date  | dateFilter}}
           <a href="#">{{ Comment.author }}</a> says :
           <a href="#">
-            <small>Reply</small>
+            <small @click.prevent="sendReply(Comment.id)">Reply</small>
           </a>
         </p>
         <comment-item v-if="Comment.child_comment"
@@ -27,6 +27,11 @@ export default {
     Comment: {
       type: Object,
       required: true
+    }
+  },
+  methods: {
+    sendReply (id) {
+      this.$emit('sendReplyComment', id)
     }
   },
   filters: {

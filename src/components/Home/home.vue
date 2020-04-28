@@ -4,7 +4,7 @@
     <b-container >
         <b-col>
           <div class="d-flex">
-            <div v-for="product in GET_PRODUCTS" :key="product.id">
+            <div v-for="product in GET_PRODUCTS.slice(0,5)" :key="product.id">
               <product :product="product"/>
             </div>
           </div>
