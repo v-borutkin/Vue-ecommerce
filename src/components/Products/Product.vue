@@ -19,8 +19,11 @@
           <b-card-text>
             {{product.short_text}}
           </b-card-text>
-          <b-button variant="outline-success" @click="ADD_TO_CART(product.id)">
+          <b-button v-if="!product.in_cart" variant="outline-success" @click="addToCart(product.id)">
             To cart
+          </b-button>
+          <b-button v-else variant="outline-success" to="/cart">
+            Оформить
           </b-button>
         </b-card>
 </template>
@@ -36,10 +39,19 @@ export default {
   },
   computed: {
   },
+  mounted () {
+    console.log(this.product.in_cart)
+  },
   methods: {
     ...mapActions([
-      'ADD_TO_CART'
-    ])
+      'ADD_TO_CART',
+      'GET_PRODUCTS_FROM_API'
+
+    ]),
+    addToCart (id) {
+      this.ADD_TO_CART(id)
+      this.GET_PRODUCTS_FROM_API()
+    }
   }
 }
 </script>

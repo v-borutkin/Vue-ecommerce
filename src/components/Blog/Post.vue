@@ -6,9 +6,9 @@
       <h6>{{ GET_POST.author }}</h6>
       <p>{{ GET_POST.text }}</p>
     </b-card>
-    <comments   v-if="GET_COMMENTS.length"
-                :comments="GET_COMMENTS"
-                :id="id"
+    <comments
+      :comments="GET_COMMENTS"
+      :id="id"
     />
   </b-container>
 </template>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <li class="clearfix">
-      <img src="https://bootdey.com/img/Content/user_1.jpg" class="avatar" alt="">пше
+      <img src="https://bootdey.com/img/Content/user_1.jpg" class="avatar" alt="">
       <div class="post-comments">
         <p class="meta">{{ Comment.created_date  | dateFilter}}
           <a href="#">{{ Comment.author }}</a> says :
@@ -9,12 +9,14 @@
             <small @click.prevent="sendReply(Comment.id)">Reply</small>
           </a>
         </p>
-        <comment-item v-if="Comment.child_comment"
-          :comment="Comment.child_comment"
-        />
         <p>
           {{Comment.text}}
         </p>
+        <comment-item
+          v-for="comment in Comment.child_comment"
+          :key="comment.id"
+          :Comment="comment"
+        />
       </div>
     </li>
   </div>
@@ -25,7 +27,6 @@ export default {
   name: 'CommentItem',
   props: {
     Comment: {
-      type: Object,
       required: true
     }
   },
@@ -36,7 +37,7 @@ export default {
   },
   filters: {
     dateFilter (value) {
-      return value.replace('T', ' ').substr(0, 19)
+      return value.toString().replace('T', ' ').substr(0, 19)
     }
   }
 }
