@@ -3,19 +3,25 @@
     <li class="clearfix">
       <img src="https://bootdey.com/img/Content/user_1.jpg" class="avatar" alt="">
       <div class="post-comments">
-        <p class="meta">{{ Comment.created_date  | dateFilter}}
-          <a href="#">{{ Comment.author }}</a> says :
-          <a href="#">
-            <small @click.prevent="sendReply(Comment.id)">Reply</small>
-          </a>
-        </p>
-        <p>
+        <div class=" header_comment d-inline-flex meta justify-content-between">
+          <p>{{ Comment.created_date  | dateFilter}}</p>
+          <a class="author" href="#">{{ Comment.author }}</a>
+          <b-button class="btn btn-info rounded-right"
+                    size="sm"
+                    v-if="isReply"
+                    @click.prevent="sendReply(Comment.id)">
+            Reply
+          </b-button>
+        </div>
+        <p :style="{ fontStyle: textStyle }">
           {{Comment.text}}
         </p>
         <comment-item
           v-for="comment in Comment.child_comment"
           :key="comment.id"
           :Comment="comment"
+          :isReply="false"
+          textStyle="italic"
         />
       </div>
     </li>
@@ -27,7 +33,18 @@ export default {
   name: 'CommentItem',
   props: {
     Comment: {
+      type: Object,
       required: true
+    },
+    isReply: {
+      type: Boolean,
+      required: false,
+      default: true
+    },
+    textStyle: {
+      type: String,
+      required: false,
+      default: 'normal'
     }
   },
   methods: {
@@ -49,6 +66,12 @@ export default {
     margin-bottom: 20px;
     border: 0;
     border-top: 1px solid #FFFFFF;
+  }
+  .header_comment {
+    width: 100%
+  }
+  .author {
+    font-size: 14px;
   }
   a {
     color: #82b440;

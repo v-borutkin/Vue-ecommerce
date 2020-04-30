@@ -1,6 +1,7 @@
 <template>
   <b-container>
-    <b-card>
+    <b-card class="item"
+            style="max-width: 20rem;">
       <b-img :src="GET_POST.image" width="680" />
       <h1>{{ GET_POST.title }}</h1>
       <h6>{{ GET_POST.author }}</h6>

@@ -1,6 +1,6 @@
 <template>
   <b-container>
-      <b-col >
+      <b-col>
         <div v-if="GET_POSTS" class="d-flex flex-row flex-wrap">
           <b-card id="products" v-for="post in GET_POSTS"
                   :key="post.id"
