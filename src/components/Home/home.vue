@@ -8,7 +8,7 @@
               <product :product="product"/>
             </div>
           </div>
-          <b-button block variant="primary">Все продукты</b-button>
+          <b-button block variant="primary" class="mt-4">Все продукты</b-button>
         </b-col>
     </b-container>
   </div>

@@ -11,11 +11,6 @@
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" class="form-control" placeholder="Password" required v-model="password">
       </div>
-      <div class="checkbox mb-3">
-        <label>
-          <input type="checkbox" value="remember-me"> Remember me
-        </label>
-      </div>
       <button class="btn btn-lg btn-primary btn-block" type="submit" @click.prevent="login">Sign in</button>
       <p class="mt-5 mb-3 text-muted">&copy; 2017-2019</p>
     </form>

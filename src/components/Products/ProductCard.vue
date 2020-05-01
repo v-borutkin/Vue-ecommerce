@@ -20,11 +20,11 @@
           </b-button>
           <b-button v-else
                     variant="outline-success"
-                    to="/cart">
+                    @click="deleteFromCart(id)">
             <svg class="bi bi-bag-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path d="M1 4h14v10a2 2 0 01-2 2H3a2 2 0 01-2-2V4zm7-2.5A2.5 2.5 0 005.5 4h-1a3.5 3.5 0 117 0h-1A2.5 2.5 0 008 1.5z"/>
             </svg>
-            <span class="ml-2">Оформить заказ</span>
+            <span class="ml-2">Удалить</span>
           </b-button>
         </div>
         <div class="addToFavorite">
@@ -67,7 +67,11 @@ import product from './Product'
 
 export default {
   name: 'Product',
-  props: ['id'],
+  props: {
+    id: {
+      required: true
+    }
+  },
   components: {
     product
   },
@@ -89,8 +93,8 @@ export default {
       if (!this.IS_AUTH) {
         alert('Необходимо авторизоваться')
       } else {
-        this.SET_FAVORITE(id).then(response => {
-          this.GET_PRODUCT_FROM_API(id)
+        this.SET_FAVORITE(parseInt(id)).then(response => {
+          this.GET_PRODUCT_FROM_API(parseInt(id))
         })
       }
     },
@@ -98,19 +102,19 @@ export default {
       if (!this.IS_AUTH) {
         alert('Необходимо авторизоваться')
       } else {
-        this.DEL_FAVORITE(id).then(response => {
-          this.GET_PRODUCT_FROM_API(id)
+        this.DEL_FAVORITE(parseInt(id)).then(response => {
+          this.GET_PRODUCT_FROM_API(parseInt(id))
         })
       }
     },
     addToCart (id) {
-      this.ADD_TO_CART(id).then(response => {
-        this.GET_PRODUCT_FROM_API(id)
+      this.ADD_TO_CART(parseInt(id)).then(response => {
+        this.GET_PRODUCT_FROM_API(parseInt(id))
       })
     },
     deleteFromCart (id) {
-      this.DELETE_FROM_CART(id).then(response => {
-        this.GET_PRODUCT_FROM_API(id)
+      this.DELETE_FROM_CART(parseInt(id)).then(response => {
+        this.GET_PRODUCT_FROM_API(parseInt(id))
       })
     }
   },

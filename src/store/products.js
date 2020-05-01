@@ -28,9 +28,9 @@ export default {
     }
   },
   actions: {
-    async  GET_PRODUCTS_FROM_API ({ commit }, category) {
+    async  GET_PRODUCTS_FROM_API ({ commit }) {
       try {
-        const productsApi = await Axios.get(`/goods/?category=${category}`)
+        const productsApi = await Axios.get('/goods/?category=0')
         commit('setProducts', productsApi.data.results)
       } catch (e) {
 

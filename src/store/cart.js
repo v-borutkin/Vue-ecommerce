@@ -39,17 +39,16 @@ export default {
     }
   },
   actions: {
-    async ADD_TO_CART ({ commit, getters, dispatch }, productId) {
-      try {
-        await Axios.post('/to-cart/', {
-          good: productId,
-          cart: getters.getCartId,
-          quantity: 1
+    async ADD_TO_CART ({ getters, dispatch }, productId) {
+      await Axios.post('/to-cart/', {
+        good: productId,
+        cart: getters.getCartId,
+        quantity: 1
+      })
+        .then(response => {
+          dispatch('GET_CART_LIST_FROM_API')
+          dispatch('GET_PRODUCTS_FROM_API')
         })
-        dispatch('GET_CART_LIST_FROM_API')
-      } catch (e) {
-        console.log(e.error)
-      }
     },
     async GET_CART_ID_FROM_API ({ commit }) {
       const cartID = await Axios.get('/carts/')
