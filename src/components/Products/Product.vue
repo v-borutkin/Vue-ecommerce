@@ -100,13 +100,23 @@ export default {
       }
     },
     addToCart (id) {
-      this.ADD_TO_CART(id).then(response => {
-        this.GET_PRODUCTS_FROM_API()
-      })
+      if (!this.IS_AUTH) {
+        alert('Необходимо авторизоваться')
+      } else {
+        this.ADD_TO_CART(id).then(response => {
+          this.GET_PRODUCTS_FROM_API()
+        })
+      }
     },
     deleteFromCart (id) {
-      this.DELETE_FROM_CART(id)
-      this.GET_PRODUCTS_FROM_API()
+      if (!this.IS_AUTH) {
+        alert('Необходимо авторизоваться')
+      } else {
+        this.DELETE_FROM_CART(id)
+          .then(response => {
+            this.GET_PRODUCTS_FROM_API()
+          })
+      }
     }
   }
 }

@@ -108,14 +108,22 @@ export default {
       }
     },
     addToCart (id) {
-      this.ADD_TO_CART(parseInt(id)).then(response => {
-        this.GET_PRODUCT_FROM_API(parseInt(id))
-      })
+      if (!this.IS_AUTH) {
+        alert('Необходимо авторизоваться')
+      } else {
+        this.ADD_TO_CART(parseInt(id)).then(response => {
+          this.GET_PRODUCT_FROM_API(parseInt(id))
+        })
+      }
     },
     deleteFromCart (id) {
-      this.DELETE_FROM_CART(parseInt(id)).then(response => {
-        this.GET_PRODUCT_FROM_API(parseInt(id))
-      })
+      if (!this.IS_AUTH) {
+        alert('Необходимо авторизоваться')
+      } else {
+        this.DELETE_FROM_CART(parseInt(id)).then(response => {
+          this.GET_PRODUCT_FROM_API(parseInt(id))
+        })
+      }
     }
   },
 

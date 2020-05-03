@@ -8,6 +8,7 @@ export default {
   state: {
     cartId: '',
     totalPrice: 0,
+    step: 1,
     cartList: []
   },
   mutations: {
@@ -23,8 +24,9 @@ export default {
   },
   getters: {
     GET_TOTAL_PRICE (state) {
+      state.totalPrice = 0
       state.cartList.forEach(item => {
-        state.totalPrice += item.amount * item.quantity
+        state.totalPrice += item.good.price * item.quantity
       })
       return state.totalPrice
     },
@@ -49,6 +51,29 @@ export default {
           dispatch('GET_CART_LIST_FROM_API')
           dispatch('GET_PRODUCTS_FROM_API')
         })
+    },
+    async CART_ELEMENT_PLUS ({ dispatch, state }, { productId, quantity }) {
+      const q = quantity + state.step
+      await Axios.put(`/cart-edit/${productId}`, {
+        quantity: q
+      }).then(response => {
+        dispatch('GET_CART_LIST_FROM_API')
+      })
+    },
+    async CART_ELEMENT_MINUS ({ dispatch, state }, { productId, quantity }) {
+      const q = quantity + state.step
+      await Axios.put(`/cart-edit/${productId}`, {
+        quantity: q
+      }).then(response => {
+        dispatch('GET_CART_LIST_FROM_API')
+      })
+    },
+    async CART_ELEMENT_CHANGE_COUNT ({ dispatch, state }, { productId, quantity }) {
+      await Axios.put(`/cart-edit/${productId}`, {
+        quantity
+      }).then(response => {
+        dispatch('GET_CART_LIST_FROM_API')
+      })
     },
     async GET_CART_ID_FROM_API ({ commit }) {
       const cartID = await Axios.get('/carts/')
