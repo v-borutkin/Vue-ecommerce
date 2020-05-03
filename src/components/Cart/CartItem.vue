@@ -18,16 +18,17 @@
           <input type="button"
                  value="+"
                  class="plus"
-                 @click="$emit('plus', item.id, item.quantity)">
+                 @click="$emit('plus', item.good.id, item.quantity)">
 
           <input type="number"
-                 v-model.lazy="count"
+                 v-model.lazy="item.quantity"
+                 disabled
                  title="Qty" class="qty">
 
           <input type="button"
                  value="-"
                  class="minus"
-                 @click="$emit('minus', item.id, item.quantity)">
+                 @click="$emit('minus', item.good.id, item.quantity)">
         </div>
       </div>
       <div class="col-2 col-sm-2 col-md-2 text-right">
@@ -51,22 +52,9 @@ export default {
       required: true
     }
   },
-  data () {
-    return {
-      count: 1
-    }
-  },
   methods: {
     deleteFromCart (id) {
       this.$emit('delete', id)
-    }
-  },
-  watch: {
-    count () {
-      if (this.count < 1) {
-        this.count = 1
-      }
-      this.$emit('changeQuantity', this.item.id, this.count)
     }
   }
 }

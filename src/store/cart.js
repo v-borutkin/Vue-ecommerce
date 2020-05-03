@@ -61,16 +61,9 @@ export default {
       })
     },
     async CART_ELEMENT_MINUS ({ dispatch, state }, { productId, quantity }) {
-      const q = quantity + state.step
+      const q = quantity - state.step
       await Axios.put(`/cart-edit/${productId}`, {
         quantity: q
-      }).then(response => {
-        dispatch('GET_CART_LIST_FROM_API')
-      })
-    },
-    async CART_ELEMENT_CHANGE_COUNT ({ dispatch, state }, { productId, quantity }) {
-      await Axios.put(`/cart-edit/${productId}`, {
-        quantity
       }).then(response => {
         dispatch('GET_CART_LIST_FROM_API')
       })

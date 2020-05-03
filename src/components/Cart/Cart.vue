@@ -84,14 +84,6 @@ export default {
 </script>
 
 <style scoped>
-  .quantity {
-    float: left;
-    margin-right: 15px;
-    background-color: #eee;
-    position: relative;
-    width: 80px;
-    overflow: hidden
-  }
 
   .quantity input {
     margin: 0;
