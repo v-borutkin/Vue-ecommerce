@@ -24,7 +24,7 @@
           </div>
         </div>
         <div class="pull-right" style="margin: 10px">
-          <button class="btn btn-success pull-right">Оформить заказ</button>
+          <button class="btn btn-success pull-right" @click="orderCheckout">Оформить заказ</button>
           <div class="pull-right" style="margin: 5px">
             Total price: <b>{{GET_TOTAL_PRICE}}</b>
           </div>
@@ -52,6 +52,9 @@ export default {
       'CART_ELEMENT_MINUS',
       'CART_ELEMENT_CHANGE_COUNT'
     ]),
+    orderCheckout () {
+
+    },
     plus (productId, quantity) {
       this.CART_ELEMENT_PLUS({
         productId,

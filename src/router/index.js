@@ -11,6 +11,7 @@ const Auth = () => import('@/components/auth/Auth')
 const Cart = () => import('@/components/Cart/Cart')
 const Home = () => import('@/components/Home/home')
 const RegistrationConform = () => import('@/components/auth/RegistrationConfirm')
+const OrderCheckout = () => import('@/components/Cart/OrderCheckout')
 
 Vue.use(VueRouter)
 
@@ -26,6 +27,7 @@ const routes = [
   { path: '/auth', name: 'Auth', component: Auth },
   { path: '/registration', name: 'Registration', component: Registration },
   { path: '/cart', name: 'Cart', component: Cart },
+  { path: '/ordercheckout', name: 'OrderCheckout', component: OrderCheckout },
   { path: '/accounts/confirm-email/:token', name: 'RegistrationConfirm', component: RegistrationConform, props: true }
 ]
 
