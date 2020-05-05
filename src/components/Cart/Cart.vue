@@ -16,16 +16,21 @@
         <div class="coupon col-md-5 col-sm-5 no-padding-left pull-left">
           <div class="row">
             <div class="col-6">
-              <input type="text" class="form-control" placeholder="cupone code">
+              <input type="text" class="form-control" placeholder="cupone code" v-model="promoText">
             </div>
             <div class="col-6">
-              <input type="submit" class="btn btn-info" value="Use cupone">
+              <input type="submit" class="btn btn-info" value="Use cupone" @click="sendPromo">
             </div>
           </div>
         </div>
         <div class="pull-right" style="margin: 10px">
           <button class="btn btn-success pull-right" @click="orderCheckout">Оформить заказ</button>
-          <div class="pull-right" style="margin: 5px">
+          <div v-if="GET_PROMO.promo_code" class="pull-right" style="margin: 5px;">
+            <p style="color: green">Активирован промо код <b>{{GET_PROMO.promo_code.description}}</b>
+              на сумму {{GET_PROMO.promo_code.discount_value}}</p>
+            Total price: <b>{{GET_PROMO.promo_price}}</b>
+          </div>
+          <div v-else class="pull-right" style="margin: 5px">
             Total price: <b>{{GET_TOTAL_PRICE}}</b>
           </div>
         </div>
@@ -42,16 +47,42 @@ import { mapGetters, mapActions } from 'vuex'
 import CartItem from './CartItem'
 export default {
   name: 'Cart',
+  data () {
+    return {
+      promoText: ''
+    }
+  },
   components: {
     CartItem
+  },
+  computed: {
+    ...mapGetters([
+      'GET_CART_LIST',
+      'GET_TOTAL_PRICE',
+      'GET_PROMO'
+    ])
   },
   methods: {
     ...mapActions([
       'DELETE_FROM_CART',
       'CART_ELEMENT_PLUS',
       'CART_ELEMENT_MINUS',
-      'CART_ELEMENT_CHANGE_COUNT'
+      'CART_ELEMENT_CHANGE_COUNT',
+      'SEND_PROMO',
+      'GET_PROMO_INFO_FROM_API'
     ]),
+    sendPromo () {
+      this.SEND_PROMO(this.promoText).then(() => {
+        this.GET_PROMO_INFO_FROM_API()
+      })
+    },
+    isPromo () {
+      if (this.promoText) {
+        this.SEND_PROMO(this.promoText).then(() => {
+          this.GET_PROMO_INFO_FROM_API()
+        })
+      }
+    },
     orderCheckout () {
 
     },
@@ -59,29 +90,31 @@ export default {
       this.CART_ELEMENT_PLUS({
         productId,
         quantity
+      }).then(() => {
+        this.isPromo()
       })
     },
     minus (productId, quantity) {
       this.CART_ELEMENT_MINUS({
         productId,
         quantity
+      }).then(() => {
+        this.isPromo()
       })
     },
     deleteFromCart (id) {
-      this.DELETE_FROM_CART(id)
+      this.DELETE_FROM_CART(id).then(() => {
+        this.isPromo()
+      })
     },
     changeQuantity (productId, quantity) {
       this.CART_ELEMENT_CHANGE_COUNT({
         productId,
         quantity
+      }).then(() => {
+        this.isPromo()
       })
     }
-  },
-  computed: {
-    ...mapGetters([
-      'GET_CART_LIST',
-      'GET_TOTAL_PRICE'
-    ])
   }
 }
 </script>

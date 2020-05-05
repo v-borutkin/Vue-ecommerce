@@ -9,7 +9,8 @@ export default {
     cartId: '',
     totalPrice: 0,
     step: 1,
-    cartList: []
+    cartList: [],
+    promoInfo: []
   },
   mutations: {
     SET_CART_ID (state, payload) {
@@ -20,9 +21,15 @@ export default {
     },
     CART_LIST_CLEAR (state, payload) {
       state.cartList = payload
+    },
+    SET_PROMO_INFO (state, payload) {
+      state.promoInfo = payload[0]
     }
   },
   getters: {
+    GET_PROMO (state) {
+      return state.promoInfo
+    },
     GET_TOTAL_PRICE (state) {
       state.totalPrice = 0
       state.cartList.forEach(item => {
@@ -32,7 +39,7 @@ export default {
     },
     getCartId (state) {
       return state.cartId
-    },
+    }, // TODO ФИКС
     GET_CART_LENGTH (state) {
       return state.cartList.length
     },
@@ -41,6 +48,16 @@ export default {
     }
   },
   actions: {
+    async SEND_PROMO ({ commit }, promoText) {
+      return await Axios.post('/promo/', {
+        promo_code: promoText
+      })
+    },
+    async GET_PROMO_INFO_FROM_API ({ commit }) {
+      await Axios.get('/promo/').then(response => {
+        commit('SET_PROMO_INFO', response.data.results)
+      })
+    },
     async ADD_TO_CART ({ getters, dispatch }, productId) {
       await Axios.post('/to-cart/', {
         good: productId,

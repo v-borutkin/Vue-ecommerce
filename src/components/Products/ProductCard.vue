@@ -87,6 +87,7 @@ export default {
       'GET_RECOMMENDED_PRODUCTS_FROM_API',
       'SET_FAVORITE',
       'DEL_FAVORITE',
+      'DELETE_FROM_CART',
       'ADD_TO_CART'
     ]),
     setFavorite (id) {
