@@ -80,7 +80,11 @@ export default {
 
     }
   },
-
+  watch: {
+    '$route.params.id' () {
+      this.GET_PRODUCT_FROM_API(parseInt(this.id))
+    }
+  },
   methods: {
     ...mapActions([
       'GET_PRODUCT_FROM_API',

@@ -5,11 +5,10 @@
                 img-alt="Image"
                 img-top
                 tag="article"
-                style="max-width: 15rem; height: 100%"
                 class="item align-items-stretch"
         >
           <b-card-title>
-            <a :href="product.id">{{product.name}}</a>
+            <router-link :to="'/products/'+ product.id">{{product.name}}</router-link>
           </b-card-title>
           <b-card-text>
             {{product.manufacturer}}
@@ -75,9 +74,6 @@ export default {
       'IS_AUTH'
     ])
   },
-  mounted () {
-    console.log(this.$route.path === '/products/')
-  },
   methods: {
     ...mapActions([
       'ADD_TO_CART',
@@ -86,9 +82,6 @@ export default {
       'DELETE_FROM_CART',
       'DEL_FAVORITE'
     ]),
-    isInner () {
-      return this.$route.path === '/products/' + this.product.id
-    },
     setFavorite (id) {
       if (!this.IS_AUTH) {
         alert('Необходимо авторизоваться')
@@ -126,6 +119,10 @@ export default {
 }
 </script>
 <style scoped>
+  .item {
+    width: 255px;
+    height: 420px;
+  }
   .productButtons{
     width: 100%;
   }
