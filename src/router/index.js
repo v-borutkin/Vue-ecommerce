@@ -19,7 +19,7 @@ const routes = [
 
   { path: '/', name: 'Home', component: Home },
   { path: '/blog', name: 'Blog', component: Posts },
-  { path: '/products', name: 'Products', component: Products },
+  { path: '/products/', name: 'Products', component: Products },
   { path: '/products/:id', name: 'Product', component: ProductCard, props: true },
   { path: '/blog/:id', name: 'Post', component: Post, props: true },
   { path: '/favorite/', name: 'Favorite', component: FavoriteList },

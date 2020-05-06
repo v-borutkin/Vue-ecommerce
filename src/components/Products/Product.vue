@@ -9,9 +9,7 @@
                 class="item align-items-stretch"
         >
           <b-card-title>
-            <router-link :to="'products/' + product.id">
-              {{product.name}}
-            </router-link>
+            <a :href="product.id">{{product.name}}</a>
           </b-card-title>
           <b-card-text>
             {{product.manufacturer}}
@@ -77,6 +75,9 @@ export default {
       'IS_AUTH'
     ])
   },
+  mounted () {
+    console.log(this.$route.path === '/products/')
+  },
   methods: {
     ...mapActions([
       'ADD_TO_CART',
@@ -85,6 +86,9 @@ export default {
       'DELETE_FROM_CART',
       'DEL_FAVORITE'
     ]),
+    isInner () {
+      return this.$route.path === '/products/' + this.product.id
+    },
     setFavorite (id) {
       if (!this.IS_AUTH) {
         alert('Необходимо авторизоваться')

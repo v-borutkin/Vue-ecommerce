@@ -6,7 +6,7 @@ Vue.use(Vuex)
 export default {
   state: {
     navLinks: [
-      { title: 'Товары', url: '/products' },
+      { title: 'Товары', url: '/products/' },
       { title: 'Блог', url: '/blog' }
     ]
   },
