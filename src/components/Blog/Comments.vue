@@ -68,8 +68,6 @@ export default {
     sendReply (id, parentText) {
       this.childId = id
       this.parentText = parentText
-      console.log(parentText)
-
       this.$refs.textarea.focus()
       this.$router.push('#textarea')
     },

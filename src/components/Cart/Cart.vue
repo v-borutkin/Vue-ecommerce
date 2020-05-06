@@ -13,9 +13,20 @@
         <hr>
       </div>
       <div class="card-footer">
+        <div class="form-group pull-left">
+          <form>
+            <input type="text" class="form-control" v-model.trim="$v.promoText.$model">
+            <small id="emailHelp" class="form-text text-muted">Введите промокод</small>
+            <input type="submit" class="btn btn-outline-info" @click.prevent="sendPromo">
+            <div style="color: red" v-if="!$v.promoText.minLength">Промо код должен содержать минимум {{$v.promoText.$params.minLength.min}} знака</div>
+          </form>
+        </div>
         <div class="pull-right" style="margin: 10px">
           <button class="btn btn-success pull-right" @click="orderCheckout">Оформить заказ</button>
-          <div class="pull-right" style="margin: 5px">
+          <div v-if="GET_PROMO_PRICE" class="pull-right" style="margin: 5px; color: green">
+            Активирован промокод <b>{{GET_PROMO_CODE_INFO.description}}</b> Итоговая цена: <b style="text-decoration: line-through">{{GET_TOTAL_PRICE}}</b> <b>{{GET_PROMO_PRICE}}</b>
+          </div>
+          <div v-else class="pull-right" style="margin: 5px">
             Total price: <b>{{GET_TOTAL_PRICE}}</b>
           </div>
         </div>
@@ -30,11 +41,18 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import CartItem from './CartItem'
+import { minLength, required } from 'vuelidate/lib/validators'
 export default {
   name: 'Cart',
   data () {
     return {
       promoText: ''
+    }
+  },
+  validations: {
+    promoText: {
+      required,
+      minLength: minLength(2)
     }
   },
   components: {
@@ -43,7 +61,9 @@ export default {
   computed: {
     ...mapGetters([
       'GET_CART_LIST',
-      'GET_TOTAL_PRICE'
+      'GET_TOTAL_PRICE',
+      'GET_PROMO_PRICE',
+      'GET_PROMO_CODE_INFO'
     ])
   },
   methods: {
@@ -51,10 +71,20 @@ export default {
       'DELETE_FROM_CART',
       'CART_ELEMENT_PLUS',
       'CART_ELEMENT_MINUS',
-      'CART_ELEMENT_CHANGE_COUNT'
+      'CART_ELEMENT_CHANGE_COUNT',
+      'SEND_PROMO',
+      'GET_CART_LIST_FROM_API'
     ]),
     orderCheckout () {
 
+    },
+    sendPromo () {
+      console.log(this.$v.promoText.required)
+      if (this.$v.promoText.required && this.$v.promoText.minLength) {
+        this.SEND_PROMO(this.promoText).then(() => {
+          this.GET_CART_LIST_FROM_API()
+        })
+      }
     },
     plus (productId, quantity) {
       this.CART_ELEMENT_PLUS({
