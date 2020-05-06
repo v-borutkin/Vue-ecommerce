@@ -9,6 +9,8 @@
                       rows="2"
                       placeholder="Добавьте Ваш комментарий"
                       v-model="message"
+                      ref="textarea"
+                      name="textarea"
                       @click="userClickForTextarea"
             >
             </textarea>
@@ -62,8 +64,9 @@ export default {
       'GET_COMMENTS_FROM_API'
     ]),
     sendReply (id) {
-      console.log(id)
       this.childId = id
+      this.$refs.textarea.focus()
+      this.$route.to('#textarea')
     },
     userClickForTextarea () {
       if (!this.IS_AUTH) {
