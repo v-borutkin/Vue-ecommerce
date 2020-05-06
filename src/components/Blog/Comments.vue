@@ -5,6 +5,7 @@
         <h3 class="text-success mt-3">Comments</h3>
         <div class="panel">
           <div class="panel-body  justify-content-center">
+            <p v-show="parentText">{{parentText}}</p>
             <textarea class="form-control"
                       rows="2"
                       placeholder="Добавьте Ваш комментарий"
@@ -49,6 +50,7 @@ export default {
     return {
       message: '',
       isChild: false,
+      parentText: '',
       childId: ''
     }
   },
@@ -63,10 +65,13 @@ export default {
       'SET_COMMENT_TO_API',
       'GET_COMMENTS_FROM_API'
     ]),
-    sendReply (id) {
+    sendReply (id, parentText) {
       this.childId = id
+      this.parentText = parentText
+      console.log(parentText)
+
       this.$refs.textarea.focus()
-      this.$route.to('#textarea')
+      this.$router.push('#textarea')
     },
     userClickForTextarea () {
       if (!this.IS_AUTH) {

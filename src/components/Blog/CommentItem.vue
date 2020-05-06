@@ -9,7 +9,7 @@
           <b-button class="btn btn-info rounded-right"
                     size="sm"
                     v-if="isReply"
-                    @click.prevent="sendReply(Comment.id)">
+                    @click.prevent="sendReply(Comment.id, Comment.text)">
             Reply
           </b-button>
         </div>
@@ -48,8 +48,8 @@ export default {
     }
   },
   methods: {
-    sendReply (id) {
-      this.$emit('sendReplyComment', id)
+    sendReply (id, parentText) {
+      this.$emit('sendReplyComment', id, parentText)
     }
   },
   filters: {
