@@ -1,5 +1,5 @@
 ```
-Ecommerce (cart, products, coupons)
+Ecommerce (cart, products, coupons, favorites)
 Blog (posts, commentaries)
 Authorization
 Registration
