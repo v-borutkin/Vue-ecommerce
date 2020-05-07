@@ -9,6 +9,7 @@
           <b-button class="btn btn-info rounded-right"
                     size="sm"
                     v-if="isReply"
+                    :disabled="!isAuth"
                     @click.prevent="sendReply(Comment.id, Comment.text)">
             Reply
           </b-button>
@@ -40,6 +41,10 @@ export default {
       type: Boolean,
       required: false,
       default: true
+    },
+    isAuth: {
+      type: Boolean,
+      required: true
     },
     textStyle: {
       type: String,

@@ -19,8 +19,8 @@
               <input type="submit"
                      class="btn btn-sm btn-primary pull-left mt-1"
                      value="Добавить"
-                     @click="sendMessage"
-              >
+                     :disabled="!IS_AUTH"
+                     @click="sendMessage">
             </div>
           </div>
         </div>
@@ -29,6 +29,7 @@
             v-for="comment in comments"
             :key="comment.id"
             :Comment="comment"
+            :isAuth="IS_AUTH"
             v-on:sendReplyComment="sendReply"
           />
         </ul>

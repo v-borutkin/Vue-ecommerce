@@ -59,7 +59,7 @@ export default {
         dispatch('GET_CART_LIST_FROM_API')
         commit('IS_AUTH', true)
         commit('AUTH', response.data.user)
-        router.push('/')
+        router.back(-1)
       })
     },
     LOGOUT ({ commit, dispatch }) {

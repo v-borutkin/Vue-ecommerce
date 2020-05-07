@@ -45,8 +45,8 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
 import CartItem from './CartItem'
+import { mapGetters, mapActions } from 'vuex'
 import { minLength, maxLength } from 'vuelidate/lib/validators'
 export default {
   name: 'Cart',
