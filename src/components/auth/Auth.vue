@@ -4,22 +4,31 @@
       <img class="mb-4" src="/docs/4.4/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
       <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
       <div>
-        <label for="inputEmail" class="sr-only" >Email address</label>
-        <input type="text"
-               id="inputEmail" class="form-control"
-               placeholder="Email address" autofocus
-               v-model.trim="$v.username.$model">
+        <label for="Username" class="sr-only" >Username</label>
+        <input id="Username" class="form-control"
+               :class="[{'is-invalid': $v.username.$error}, {'is-valid': !$v.username.$error}]"
+               placeholder="Username" autofocus
+               @blur="setUsername($event.target.value)">
+        <div class="invalid-feedback" v-if="!$v.username.minLength || !$v.username.maxLength">
+          Имя пользователя должно содержать минимум {{$v.username.$params.minLength.min}}
+          знака и максимум {{$v.username.$params.maxLength.max}}
+        </div>
+
       </div>
       <div>
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password"
                id="inputPassword"
-               class="form-control"
+               class="form-control mt-2"
+               :class="[{'is-invalid': $v.password.$error}, {'is-valid': !$v.password.$error}]"
                placeholder="Password"
-               v-model.trim="$v.password.$model">
+               @blur="setPassword($event.target.value)">
+        <div class="invalid-feedback" v-if="!$v.password.minLength || !$v.password.maxLength">
+          Пароль должен содержать минимум {{$v.password.$params.minLength.min}}
+          знака и максимум {{$v.password.$params.maxLength.max}}
+        </div>
       </div>
-      <button class="btn btn-lg btn-primary btn-block" type="submit" @click.prevent="login">Sign in</button>
-      <pre>{{ $v }}</pre>
+      <button class="btn btn-lg btn-primary btn-block mt-2" type="submit" @click.prevent="login">Sign in</button>
     </form>
     <div v-if="errors">
       <p style="color: red" v-for="(error, key) in errors" :key="key">{{error[0]}}</p>
@@ -55,6 +64,14 @@ export default {
     ...mapActions([
       'AUTH'
     ]),
+    setPassword (value) {
+      this.password = value
+      this.$v.password.$touch()
+    },
+    setUsername (value) {
+      this.username = value
+      this.$v.username.$touch()
+    },
     login () {
       if (!this.$v.$error) {
         this.AUTH({
