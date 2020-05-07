@@ -16,15 +16,16 @@
         <div class="form-group pull-left">
           <form>
             <input class="form-control"
-                   @blur="setPromo($event.target.value)"
-                   :value="promoText"
-            >
+                   @input="setPromo($event.target.value)"
+                   :class="[{'is-invalid': $v.promoText.$error}]"
+                   :value="promoText">
+            <div class="invalid-feedback" v-if="!$v.promoText.minLength || !$v.promoText.maxLength">
+              Промокод должен содержать минимум {{$v.promoText.$params.minLength.min}}
+              знака и максимум {{$v.promoText.$params.maxLength.max}}
+            </div>
             <small id="emailHelp" class="form-text text-muted">Введите промокод</small>
             <input type="submit" class="btn btn-outline-info" @click.prevent="sendPromo">
           </form>
-          <div style="color: red" v-if="!$v.promoText.minLength">
-            Промо код должен содержать минимум {{$v.promoText.$params.minLength.min}} знака
-          </div>
         </div>
         <div class="pull-right" style="margin: 10px">
           <button class="btn btn-success pull-right" @click="orderCheckout">Оформить заказ</button>
@@ -46,7 +47,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import CartItem from './CartItem'
-import { minLength, required } from 'vuelidate/lib/validators'
+import { minLength, maxLength } from 'vuelidate/lib/validators'
 export default {
   name: 'Cart',
   data () {
@@ -56,8 +57,8 @@ export default {
   },
   validations: {
     promoText: {
-      required,
-      minLength: minLength(2)
+      minLength: minLength(2),
+      maxLength: maxLength(10)
     }
   },
   components: {
@@ -82,13 +83,13 @@ export default {
     ]),
     setPromo (value) {
       this.promoText = value
-      this.$v.promoText.$touch()
     },
     orderCheckout () {
 
     },
     sendPromo () {
-      if (!this.$v.$error) {
+      this.$v.promoText.$touch()
+      if (!this.$v.$error && this.promoText) {
         this.SEND_PROMO(this.promoText).then(() => {
           this.GET_CART_LIST_FROM_API()
         })
