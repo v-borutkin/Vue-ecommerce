@@ -15,11 +15,16 @@
       <div class="card-footer">
         <div class="form-group pull-left">
           <form>
-            <input type="text" class="form-control" v-model.trim="$v.promoText.$model">
+            <input class="form-control"
+                   @blur="setPromo($event.target.value)"
+                   :value="promoText"
+            >
             <small id="emailHelp" class="form-text text-muted">Введите промокод</small>
             <input type="submit" class="btn btn-outline-info" @click.prevent="sendPromo">
-            <div style="color: red" v-if="!$v.promoText.minLength">Промо код должен содержать минимум {{$v.promoText.$params.minLength.min}} знака</div>
           </form>
+          <div style="color: red" v-if="!$v.promoText.minLength">
+            Промо код должен содержать минимум {{$v.promoText.$params.minLength.min}} знака
+          </div>
         </div>
         <div class="pull-right" style="margin: 10px">
           <button class="btn btn-success pull-right" @click="orderCheckout">Оформить заказ</button>
@@ -75,12 +80,15 @@ export default {
       'SEND_PROMO',
       'GET_CART_LIST_FROM_API'
     ]),
+    setPromo (value) {
+      this.promoText = value
+      this.$v.promoText.$touch()
+    },
     orderCheckout () {
 
     },
     sendPromo () {
-      console.log(this.$v.promoText.required)
-      if (this.$v.promoText.required && this.$v.promoText.minLength) {
+      if (!this.$v.$error) {
         this.SEND_PROMO(this.promoText).then(() => {
           this.GET_CART_LIST_FROM_API()
         })

@@ -15,7 +15,7 @@
 
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
-            <router-link class="ml-2 mt-2" to="/cart">
+            <router-link class="ml-2 mt-1" to="/cart">
               <button class="btn btn-primary"> {{cartLength}} Корзина</button>
             </router-link>
           <b-nav-item-dropdown right v-if="IS_AUTH">
@@ -27,7 +27,7 @@
             <b-dropdown-item href="#">Профиль</b-dropdown-item>
             <b-dropdown-item href="#" @click="userLogout">Выйти</b-dropdown-item>
           </b-nav-item-dropdown>
-          <div v-else class="flex flex-row">
+          <div v-else class="flex flex-row mt-2">
             <router-link to="/auth" class="ml-2">Войти</router-link>
             <router-link to="/registration" class="ml-2">Регистрация</router-link>
           </div>
