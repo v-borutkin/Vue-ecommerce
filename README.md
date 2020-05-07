@@ -1,9 +1,10 @@
+```
 Ecommerce (cart, products, coupons)
 Blog (posts, commentaries)
 Authorization
 Registration
 Data validation
-
+```
 
 # vuecommerce
 
