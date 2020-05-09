@@ -21,6 +21,7 @@
           v-for="comment in Comment.child_comment"
           :key="comment.id"
           :Comment="comment"
+          :isAuth="isAuth"
           :isReply="false"
           textStyle="italic"
         />
@@ -35,7 +36,7 @@ export default {
   props: {
     Comment: {
       type: Object,
-      required: true
+      required: false
     },
     isReply: {
       type: Boolean,
