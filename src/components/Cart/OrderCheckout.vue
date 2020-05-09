@@ -184,7 +184,6 @@ export default {
   },
   methods: {
     isCart () {
-      console.log(this.paymentMethod)
       return this.paymentMethod === 1
     }
   },

@@ -24,7 +24,7 @@ export default {
       }
     },
 
-    SET_COMMENT_TO_API: async function ({ commit, dispatch }, { text, post, author, childrenId = '' }) {
+    async SET_COMMENT_TO_API ({ commit, dispatch }, { text, post, author, childrenId = '' }) {
       const pes = {
         text,
         post,
@@ -36,7 +36,7 @@ export default {
       } else {
         pes.post = post
       }
-      await Axios.post(`http://77.66.177.88:8181/api/v1/comments/${childrenId}`, pes)
+      await Axios.post(`/comments/${childrenId}`, pes)
     }
   },
   getters: {
