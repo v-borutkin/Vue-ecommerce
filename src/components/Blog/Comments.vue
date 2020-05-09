@@ -71,7 +71,6 @@ export default {
       this.parentText = parentText
       this.$refs.textarea.focus()
       this.$router.push('#textarea')
-
     },
     userClickForTextarea () {
       if (!this.IS_AUTH) {
