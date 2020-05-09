@@ -54,7 +54,7 @@ export default {
       parentText: '',
       childId: ''
     }
-  }
+  },
   computed: {
     ...mapGetters([
       'IS_AUTH',
