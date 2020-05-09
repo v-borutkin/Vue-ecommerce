@@ -54,7 +54,7 @@ export default {
       parentText: '',
       childId: ''
     }
-  },
+  }
   computed: {
     ...mapGetters([
       'IS_AUTH',
@@ -71,6 +71,7 @@ export default {
       this.parentText = parentText
       this.$refs.textarea.focus()
       this.$router.push('#textarea')
+
     },
     userClickForTextarea () {
       if (!this.IS_AUTH) {
@@ -88,7 +89,7 @@ export default {
           post: this.id,
           author: this.GET_USER.userId,
           childrenId: clildId
-        }).then(response => {
+        }).then(() => {
           this.GET_COMMENTS_FROM_API(this.id)
           this.message = ''
         }).catch(error => {
