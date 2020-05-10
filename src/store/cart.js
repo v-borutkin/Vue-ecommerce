@@ -6,10 +6,13 @@ Vue.use(Vuex)
 
 export default {
   state: {
+    geoApiKey: 'rxbbee9nZktOrDhlfruXp6iVSP7YSPt0',
+    geoApiResponseLang: 'ru',
     cartId: '',
     totalPrice: 0,
     promoPrice: 0,
     step: 1,
+    countries: [],
     promoCodeInfo: [],
     cartList: []
   },
@@ -28,9 +31,16 @@ export default {
     },
     SET_PROMO_CODE_INFO (state, payload) {
       state.promoCodeInfo = payload
+    },
+    SET_COUNTRIES (state, payload) {
+      state.countries = payload
     }
   },
   getters: {
+    GET_COUNTRIES (state) {
+      console.log(state.countries)
+      return state.countries
+    },
     GET_PROMO_PRICE (state) {
       if (state.promoPrice !== null) {
         return state.promoPrice
@@ -97,6 +107,16 @@ export default {
       await Axios.delete(`/cart-edit/${payload}`).then(() => {
         dispatch('GET_CART_LIST_FROM_API')
       })
+    },
+    async GET_COUNTRIES_FROM_API ({ commit, state }) {
+      await Axios.get(`http://geohelper.info/api/v1/countries?apiKey=${state.geoApiKey}&locale[lang]=${state.geoApiResponseLang}`)
+        .then(response => {
+          commit('SET_COUNTRIES', response.data.result)
+        })
+    },
+    async GET_CITIES ({ commit, state }, countryId) {
+      await Axios.get(`http://geohelper.info/api/v1/cities?apiKey=${state.geoApiKey}
+                           &locale[lang]=${state.geoApiResponseLang}&filter[countryIso]=${countryId}`)
     },
     async CART_LIST_CLEAR ({ commit }) {
       commit('CART_LIST_CLEAR', [])

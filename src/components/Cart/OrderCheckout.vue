@@ -31,7 +31,7 @@
           </li>
           <li class="list-group-item d-flex justify-content-between">
             <span>Итог</span>
-            <strong>{{GET_TOTAL_PRICE}}</strong>
+            <strong></strong>
           </li>
         </ul>
       </div>
@@ -76,7 +76,11 @@
               <label for="country">Страна</label>
               <select class="custom-select d-block w-100" id="country" required>
                 <option value="">Выбор...</option>
-                <option>United States</option>
+                <option v-for="country in GET_COUNTRIES"
+                        :value="country.id"
+                        :key="country.id">
+                  {{country.name}}
+                </option>
               </select>
               <div class="invalid-feedback">
                 Please select a valid country.
@@ -86,7 +90,6 @@
               <label for="state">Город</label>
               <select class="custom-select d-block w-100" id="state" required>
                 <option value="">Выбор...</option>
-                <option>California</option>
               </select>
               <div class="invalid-feedback">
                 Please provide a valid state.
@@ -110,58 +113,24 @@
             <div class="d-block my-3">
               <h4 class="mb-3">Оплата</h4>
               <div class="custom-control custom-radio">
-                <input id="credit"
-                       name="paymentMethod"
-                       type="radio"
-                       class="custom-control-input"
-                       value="1"
-                       checked
-                       v-model="paymentMethod">
-                <label class="custom-control-label" for="credit">Кредитная карта</label>
-              </div>
-              <div class="custom-control custom-radio">
                 <input id="debit"
                        name="paymentMethod"
                        type="radio"
                        class="custom-control-input"
                        value="2"
+                       checked
                        v-model="paymentMethod">
                 <label class="custom-control-label" for="debit">Оплата наличными</label>
               </div>
-            </div>
-            <div v-show="paymentMethod == 1">
-              <div class="row">
-                <div class="col-md-6 mb-3">
-                  <label for="cc-name">Имя держателя карты</label>
-                  <input type="text" class="form-control" id="cc-name" placeholder="" required>
-                  <small class="text-muted">Full name as displayed on card</small>
-                  <div class="invalid-feedback">
-                    Name on card is required
-                  </div>
-                </div>
-                <div class="col-md-6 mb-3">
-                  <label for="cc-number">Номер карты</label>
-                  <input type="text" class="form-control" id="cc-number" placeholder="" required>
-                  <div class="invalid-feedback">
-                    Credit card number is required
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-3 mb-3">
-                  <label for="cc-expiration">Срок истечения</label>
-                  <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
-                  <div class="invalid-feedback">
-                    Expiration date required
-                  </div>
-                </div>
-                <div class="col-md-3 mb-3">
-                  <label for="cc-cvv">CVV</label>
-                  <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
-                  <div class="invalid-feedback">
-                    Security code required
-                  </div>
-                </div>
+              <div class="custom-control custom-radio">
+                <input id="credit"
+                       name="paymentMethod"
+                       type="radio"
+                       class="custom-control-input"
+                       value="1"
+                       disabled
+                       v-model="paymentMethod">
+                <label class="custom-control-label" for="credit">Кредитная карта</label>
               </div>
             </div>
           </div>
@@ -174,24 +143,27 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 export default {
-  name: 'OrderCheckuot',
+  name: 'OrderCheckout',
   data () {
     return {
       paymentMethod: 1
     }
   },
   methods: {
-    isCart () {
-      return this.paymentMethod === 1
-    }
+    ...mapActions([
+      'GET_COUNTRIES_FROM_API'
+    ])
   },
   computed: {
     ...mapGetters([
       'GET_CART_LIST',
-      'GET_TOTAL_PRICE'
+      'GET_COUNTRIES'
     ])
+  },
+  mounted () {
+    this.GET_COUNTRIES_FROM_API()
   }
 }
 </script>
