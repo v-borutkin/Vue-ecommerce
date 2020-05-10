@@ -1,7 +1,7 @@
 <template>
   <b-container>
     <b-card class="item">
-      <b-img :src="GET_POST.image" width="680" />
+      <b-img :src="imgUrl(GET_POST.image)" width="680" />
       <h1>{{ GET_POST.title }}</h1>
       <h6>{{ GET_POST.author }}</h6>
       <p>{{ GET_POST.text }}</p>
@@ -15,9 +15,11 @@
 
 <script>
 import Comments from './Comments'
+import imgUrl from '../../mixins/imgUrl'
 import { mapActions, mapGetters } from 'vuex'
 export default {
   props: ['id'],
+  mixins: [imgUrl],
   name: 'Post',
   components: {
     Comments

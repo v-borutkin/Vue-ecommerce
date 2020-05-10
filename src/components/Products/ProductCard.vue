@@ -2,7 +2,7 @@
   <div>
   <b-container>
     <b-card>
-      <b-img :src="GET_PRODUCT.photo" width="480" />
+      <b-img :src="imgUrl(GET_PRODUCT.photo)" width="480" />
       <h1>{{ GET_PRODUCT.name }}</h1>
       <h6>{{ GET_PRODUCT.description }}</h6>
       <p>{{ GET_PRODUCT.price }}</p>
@@ -64,9 +64,10 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import product from './Product'
-
+import imgUrl from '../../mixins/imgUrl'
 export default {
   name: 'Product',
+  mixins: [imgUrl],
   props: {
     id: {
       required: true

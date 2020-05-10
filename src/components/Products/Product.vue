@@ -1,7 +1,7 @@
 <template>
         <b-card
                 :key="product.id"
-                :img-src="product.photo"
+                :img-src="imgUrl(product.photo)"
                 img-alt="Image"
                 img-top
                 tag="article"
@@ -61,14 +61,10 @@
 </template>
 <script>
 import { mapActions, mapGetters } from 'vuex'
-
+import imgUrl from '../../mixins/imgUrl'
 export default {
   props: ['product'],
-  data () {
-    return {
-
-    }
-  },
+  mixins: [imgUrl],
   computed: {
     ...mapGetters([
       'IS_AUTH'

@@ -9,7 +9,7 @@
             class="mb-2 item"
           >
             <div>
-              <img :src="post.image" alt="Card image">
+              <img :src="imgUrl(post.image)" alt="Card image">
             </div>
 
               <b-card-title class="mt-2">
@@ -36,11 +36,13 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import vPagination from 'vue-plain-pagination'
+import imgUrl from '../../mixins/imgUrl'
 
 export default {
   components: {
     vPagination
   },
+  mixins: [imgUrl],
   data () {
     return {
       isLoading: true,
