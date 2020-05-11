@@ -11,7 +11,7 @@ export default {
     promoPrice: 0,
     step: 1,
     promoCodeInfo: [],
-    cartList: [],
+    cartList: []
   },
   mutations: {
     SET_CART_PRODUCT_LIST (state, payload) {
@@ -28,7 +28,7 @@ export default {
     },
     SET_PROMO_CODE_INFO (state, payload) {
       state.promoCodeInfo = payload
-    },
+    }
   },
   getters: {
     GET_PROMO_PRICE (state) {
@@ -63,7 +63,7 @@ export default {
         cart: getters.getCartId,
         quantity: 1
       })
-        .then(response => {
+        .then(() => {
           dispatch('GET_CART_LIST_FROM_API')
           dispatch('GET_PRODUCTS_FROM_API')
         })
@@ -80,7 +80,7 @@ export default {
       const q = quantity - state.step
       await Axios.put(`/cart-edit/${productId}`, {
         quantity: q
-      }).then(response => {
+      }).then(() => {
         dispatch('GET_CART_LIST_FROM_API')
       })
     },
