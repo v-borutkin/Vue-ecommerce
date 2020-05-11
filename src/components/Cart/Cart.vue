@@ -28,9 +28,11 @@
           </form>
         </div>
         <div class="pull-right" style="margin: 10px">
-          <button class="btn btn-success pull-right" @click="orderCheckout">Оформить заказ</button>
+          <button class="btn btn-success pull-right btn-order">
+            <router-link to="/ordercheckout">Оформить заказ</router-link>
+          </button>
           <div v-if="GET_PROMO_PRICE" class="pull-right" style="margin: 5px; color: green">
-            Активирован промокод <b>{{GET_PROMO_CODE_INFO.description}}</b> Итоговая цена: <b style="text-decoration: line-through">{{GET_TOTAL_PRICE}}</b> <b>{{GET_PROMO_PRICE}}</b>
+            Активирован промокод <b>{{GET_PROMO_CODE_INFO.description}} (-{{GET_PROMO_CODE_INFO.discount_value}}$)</b> Итоговая цена: <b style="text-decoration: line-through"></b> <b>{{GET_PROMO_PRICE}}</b>
           </div>
           <div v-else class="pull-right" style="margin: 5px">
             Total price: <b>{{GET_TOTAL_PRICE}}</b>
@@ -84,9 +86,6 @@ export default {
     setPromo (value) {
       this.promoText = value
     },
-    orderCheckout () {
-
-    },
     sendPromo () {
       this.$v.promoText.$touch()
       if (!this.$v.$error && this.promoText) {
@@ -121,7 +120,10 @@ export default {
 </script>
 
 <style scoped>
-
+  .btn-order a {
+    color: white;
+    text-decoration: none;
+  }
   .quantity input {
     margin: 0;
     text-align: center;

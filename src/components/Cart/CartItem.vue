@@ -11,7 +11,7 @@
     </div>
     <div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
       <div class="col-3 col-sm-3 col-md-6 text-md-right" style="padding-top: 5px">
-        <h6><strong>{{item.good.price * item.quantity}} <span class="text-muted">$</span></strong></h6>
+        <h6><strong>{{item.amount}} <span class="text-muted">$</span></strong></h6>
       </div>
       <div class="col-4 col-sm-4 col-md-4">
         <div class="quantity">
