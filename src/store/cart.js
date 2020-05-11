@@ -6,9 +6,6 @@ Vue.use(Vuex)
 
 export default {
   state: {
-    geoApiKey: 'rxbbee9nZktOrDhlfruXp6iVSP7YSPt0',
-    geoApiResponseLang: 'ru',
-    countryId: 'RU',
     cartId: '',
     totalPrice: 0,
     promoPrice: 0,
