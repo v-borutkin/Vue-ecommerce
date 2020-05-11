@@ -20,19 +20,24 @@
               <h6 class="my-0">{{item.good.name}}</h6>
               <small class="text-muted">{{item.good.short_text}}</small>
             </div>
-            <span class="text-muted">{{item.good.price * item.quantity}}</span>
+            <span class="text-muted">{{item.amount}}</span>
           </li>
-          <li class="list-group-item d-flex justify-content-between bg-light">
+          <li class="list-group-item d-flex justify-content-between bg-light" v-if="GET_PROMO_CODE_INFO">
             <div class="text-success">
               <h6 class="my-0">Promo code</h6>
-              <small>EXAMPLECODE</small>
+              <small>{{GET_PROMO_CODE_INFO.name}}</small>
             </div>
-            <span class="text-success">-$5</span>
+            <span class="text-success">-{{GET_PROMO_CODE_INFO.discount_value}}$</span>
           </li>
-          <li class="list-group-item d-flex justify-content-between">
+          <li class="list-group-item d-flex justify-content-between" v-if="GET_PROMO_CODE_INFO">
             <span>Итог</span>
-            <strong></strong>
+            <strong>{{GET_PROMO_PRICE}}</strong>
           </li>
+          <li class="list-group-item d-flex justify-content-between" v-else>
+            <span>Итог</span>
+            <strong>{{GET_TOTAL_PRICE}}</strong>
+          </li>
+
         </ul>
       </div>
       <div class="col-md-8 order-md-1">
@@ -119,11 +124,14 @@ export default {
 
   computed: {
     ...mapGetters([
-      'GET_CART_LIST'
+      'GET_CART_LIST',
+      'GET_TOTAL_PRICE',
+      'GET_PROMO_PRICE',
+      'GET_PROMO_CODE_INFO'
     ])
   },
   mounted () {
-    this.GET_REGIONS_FROM_API()
+    console.log(this.GET_PROMO_CODE_INFO)
   }
 }
 </script>
