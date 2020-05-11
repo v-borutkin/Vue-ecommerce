@@ -70,39 +70,6 @@
               Please enter your shipping address.
             </div>
           </div>
-
-          <div class="row">
-            <div class="col-md-5 mb-3">
-              <label for="country">Страна</label>
-              <select class="custom-select d-block w-100" id="country" required>
-                <option value="">Выбор...</option>
-                <option v-for="country in GET_COUNTRIES"
-                        :value="country.id"
-                        :key="country.id">
-                  {{country.name}}
-                </option>
-              </select>
-              <div class="invalid-feedback">
-                Please select a valid country.
-              </div>
-            </div>
-            <div class="col-md-4 mb-3">
-              <label for="state">Город</label>
-              <select class="custom-select d-block w-100" id="state" required>
-                <option value="">Выбор...</option>
-              </select>
-              <div class="invalid-feedback">
-                Please provide a valid state.
-              </div>
-            </div>
-            <div class="col-md-3 mb-3">
-              <label for="zip">Индекс</label>
-              <input type="text" class="form-control" id="zip" placeholder="" required>
-              <div class="invalid-feedback">
-                Zip code required.
-              </div>
-            </div>
-          </div>
           <hr class="mb-4">
           <div class="custom-control custom-checkbox">
             <input type="checkbox" class="custom-control-input" id="save-info">
@@ -117,7 +84,7 @@
                        name="paymentMethod"
                        type="radio"
                        class="custom-control-input"
-                       value="2"
+                       value="1"
                        checked
                        v-model="paymentMethod">
                 <label class="custom-control-label" for="debit">Оплата наличными</label>
@@ -127,9 +94,7 @@
                        name="paymentMethod"
                        type="radio"
                        class="custom-control-input"
-                       value="1"
-                       disabled
-                       v-model="paymentMethod">
+                       disabled>
                 <label class="custom-control-label" for="credit">Кредитная карта</label>
               </div>
             </div>
@@ -141,33 +106,28 @@
     </div>
   </div>
 </template>
-
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 export default {
   name: 'OrderCheckout',
   data () {
     return {
-      paymentMethod: 1
+      paymentMethod: 1,
+      address: ''
     }
   },
-  methods: {
-    ...mapActions([
-      'GET_COUNTRIES_FROM_API'
-    ])
-  },
+
   computed: {
     ...mapGetters([
-      'GET_CART_LIST',
-      'GET_COUNTRIES'
+      'GET_CART_LIST'
     ])
   },
   mounted () {
-    this.GET_COUNTRIES_FROM_API()
+    this.GET_REGIONS_FROM_API()
   }
 }
 </script>
 
-<style scoped>
+<style src="vue-multiselect/dist/vue-multiselect.min.css">
 
 </style>

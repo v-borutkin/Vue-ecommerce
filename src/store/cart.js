@@ -8,15 +8,20 @@ export default {
   state: {
     geoApiKey: 'rxbbee9nZktOrDhlfruXp6iVSP7YSPt0',
     geoApiResponseLang: 'ru',
+    countryId: 'RU',
     cartId: '',
     totalPrice: 0,
     promoPrice: 0,
     step: 1,
-    countries: [],
+    regions: [],
     promoCodeInfo: [],
-    cartList: []
+    cartList: [],
+    cities: []
   },
   mutations: {
+    SET_CITIES (state, payload) {
+      state.cities = payload
+    },
     SET_CART_PRODUCT_LIST (state, payload) {
       state.cartList = payload
     },
@@ -32,14 +37,16 @@ export default {
     SET_PROMO_CODE_INFO (state, payload) {
       state.promoCodeInfo = payload
     },
-    SET_COUNTRIES (state, payload) {
-      state.countries = payload
+    SET_REGIONS (state, payload) {
+      state.regions = payload
     }
   },
   getters: {
-    GET_COUNTRIES (state) {
-      console.log(state.countries)
-      return state.countries
+    GET_REGIONS (state) {
+      return state.regions
+    },
+    GET_CITIES (state) {
+      return state.cities
     },
     GET_PROMO_PRICE (state) {
       if (state.promoPrice !== null) {
@@ -108,15 +115,17 @@ export default {
         dispatch('GET_CART_LIST_FROM_API')
       })
     },
-    async GET_COUNTRIES_FROM_API ({ commit, state }) {
-      await Axios.get(`http://geohelper.info/api/v1/countries?apiKey=${state.geoApiKey}&locale[lang]=${state.geoApiResponseLang}`)
+    async GET_REGIONS_FROM_API ({ commit, state }) {
+      await Axios.get(`http://geohelper.info/api/v1/regions?apiKey=${state.geoApiKey}&locale[lang]=${state.geoApiResponseLang}&filter[countryIso]=${state.countryId}&pagination[limit]=100`)
         .then(response => {
-          commit('SET_COUNTRIES', response.data.result)
+          commit('SET_REGIONS', response.data.result)
         })
     },
-    async GET_CITIES ({ commit, state }, countryId) {
-      await Axios.get(`http://geohelper.info/api/v1/cities?apiKey=${state.geoApiKey}
-                           &locale[lang]=${state.geoApiResponseLang}&filter[countryIso]=${countryId}`)
+    async GET_CITIES_FROM_API ({ commit }, name) {
+      await Axios.get(`http://geohelper.info/api/v1/cities?apiKey=rxbbee9nZktOrDhlfruXp6iVSP7YSPt0&locale[lang]=ru&filter[nameStrictLanguage]=ru&filter[name]=${name}`)
+        .then(response => {
+          commit('SET_CITIES', response.data.result)
+        })
     },
     async CART_LIST_CLEAR ({ commit }) {
       commit('CART_LIST_CLEAR', [])
