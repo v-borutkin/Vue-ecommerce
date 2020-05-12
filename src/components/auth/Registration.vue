@@ -110,7 +110,7 @@ export default {
     ...mapActions([
       'REGISTRATION'
     ]),
-    registration () {
+    registration: function () {
       this.$v.password.$touch()
       this.$v.email.$touch()
       this.$v.passwordConfirm.$touch()
@@ -133,7 +133,7 @@ export default {
           for (const item in error.response.data) {
             this.$refs[item].classList.add('is-invalid')
             this.$refs[item].insertAdjacentHTML('afterEnd',
-              `<p style="color: #dc3545; font-size: 80%; margin-top: .25rem;" class="error-api">${error.response.data[item][0]}</p>`)
+              `<p class="error-api">${error.response.data[item][0]}</p>`)
           }
         })
       }
@@ -143,5 +143,11 @@ export default {
 </script>
 
 <style scoped>
-
+.error-api {
+  color: #dc3545;
+  font-size: 80%;
+  margin-top: .25rem;
+  transition: all;
+  transition-timing-function: ease
+}
 </style>
