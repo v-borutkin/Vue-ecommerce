@@ -2,7 +2,7 @@
     <b-container >
       <b-col>
         <div class="d-flex flex-row flex-wrap">
-          <div v-for="product in GET_PRODUCTS" :key="product.id">
+          <div v-for="product in products" :key="product.id">
             <product :product="product"/>
           </div>
         </div>
@@ -10,7 +10,7 @@
     </b-container>
   </template>
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 import product from './Product'
 
 export default {
@@ -22,18 +22,20 @@ export default {
     }
   },
   computed: {
-    ...mapGetters([
-      'GET_PRODUCTS'
+    ...mapState('products', [
+      'products'
     ])
   },
   methods: {
-    ...mapActions([
-      'GET_PRODUCTS_FROM_API',
+    ...mapActions('products', [
+      'FETCH_PRODUCTS_FROM_API'
+    ]),
+    ...mapActions('cart', [
       'ADD_TO_CART'
     ])
   },
   mounted () {
-    this.GET_PRODUCTS_FROM_API()
+    this.FETCH_PRODUCTS_FROM_API()
   }
 }
 </script>

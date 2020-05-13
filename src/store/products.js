@@ -7,15 +7,9 @@ Vue.use(Vuex)
 export default {
   namespaced: true,
   state: {
-    products: [
-
-    ],
-    product: [
-
-    ],
-    recommendedProducts: [
-
-    ]
+    products: [],
+    product: [],
+    recommendedProducts: []
   },
   mutations: {
     setProducts (state, payload) {
@@ -29,16 +23,14 @@ export default {
     }
   },
   actions: {
-    async  GET_PRODUCTS_FROM_API ({ commit }) {
+    async  FETCH_PRODUCTS_FROM_API ({ commit }) {
       try {
         const productsApi = await Axios.get('/goods/?category=0')
         commit('setProducts', productsApi.data.results)
       } catch (e) {
-
       }
     },
-
-    async  GET_RECOMMENDED_PRODUCTS_FROM_API ({ commit }) {
+    async  FETCH_RECOMMENDED_PRODUCTS_FROM_API ({ commit }) {
       try {
         const productsApi = await Axios.get('/goods-random/')
         commit('setRecommendedProducts', productsApi.data.results)
@@ -46,21 +38,9 @@ export default {
 
       }
     },
-
-    async GET_PRODUCT_FROM_API ({ commit }, id) {
+    async FETCH_PRODUCT_FROM_API ({ commit }, id) {
       const productApi = await Axios.get(`http://77.66.177.88:8181/api/v1/goods-ops/${id}`)
       commit('setProduct', productApi.data)
-    }
-  },
-  getters: {
-    GET_PRODUCTS (state) {
-      return state.products
-    },
-    GET_PRODUCT (state) {
-      return state.product
-    },
-    GET_RECOMMENDED_PRODUCTS (state) {
-      return state.recommendedProducts
     }
   }
 }

@@ -5,8 +5,7 @@
                 img-alt="Image"
                 img-top
                 tag="article"
-                class="item align-items-stretch"
-        >
+                class="item align-items-stretch">
           <b-card-title>
             <router-link :to="'/products/'+ product.id">{{product.name}}</router-link>
           </b-card-title>
@@ -60,23 +59,27 @@
         </b-card>
 </template>
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 import imgUrl from '../../mixins/imgUrl'
 export default {
   props: ['product'],
   mixins: [imgUrl],
   computed: {
-    ...mapGetters([
-      'IS_AUTH'
+    ...mapState('user', [
+      'isAuth'
     ])
   },
   methods: {
-    ...mapActions([
+    ...mapActions('cart', [
       'ADD_TO_CART',
-      'GET_PRODUCTS_FROM_API',
+      'DELETE_FROM_CART'
+    ]),
+    ...mapActions('favorite', [
       'SET_FAVORITE',
-      'DELETE_FROM_CART',
       'DEL_FAVORITE'
+    ]),
+    ...mapActions('products', [
+      'FETCH_PRODUCTS_FROM_API'
     ]),
     setFavorite (id) {
       if (!this.IS_AUTH) {
@@ -96,8 +99,8 @@ export default {
       if (!this.IS_AUTH) {
         alert('Необходимо авторизоваться')
       } else {
-        this.ADD_TO_CART(id).then(response => {
-          this.GET_PRODUCTS_FROM_API()
+        this.ADD_TO_CART(id).then(() => {
+          this.FETCH_PRODUCTS_FROM_API()
         })
       }
     },
@@ -106,8 +109,8 @@ export default {
         alert('Необходимо авторизоваться')
       } else {
         this.DELETE_FROM_CART(id)
-          .then(response => {
-            this.GET_PRODUCTS_FROM_API()
+          .then(() => {
+            this.FETCH_PRODUCTS_FROM_API()
           })
       }
     }

@@ -17,15 +17,15 @@
         <p :style="{ fontStyle: textStyle }">
           {{comment.text}}
         </p>
-        <comment-item
-          v-for="comment in comment.child_comment"
-          :key="comment.id"
-          :Comment="comment"
-          :isAuth="isAuth"
-          :isReply="false"
-          textStyle="italic"
-        />
-      </div>
+          <comment-item
+            v-for="comment in comment.child_comment"
+            :key="comment.id"
+            :comment="comment"
+            :isAuth="isAuth"
+            :isReply="false"
+            textStyle="italic"
+          />
+        </div>
     </li>
   </div>
 </template>

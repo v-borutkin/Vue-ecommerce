@@ -2,13 +2,13 @@
   <div>
   <b-container>
     <b-card>
-      <b-img :src="imgUrl(GET_PRODUCT.photo)" width="480" />
-      <h1>{{ GET_PRODUCT.name }}</h1>
-      <h6>{{ GET_PRODUCT.description }}</h6>
-      <p>{{ GET_PRODUCT.price }}</p>
+      <b-img :src="imgUrl(product.photo)" width="480" />
+      <h1>{{ product.name }}</h1>
+      <h6>{{ product.description }}</h6>
+      <p>{{ product.price }}</p>
       <div class="productButtons d-flex d-inline-flex justify-content-around">
         <div class="addToCart">
-          <b-button v-if="!GET_PRODUCT.in_cart"
+          <b-button v-if="!product.in_cart"
                     variant="outline-success"
                     @click="addToCart(id)"
           >
@@ -28,7 +28,7 @@
           </b-button>
         </div>
         <div class="addToFavorite">
-          <b-button v-if="!GET_PRODUCT.in_favorite"
+          <b-button v-if="!product.in_favorite"
                     variant="outline-success"
                     @click="setFavorite(id)">
             <svg class="bi bi-star" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -52,7 +52,7 @@
     <b-col>
       <h2 class="mt-3">С этим товаром покупают</h2>
       <div class="d-flex flex-row mt-5 justify-content-around">
-        <div v-for="product in GET_RECOMMENDED_PRODUCTS" :key="product.id">
+        <div v-for="product in recommendedProducts" :key="product.id">
           <product :product="product"/>
         </div>
       </div>
@@ -62,7 +62,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import product from './Product'
 import imgUrl from '../../mixins/imgUrl'
 export default {
@@ -83,24 +83,37 @@ export default {
   },
   watch: {
     '$route.params.id' () {
-      this.GET_PRODUCT_FROM_API(parseInt(this.id))
+      this.FETCH_PRODUCTS_FROM_API(parseInt(this.id))
     }
   },
+  computed: {
+    ...mapState('user', [
+      'isAuth'
+    ]),
+    ...mapState('products', [
+      'product',
+      'recommendedProducts'
+    ])
+  },
   methods: {
-    ...mapActions([
-      'GET_PRODUCT_FROM_API',
-      'GET_RECOMMENDED_PRODUCTS_FROM_API',
+    ...mapActions('cart', [
+      'ADD_TO_CART',
+      'DELETE_FROM_CART'
+    ]),
+    ...mapActions('favorite', [
       'SET_FAVORITE',
-      'DEL_FAVORITE',
-      'DELETE_FROM_CART',
-      'ADD_TO_CART'
+      'DEL_FAVORITE'
+    ]),
+    ...mapActions('products', [
+      'FETCH_PRODUCT_FROM_API',
+      'FETCH_RECOMMENDED_PRODUCTS_FROM_API'
     ]),
     setFavorite (id) {
       if (!this.IS_AUTH) {
         alert('Необходимо авторизоваться')
       } else {
-        this.SET_FAVORITE(parseInt(id)).then(response => {
-          this.GET_PRODUCT_FROM_API(parseInt(id))
+        this.SET_FAVORITE(parseInt(id)).then(() => {
+          this.FETCH_PRODUCT_FROM_API(parseInt(id))
         })
       }
     },
@@ -108,8 +121,8 @@ export default {
       if (!this.IS_AUTH) {
         alert('Необходимо авторизоваться')
       } else {
-        this.DEL_FAVORITE(parseInt(id)).then(response => {
-          this.GET_PRODUCT_FROM_API(parseInt(id))
+        this.DEL_FAVORITE(parseInt(id)).then(() => {
+          this.FETCH_PRODUCT_FROM_API(parseInt(id))
         })
       }
     },
@@ -117,8 +130,8 @@ export default {
       if (!this.IS_AUTH) {
         alert('Необходимо авторизоваться')
       } else {
-        this.ADD_TO_CART(parseInt(id)).then(response => {
-          this.GET_PRODUCT_FROM_API(parseInt(id))
+        this.ADD_TO_CART(parseInt(id)).then(() => {
+          this.FETCH_PRODUCT_FROM_API(parseInt(id))
         })
       }
     },
@@ -126,24 +139,15 @@ export default {
       if (!this.IS_AUTH) {
         alert('Необходимо авторизоваться')
       } else {
-        this.DELETE_FROM_CART(parseInt(id)).then(response => {
-          this.GET_PRODUCT_FROM_API(parseInt(id))
+        this.DELETE_FROM_CART(parseInt(id)).then(() => {
+          this.FETCH_PRODUCT_FROM_API(parseInt(id))
         })
       }
     }
   },
-
-  computed: {
-    ...mapGetters([
-      'GET_PRODUCT',
-      'GET_RECOMMENDED_PRODUCTS',
-      'IS_AUTH'
-    ])
-  },
-
   mounted () {
-    this.GET_RECOMMENDED_PRODUCTS_FROM_API()
-    this.GET_PRODUCT_FROM_API(this.id)
+    this.FETCH_RECOMMENDED_PRODUCTS_FROM_API()
+    this.FETCH_PRODUCT_FROM_API(this.id)
   }
 }
 
