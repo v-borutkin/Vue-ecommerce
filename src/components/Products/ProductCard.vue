@@ -1,3 +1,4 @@
+<!--suppress JSValidateTypes -->
 <template>
   <div>
   <b-container>
@@ -109,7 +110,7 @@ export default {
       'FETCH_RECOMMENDED_PRODUCTS_FROM_API'
     ]),
     setFavorite (id) {
-      if (!this.IS_AUTH) {
+      if (!this.isAuth) {
         alert('Необходимо авторизоваться')
       } else {
         this.SET_FAVORITE(parseInt(id)).then(() => {
@@ -118,7 +119,7 @@ export default {
       }
     },
     delFavorite (id) {
-      if (!this.IS_AUTH) {
+      if (!this.isAuth) {
         alert('Необходимо авторизоваться')
       } else {
         this.DEL_FAVORITE(parseInt(id)).then(() => {
@@ -127,7 +128,7 @@ export default {
       }
     },
     addToCart (id) {
-      if (!this.IS_AUTH) {
+      if (!this.isAuth) {
         alert('Необходимо авторизоваться')
       } else {
         this.ADD_TO_CART(parseInt(id)).then(() => {
@@ -136,7 +137,7 @@ export default {
       }
     },
     deleteFromCart (id) {
-      if (!this.IS_AUTH) {
+      if (!this.isAuth) {
         alert('Необходимо авторизоваться')
       } else {
         this.DELETE_FROM_CART(parseInt(id)).then(() => {

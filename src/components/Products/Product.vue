@@ -82,21 +82,21 @@ export default {
       'FETCH_PRODUCTS_FROM_API'
     ]),
     setFavorite (id) {
-      if (!this.IS_AUTH) {
+      if (!this.isAuth) {
         alert('Необходимо авторизоваться')
       } else {
         this.SET_FAVORITE(id)
       }
     },
     delFavorite (id) {
-      if (!this.IS_AUTH) {
+      if (!this.isAuth) {
         alert('Необходимо авторизоваться')
       } else {
         this.DEL_FAVORITE(id)
       }
     },
     addToCart (id) {
-      if (!this.IS_AUTH) {
+      if (!this.isAuth) {
         alert('Необходимо авторизоваться')
       } else {
         this.ADD_TO_CART(id).then(() => {
@@ -105,7 +105,7 @@ export default {
       }
     },
     deleteFromCart (id) {
-      if (!this.IS_AUTH) {
+      if (!this.isAuth) {
         alert('Необходимо авторизоваться')
       } else {
         this.DELETE_FROM_CART(id)
