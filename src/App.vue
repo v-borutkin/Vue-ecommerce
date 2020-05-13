@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="wrapper">
-      <navigation :cartLength="GET_CART_LENGTH"></navigation>
+      <navigation :cartLength="cartList.length"></navigation>
       <div class="content">
         <keep-alive include="Products, Home, Cart">
           <router-view/>
@@ -13,10 +13,10 @@
 
 </template>
 <script>
-
 import Navigation from './components/Home/Navigation'
 import Footer from './components/Home/Footer'
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapState } from 'vuex'
+
 export default {
   components: {
     Navigation,
@@ -28,8 +28,8 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('cart', [
-      'GET_CART_LENGTH'
+    ...mapState('cart', [
+      'cartList'
     ])
   },
   methods: {
