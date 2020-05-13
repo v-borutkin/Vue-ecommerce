@@ -35,7 +35,5 @@ export default {
       } catch (e) {
       }
     }
-  },
-  getters: {
   }
 }

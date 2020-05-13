@@ -10,14 +10,5 @@ export default {
       { title: 'Товары', url: '/products/' },
       { title: 'Блог', url: '/blog' }
     ]
-  },
-  mutations: {
-  },
-  actions: {
-  },
-  getters: {
-    getNavLinks (state) {
-      return state.navLinks
-    }
   }
 }

@@ -1,10 +1,10 @@
 <template>
   <div id="app">
     <slider></slider>
-    <b-container >
+    <b-container>
         <b-col>
           <div class="d-flex">
-            <div v-for="product in GET_PRODUCTS.slice(0,5)" :key="product.id">
+            <div v-for="product in products.slice(0,5)" :key="product.id">
               <product :product="product"/>
             </div>
           </div>
@@ -16,7 +16,7 @@
 <script>
 import Slider from './Slider'
 import product from '../Products/Product'
-import { mapGetters, mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   components: {
@@ -24,16 +24,16 @@ export default {
   },
   data () {
     return {
-      isAuth: false
+
     }
   },
   computed: {
-    ...mapGetters([
-      'GET_PRODUCTS'
+    ...mapState('products', [
+      'products'
     ])
   },
   methods: {
-    ...mapActions([
+    ...mapActions('products', [
       'GET_PRODUCTS_FROM_API'
     ])
   },

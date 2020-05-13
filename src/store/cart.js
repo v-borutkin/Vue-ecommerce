@@ -39,17 +39,8 @@ export default {
         return false
       }
     },
-    GET_TOTAL_PRICE (state) {
-      return state.totalPrice
-    },
     GET_CART_LENGTH (state) {
       return state.cartList.length
-    },
-    GET_CART_LIST (state) {
-      return state.cartList
-    },
-    GET_PROMO_CODE_INFO (state) {
-      return state.promoCodeInfo
     }
   },
   actions: {
@@ -73,7 +64,7 @@ export default {
       const q = quantity + state.step
       await Axios.put(`/cart-edit/${productId}`, {
         quantity: q
-      }).then(response => {
+      }).then(() => {
         dispatch('GET_CART_LIST_FROM_API')
       })
     },

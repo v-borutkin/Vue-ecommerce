@@ -1,9 +1,9 @@
 <template>
   <div class="container">
-    <div v-if="GET_CART_LIST.length" class="card shopping-cart">
+    <div v-if="cartList.length" class="card shopping-cart">
       <div class="card-body">
 
-        <cart-item v-for="item in GET_CART_LIST"
+        <cart-item v-for="item in cartList"
                    :item="item"
                    :key="item.id"
                    v-on:delete="deleteFromCart"
@@ -32,10 +32,10 @@
             <router-link to="/ordercheckout">Оформить заказ</router-link>
           </button>
           <div v-if="GET_PROMO_PRICE" class="pull-right" style="margin: 5px; color: green">
-            Активирован промокод <b>{{GET_PROMO_CODE_INFO.description}} (-{{GET_PROMO_CODE_INFO.discount_value}}$)</b> Итоговая цена: <b style="text-decoration: line-through"></b> <b>{{GET_PROMO_PRICE}}</b>
+            Активирован промокод <b>{{promoCodeInfo.description}} (-{{promoCodeInfo.discount_value}}$)</b> Итоговая цена: <b style="text-decoration: line-through"></b> <b>{{GET_PROMO_PRICE}}</b>
           </div>
           <div v-else class="pull-right" style="margin: 5px">
-            Total price: <b>{{GET_TOTAL_PRICE}}</b>
+            Total price: <b>{{totalPrice}}</b>
           </div>
         </div>
       </div>
@@ -48,7 +48,7 @@
 
 <script>
 import CartItem from './CartItem'
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions, mapState } from 'vuex'
 import { minLength, maxLength } from 'vuelidate/lib/validators'
 export default {
   name: 'Cart',
@@ -67,19 +67,20 @@ export default {
     CartItem
   },
   computed: {
-    ...mapGetters([
-      'GET_CART_LIST',
-      'GET_TOTAL_PRICE',
-      'GET_PROMO_PRICE',
-      'GET_PROMO_CODE_INFO'
+    ...mapGetters('cart', [
+      'GET_PROMO_PRICE'
+    ]),
+    ...mapState('cart', [
+      'cartList',
+      'totalPrice',
+      'promoCodeInfo'
     ])
   },
   methods: {
-    ...mapActions([
+    ...mapActions('cart', [
       'DELETE_FROM_CART',
       'CART_ELEMENT_PLUS',
       'CART_ELEMENT_MINUS',
-      'CART_ELEMENT_CHANGE_COUNT',
       'SEND_PROMO',
       'GET_CART_LIST_FROM_API'
     ]),

@@ -31,7 +31,6 @@ export default {
     ...mapGetters('cart', [
       'GET_CART_LENGTH'
     ])
-
   },
   methods: {
     ...mapActions('cart', [

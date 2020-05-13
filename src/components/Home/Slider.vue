@@ -11,7 +11,7 @@
       img-height="300"
       style="text-shadow: 1px 1px 2px #333;"
     >
-      <b-carousel-slide v-for="(slide, index) in getSlides" :key="index">
+      <b-carousel-slide v-for="(slide, index) in sliderItems" :key="index">
         <template v-slot:img>
           <img
             :src="slide.src"
@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   data () {
     return {
@@ -43,9 +44,9 @@ export default {
     }
   },
   computed: {
-    getSlides () {
-      return this.$store.getters.getSliders
-    }
+    ...mapState('slider', [
+      'sliderItems'
+    ])
   }
 }
 </script>

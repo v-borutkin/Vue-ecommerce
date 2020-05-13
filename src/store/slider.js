@@ -6,18 +6,9 @@ Vue.use(Vuex)
 export default {
   namespaced: true,
   state: {
-    sliderItem: [
+    sliderItems: [
       { src: 'https://img1.akspic.ru/image/13872-snajper-oruzhie-soldat-strajkbolnoe_oruzhie-pushka-1920x1080.jpg', alt: 'image slot', text: 'asdsadasd' },
       { src: 'https://img1.akspic.ru/image/13872-snajper-oruzhie-soldat-strajkbolnoe_oruzhie-pushka-1920x1080.jpg', alt: 'image slot', text: 'asdsadasd' }
     ]
-  },
-  mutations: {
-  },
-  actions: {
-  },
-  getters: {
-    getSliders (state) {
-      return state.sliderItem
-    }
   }
 }
