@@ -5,9 +5,9 @@ import Axios from '../interceptor'
 Vue.use(Vuex)
 
 export default {
+  namespaced: true,
   state: {
-    posts: [
-    ],
+    posts: [],
     post: {},
     paginationCount: 1
   },
@@ -21,14 +21,14 @@ export default {
     }
   },
   actions: {
-    async  GET_POSTS_FROM_API ({ commit, dispatch }, currentPage) {
+    async  FETCH_POSTS_FROM_API ({ commit, dispatch }, currentPage) {
       try {
         const postsApi = await Axios.get(`/posts/?page=${currentPage}`)
         commit('loadPosts', postsApi)
       } catch (e) {
       }
     },
-    async GET_POST_FROM_API ({ commit, dispatch }, id) {
+    async FETCH_POST_FROM_API ({ commit, dispatch }, id) {
       try {
         const postApi = await Axios.get(`/post-ops/${id}`)
         commit('loadPost', postApi.data)
@@ -37,17 +37,5 @@ export default {
     }
   },
   getters: {
-    GET_POSTS (state) {
-      return state.posts
-    },
-    GET_POST: state => { // TODO фикс
-      return state.post
-    },
-    /**
-     * @return {number}
-     */
-    GET_PAGINATION_COUNT (state) {
-      return state.paginationCount
-    }
   }
 }

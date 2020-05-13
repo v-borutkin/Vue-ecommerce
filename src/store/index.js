@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import navigation from './navigation'
 import slider from './slider'
-import auth from './user'
+import user from './user'
 import blog from './blog'
 import shared from './shared'
 import favorite from './favorite'
@@ -12,7 +12,6 @@ import cart from './cart'
 
 Vue.use(Vuex)
 export default new Vuex.Store({ // TODO сделать единый отлов ошибок
-  namespaced: true,
   state: {},
   mutations: {},
   actions: {},
@@ -20,7 +19,7 @@ export default new Vuex.Store({ // TODO сделать единый отлов �
   modules: {
     navigation,
     slider,
-    auth,
+    user,
     blog,
     shared,
     favorite,

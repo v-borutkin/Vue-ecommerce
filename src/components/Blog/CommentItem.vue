@@ -4,21 +4,21 @@
       <img src="https://bootdey.com/img/Content/user_1.jpg" class="avatar" alt="">
       <div class="post-comments">
         <div class=" header_comment d-inline-flex meta justify-content-between">
-          <p>{{ Comment.created_date  | dateFilter}}</p>
-          <a class="author" href="#">{{ Comment.author }}</a>
+          <p>{{ comment.created_date  | dateFilter}}</p>
+          <a class="author" href="#">{{ comment.author }}</a>
           <b-button class="btn btn-info rounded-right"
                     size="sm"
                     v-if="isReply"
                     :disabled="!isAuth"
-                    @click.prevent="sendReply(Comment.id, Comment.text)">
+                    @click.prevent="sendReply(comment.id, comment.text)">
             Reply
           </b-button>
         </div>
         <p :style="{ fontStyle: textStyle }">
-          {{Comment.text}}
+          {{comment.text}}
         </p>
         <comment-item
-          v-for="comment in Comment.child_comment"
+          v-for="comment in comment.child_comment"
           :key="comment.id"
           :Comment="comment"
           :isAuth="isAuth"
@@ -34,7 +34,7 @@
 export default {
   name: 'CommentItem',
   props: {
-    Comment: {
+    comment: {
       type: Object,
       required: false
     },

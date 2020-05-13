@@ -6,8 +6,9 @@ import router from '../router'
 Vue.use(Vuex)
 
 export default {
+  namespaced: true,
   state: {
-    isAuth: '',
+    isAuth: false,
     user: {
       userId: 0,
       userName: ''
@@ -32,7 +33,7 @@ export default {
       state.user.userName = payload.username
       localStorage.setItem('userName', payload.username)
     },
-    UPDATE_USER (state, payload) {
+    UPDATE_USER (state) {
       const userName = localStorage.getItem('userName')
       const userId = localStorage.getItem('userId')
 

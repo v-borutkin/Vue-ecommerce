@@ -42,7 +42,7 @@
       </div>
       <div class="col-md-8 order-md-1">
         <h4 class="mb-3">Оформление доставки</h4>
-        <form class="needs-validation" novalidate>
+        <form class="needs-validation">
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="firstName">Имя</label>
@@ -131,11 +131,11 @@ export default {
     ])
   },
   mounted () {
-    console.log(this.GET_PROMO_CODE_INFO)
+
   }
 }
 </script>
 
-<style src="vue-multiselect/dist/vue-multiselect.min.css">
+<style>
 
 </style>

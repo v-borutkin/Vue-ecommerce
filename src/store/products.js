@@ -5,6 +5,7 @@ import Axios from '../interceptor'
 Vue.use(Vuex)
 
 export default {
+  namespaced: true,
   state: {
     products: [
 

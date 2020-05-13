@@ -14,7 +14,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions([
+    ...mapActions('user', [
       'REGISTRATION_CONFIRM'
     ])
   },

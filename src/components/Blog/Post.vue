@@ -1,13 +1,13 @@
 <template>
   <b-container>
     <b-card class="item">
-      <b-img :src="imgUrl(GET_POST.image)" width="680" />
-      <h1>{{ GET_POST.title }}</h1>
-      <h6>{{ GET_POST.author }}</h6>
-      <p>{{ GET_POST.text }}</p>
+      <b-img :src="imgUrl(post.image)" width="680" />
+      <h1>{{ post.title }}</h1>
+      <h6>{{ post.author }}</h6>
+      <p>{{ post.text }}</p>
     </b-card>
     <comments
-      :comments="GET_COMMENTS"
+      :comments="comments"
       :id="id"
     />
   </b-container>
@@ -16,7 +16,7 @@
 <script>
 import Comments from './Comments'
 import imgUrl from '../../mixins/imgUrl'
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 export default {
   props: ['id'],
   mixins: [imgUrl],
@@ -29,23 +29,25 @@ export default {
     }
   },
   methods: {
-    ...mapActions([
-      'GET_POST_FROM_API',
-      'GET_COMMENTS_FROM_API',
+    ...mapActions('blog', [
+      'FETCH_POSTS_FROM_API',
+      'FETCH_POST_FROM_API'
+    ]),
+    ...mapActions('comments', [
       'SET_COMMENT_TO_API'
     ])
   },
   computed: {
-    ...mapGetters([
-      'GET_POST',
-      'GET_COMMENTS',
-      'IS_AUTH',
-      'GET_USER'
+    ...mapState('blog', [
+      'post'
+    ]),
+    ...mapState('comments', [
+      'comments'
     ])
   },
   mounted () {
-    this.GET_POST_FROM_API(this.id)
-    this.GET_COMMENTS_FROM_API(this.id)
+    this.FETCH_POSTS_FROM_API(this.id)
+    this.FETCH_POST_FROM_API(this.id)
   }
 }
 </script>

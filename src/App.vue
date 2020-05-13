@@ -28,14 +28,16 @@ export default {
     }
   },
   computed: {
-    ...mapGetters([
+    ...mapGetters('cart', [
       'GET_CART_LENGTH'
     ])
 
   },
   methods: {
-    ...mapActions([
-      'GET_CART_LIST_FROM_API',
+    ...mapActions('cart', [
+      'GET_CART_LIST_FROM_API'
+    ]),
+    ...mapActions('user', [
       'TO_AUTH'
     ])
   },

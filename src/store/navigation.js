@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 export default {
+  namespaced: true,
   state: {
     navLinks: [
       { title: 'Товары', url: '/products/' },

@@ -107,7 +107,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions([
+    ...mapActions('user', [
       'REGISTRATION'
     ]),
     registration: function () {

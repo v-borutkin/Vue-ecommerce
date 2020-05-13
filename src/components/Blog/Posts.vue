@@ -1,8 +1,8 @@
 <template>
   <b-container>
       <b-col>
-        <div v-if="GET_POSTS" class="d-flex flex-row flex-wrap">
-          <b-card id="products" v-for="post in GET_POSTS"
+        <div v-if="posts" class="d-flex flex-row flex-wrap">
+          <b-card id="products" v-for="post in posts"
                   :key="post.id"
             tag="article"
             style="max-width: 20rem;"
@@ -27,14 +27,14 @@
       </b-col>
       <v-pagination
                     v-model="currentPage"
-                    :page-count="GET_PAGINATION_COUNT"
+                    :page-count="paginationCount"
                     :classes="bootstrapPaginationClasses" >
       </v-pagination>
     </b-container>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 import vPagination from 'vue-plain-pagination'
 import imgUrl from '../../mixins/imgUrl'
 
@@ -60,22 +60,22 @@ export default {
     this.fetchPostsFromApi()
   },
   computed: {
-    ...mapGetters([
-      'GET_POSTS',
-      'GET_PAGINATION_COUNT'
+    ...mapState('blog', [
+      'posts',
+      'paginationCount'
     ])
   },
   methods: {
-    ...mapActions([
-      'GET_POSTS_FROM_API'
+    ...mapActions('blog', [
+      'FETCH_POSTS_FROM_API'
     ]),
     fetchPostsFromApi () {
-      this.GET_POSTS_FROM_API(1)
+      this.FETCH_POSTS_FROM_API(1)
     }
   },
   watch: {
     currentPage () {
-      this.GET_POSTS_FROM_API(this.currentPage)
+      this.FETCH_POSTS_FROM_API(this.currentPage)
     }
   }
 }

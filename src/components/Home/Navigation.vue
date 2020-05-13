@@ -46,13 +46,13 @@ export default {
     getLinks () {
       return this.$store.getters.getNavLinks // TODO пофиксить
     },
-    ...mapGetters([
+    ...mapGetters('user', [
       'IS_AUTH',
       'GET_USER'
     ])
   },
   methods: {
-    ...mapActions([
+    ...mapActions('user', [
       'LOGOUT'
     ]),
     userLogout () {

@@ -19,7 +19,7 @@
               <input type="submit"
                      class="btn btn-sm btn-primary pull-left mt-1"
                      value="Добавить"
-                     :disabled="!IS_AUTH"
+                     :disabled="!isAuth"
                      @click="sendMessage">
             </div>
           </div>
@@ -28,9 +28,9 @@
           <comment-item
             v-for="comment in comments"
             :key="comment.id"
-            :Comment="comment"
-            :isAuth="IS_AUTH"
-            v-on:sendReplyComment="sendReply"
+            :comment="comment"
+            :isAuth="isAuth"
+            @sendReplyComment="sendReply"
           />
         </ul>
       </div>
@@ -40,7 +40,7 @@
 
 <script>
 import CommentItem from './CommentItem'
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 export default {
   name: 'Comments',
   props: ['comments', 'id'],
@@ -55,16 +55,19 @@ export default {
       childId: ''
     }
   },
+  mounted () {
+    this.FETCH_COMMENTS_FROM_API(this.id)
+  },
   computed: {
-    ...mapGetters([
-      'IS_AUTH',
-      'GET_USER'
+    ...mapState('user', [
+      'isAuth',
+      'user'
     ])
   },
   methods: {
-    ...mapActions([
+    ...mapActions('comments', [
       'SET_COMMENT_TO_API',
-      'GET_COMMENTS_FROM_API'
+      'FETCH_COMMENTS_FROM_API'
     ]),
     sendReply (id, parentText) {
       this.childId = id
@@ -73,12 +76,12 @@ export default {
       this.$router.push('#textarea')
     },
     userClickForTextarea () {
-      if (!this.IS_AUTH) {
+      if (!this.isAuth) {
         alert('Для отправки комментария авторизуйтесь')
       }
     },
     sendMessage () {
-      if (this.IS_AUTH) {
+      if (this.isAuth) {
         let clildId = ''
         if (this.childId) {
           clildId = this.childId
@@ -86,10 +89,10 @@ export default {
         this.SET_COMMENT_TO_API({
           text: this.message,
           post: this.id,
-          author: this.GET_USER.userId,
+          author: this.user.userId,
           childrenId: clildId
         }).then(() => {
-          this.GET_COMMENTS_FROM_API(this.id)
+          this.FETCH_COMMENTS_FROM_API(this.id)
           this.message = ''
         }).catch(error => {
           alert(`произошла ошибка + ${error.response}`)

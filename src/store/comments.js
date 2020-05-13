@@ -5,10 +5,9 @@ import Axios from '../interceptor'
 Vue.use(Vuex)
 
 export default {
+  namespaced: true,
   state: {
-    comments: [
-
-    ]
+    comments: []
   },
   mutations: {
     loadComments (state, payload) {
@@ -16,7 +15,7 @@ export default {
     }
   },
   actions: {
-    async GET_COMMENTS_FROM_API ({ commit, dispatch }, postID) {
+    async FETCH_COMMENTS_FROM_API ({ commit, dispatch }, postID) {
       try {
         const commentsApi = await Axios.get(`/comments/post_id=${postID}`)
         commit('loadComments', commentsApi.data.results)
