@@ -6,7 +6,7 @@
       <h6>{{ post.author }}</h6>
       <p>{{ post.text }}</p>
     </b-card>
-    <v-comments
+    <the-comments
       :comments="comments"
       :id="id"
     />
@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import vComments from './vComments'
+import TheComments from './TheComments'
 import imgUrl from '../../mixins/imgUrl'
 import { mapActions, mapState } from 'vuex'
 export default {
@@ -22,7 +22,7 @@ export default {
   mixins: [imgUrl],
   name: 'Post',
   components: {
-    vComments
+    TheComments
   },
   data () {
     return {

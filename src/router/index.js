@@ -1,17 +1,17 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-const Registration = () => import('@/components/auth/vRegistration')
-const Posts = () => import('@/components/Blog/vPosts')
-const Products = () => import('@/components/Products/vProducts')
-const Post = () => import('@/components/Blog/vPost')
-const FavoriteList = () => import('@/components/Favorite/vFavoriteList')
-const FavoriteItem = () => import('@/components/Favorite/vFavoriteItem')
-const ProductCard = () => import('@/components/Products/vProductCard')
-const Auth = () => import('@/components/auth/vAuth')
-const Cart = () => import('@/components/Cart/vCart')
-const Home = () => import('@/components/Home/vHome')
-const RegistrationConform = () => import('@/components/auth/vRegistrationConfirm')
-const OrderCheckout = () => import('@/components/Cart/vOrderCheckout')
+const Registration = () => import('@/components/User/UserRegistrationPage')
+const Posts = () => import('@/components/Blog/BlogPostsPage')
+const Products = () => import('@/components/Products/ProductListPage')
+const Post = () => import('@/components/Blog/BlogPostPage')
+const FavoriteList = () => import('@/components/Favorite/FavoriteListPage')
+const FavoriteItem = () => import('@/components/Favorite/FavoriteCardPage')
+const ProductCard = () => import('@/components/Products/ProductCardPage')
+const Auth = () => import('@/components/User/UserAuthPage')
+const Cart = () => import('@/components/Cart/CartPage')
+const Home = () => import('@/components/Home/HomePage')
+const RegistrationConform = () => import('@/components/User/UserRegistrationConfirmPage')
+const OrderCheckout = () => import('@/components/Cart/OrderCheckoutPage')
 
 Vue.use(VueRouter)
 
@@ -24,7 +24,7 @@ const routes = [
   { path: '/blog/:id', name: 'Post', component: Post, props: true },
   { path: '/favorite/', name: 'Favorite', component: FavoriteList },
   { path: '/favorite/:id', name: 'FavoriteItem', component: FavoriteItem },
-  { path: '/auth', name: 'Auth', component: Auth },
+  { path: '/User', name: 'Auth', component: Auth },
   { path: '/registration', name: 'Registration', component: Registration },
   { path: '/cart', name: 'Cart', component: Cart },
   { path: '/ordercheckout', name: 'OrderCheckout', component: OrderCheckout },

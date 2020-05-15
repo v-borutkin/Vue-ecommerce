@@ -43,17 +43,17 @@ export default {
   },
   actions: {
     async REGISTRATION_CONFIRM ({ commit }, registrationToken) {
-      return Axios.post('/rest-auth/registration/verify-email/', {
+      return Axios.post('/rest-User/registration/verify-email/', {
         key: registrationToken
       })
     },
     async REGISTRATION ({ state, commit }, { username, email, password1, password2 }) {
-      return await Axios.post('/rest-auth/registration/', {
+      return await Axios.post('/rest-User/registration/', {
         username, email, password1, password2
       })
     },
     async AUTH ({ commit, dispatch }, { username, password }) {
-      return await Axios.post('/rest-auth/login/', {
+      return await Axios.post('/rest-User/login/', {
         username, password
       }).then(response => {
         localStorage.setItem('token', response.data.key)

@@ -14,7 +14,7 @@
   </div>
 </template>
 <script>
-import vSlider from './vSlider'
+import vSlider from '../Assets/vSlider'
 import vProduct from '../Products/vProduct'
 import { mapState, mapActions } from 'vuex'
 

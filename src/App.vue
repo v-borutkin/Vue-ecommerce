@@ -1,26 +1,26 @@
 <template>
   <div id="app">
     <div class="wrapper">
-      <v-navigation :cartLength="cartList.length"></v-navigation>
+      <the-navigation :cartLength="cartList.length"></the-navigation>
       <div class="content">
         <keep-alive include="Products, Home, Cart">
           <router-view/>
         </keep-alive>
       </div>
-        <v-footer />
+        <the-footer />
     </div>
   </div>
 
 </template>
 <script>
-import vNavigation from './components/Home/vNavigation'
-import vFooter from './components/Home/vFooter'
+import TheNavigation from './components/Assets/TheNavigation'
+import TheFooter from './components/Assets/TheFooter'
 import { mapActions, mapState } from 'vuex'
 
 export default {
   components: {
-    vNavigation,
-    vFooter
+    TheNavigation,
+    TheFooter
   },
   data () {
     return {
