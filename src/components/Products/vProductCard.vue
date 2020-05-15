@@ -64,7 +64,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
-import product from './Product'
+import product from './vProduct'
 import imgUrl from '../../mixins/imgUrl'
 export default {
   name: 'Product',

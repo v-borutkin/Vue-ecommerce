@@ -25,7 +25,7 @@
           </div>
         </div>
         <ul class="comments mt-4">
-          <comment-item
+          <v-comment-item
             v-for="comment in comments"
             :key="comment.id"
             :comment="comment"
@@ -39,13 +39,13 @@
 </template>
 
 <script>
-import CommentItem from './CommentItem'
+import vCommentItem from './vCommentItem'
 import { mapActions, mapState } from 'vuex'
 export default {
   name: 'Comments',
   props: ['comments', 'id'],
   components: {
-    CommentItem
+    vCommentItem
   },
   data () {
     return {

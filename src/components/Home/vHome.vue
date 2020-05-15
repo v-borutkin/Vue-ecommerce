@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    <slider></slider>
+    <v-slider></v-slider>
     <b-container>
         <b-col>
           <div class="d-flex">
             <div v-for="product in products.slice(0,5)" :key="product.id">
-              <product :product="product"/>
+              <v-product :product="product"/>
             </div>
           </div>
           <b-button block variant="primary" class="mt-4" to="/products/">Все продукты</b-button>
@@ -14,13 +14,13 @@
   </div>
 </template>
 <script>
-import Slider from './Slider'
-import product from '../Products/Product'
+import vSlider from './vSlider'
+import vProduct from '../Products/vProduct'
 import { mapState, mapActions } from 'vuex'
 
 export default {
   components: {
-    Slider, product
+    vSlider, vProduct
   },
   data () {
     return {

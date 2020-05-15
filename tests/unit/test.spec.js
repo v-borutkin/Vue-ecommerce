@@ -1,4 +1,4 @@
-import cart from '@/components/Cart/CartItem'
+import cart from '@/components/Cart/vCartItem'
 import { shallowMount } from '@vue/test-utils'
 const expect = require('expect')
 
@@ -59,6 +59,7 @@ describe('Проверяем кликабельность', () => {
           good: {
             id: 1
           }
+
         }
       }
     })

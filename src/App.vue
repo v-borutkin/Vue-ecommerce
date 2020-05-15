@@ -1,26 +1,26 @@
 <template>
   <div id="app">
     <div class="wrapper">
-      <navigation :cartLength="cartList.length"></navigation>
+      <v-navigation :cartLength="cartList.length"></v-navigation>
       <div class="content">
         <keep-alive include="Products, Home, Cart">
           <router-view/>
         </keep-alive>
       </div>
-        <footer-component />
+        <v-footer />
     </div>
   </div>
 
 </template>
 <script>
-import Navigation from './components/Home/Navigation'
-import Footer from './components/Home/Footer'
+import vNavigation from './components/Home/vNavigation'
+import vFooter from './components/Home/vFooter'
 import { mapActions, mapState } from 'vuex'
 
 export default {
   components: {
-    Navigation,
-    'footer-component': Footer // TODO прижать футер книзу
+    vNavigation,
+    vFooter
   },
   data () {
     return {

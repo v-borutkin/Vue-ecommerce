@@ -3,7 +3,7 @@
     <div v-if="cartList.length" class="card shopping-cart">
       <div class="card-body">
 
-        <cart-item v-for="item in cartList"
+        <v-cart-item v-for="item in cartList"
                    :item="item"
                    :key="item.id"
                    v-on:delete="deleteFromCart"
@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import CartItem from './CartItem'
+import vCartItem from './vCartItem'
 import { mapGetters, mapActions, mapState } from 'vuex'
 import { minLength, maxLength } from 'vuelidate/lib/validators'
 export default {
@@ -64,7 +64,7 @@ export default {
     }
   },
   components: {
-    CartItem
+    vCartItem
   },
   computed: {
     ...mapGetters('cart', [
