@@ -1,4 +1,3 @@
-<!--suppress JSValidateTypes -->
 <template>
   <div>
   <b-container>
@@ -84,7 +83,7 @@ export default {
   },
   watch: {
     '$route.params.id' () {
-      this.FETCH_PRODUCTS_FROM_API(parseInt(this.id))
+      this.FETCH_PRODUCT_FROM_API(parseInt(this.id))
     }
   },
   computed: {
