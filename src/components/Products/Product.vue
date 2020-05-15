@@ -20,8 +20,7 @@
             <b-button v-if="!product.in_cart"
                       variant="outline-success"
                       @click="addToCart(product.id)"
-                      v-b-tooltip.hover title="Добавить в корзину"
-            >
+                      v-b-tooltip.hover title="Добавить в корзину">
               <svg class="bi bi-bag" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M14 5H2v9a1 1 0 001 1h10a1 1 0 001-1V5zM1 4v10a2 2 0 002 2h10a2 2 0 002-2V4H1z" clip-rule="evenodd"/>
                 <path d="M8 1.5A2.5 2.5 0 005.5 4h-1a3.5 3.5 0 117 0h-1A2.5 2.5 0 008 1.5z"/>
@@ -30,8 +29,7 @@
             <b-button v-else
                       variant="outline-success"
                       @click="deleteFromCart(product.id)"
-                      v-b-tooltip.hover title="Удалить"
-            >
+                      v-b-tooltip.hover title="Удалить">
               <svg class="bi bi-bag-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path d="M1 4h14v10a2 2 0 01-2 2H3a2 2 0 01-2-2V4zm7-2.5A2.5 2.5 0 005.5 4h-1a3.5 3.5 0 117 0h-1A2.5 2.5 0 008 1.5z"/>
               </svg>

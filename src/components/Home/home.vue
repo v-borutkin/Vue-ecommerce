@@ -8,7 +8,7 @@
               <product :product="product"/>
             </div>
           </div>
-          <b-button block variant="primary" class="mt-4">Все продукты</b-button>
+          <b-button block variant="primary" class="mt-4" to="/products/">Все продукты</b-button>
         </b-col>
     </b-container>
   </div>
@@ -34,11 +34,11 @@ export default {
   },
   methods: {
     ...mapActions('products', [
-      'GET_PRODUCTS_FROM_API'
+      'FETCH_PRODUCTS_FROM_API'
     ])
   },
   mounted () {
-    this.GET_PRODUCTS_FROM_API(0)
+    this.FETCH_PRODUCTS_FROM_API(0)
   }
 }
 </script>

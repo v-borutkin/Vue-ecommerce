@@ -12,6 +12,8 @@
     "axios": "^0.19.2",
     "bootstrap-vue": "^2.13.1",
     "core-js": "^3.6.5",
+    "jest": "^26.0.1",
+    "sinon": "^9.0.2",
     "vue": "^2.6.11",
     "vue-plain-pagination": "^0.3.0",
     "vue-router": "^3.1.5",
@@ -30,7 +32,6 @@
     "@vue/test-utils": "1.0.0-beta.31",
     "babel-eslint": "^10.0.3",
     "bootstrap": "^4.3.1",
-    "chai": "^4.1.2",
     "eslint": "^6.7.2",
     "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-node": "^11.0.0",
@@ -44,5 +45,32 @@
     "sass-loader": "^8.0.0",
     "vue-cli-plugin-bootstrap-vue": "^0.6.0",
     "vue-template-compiler": "^2.6.11"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "jsx",
+      "json",
+      "vue"
+    ],
+    "transform": {
+      "^.+\\.vue$": "vue-jest",
+      ".+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$": "jest-transform-stub",
+      "^.+\\.jsx?$": "babel-jest"
+    },
+    "snapshotSerializers": [
+      "jest-serializer-vue"
+    ],
+    "testMatch": [
+      "**/tests/unit/**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx)"
+    ],
+    "testURL": "http://localhost/",
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "**/src/**.{js,vue}",
+      "!**/node_modules/**",
+      "!**src/main.js**",
+      "!**src/router.js**"
+    ]
   }
 }
