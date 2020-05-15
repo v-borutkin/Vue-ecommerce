@@ -7,20 +7,17 @@
           <router-view/>
         </keep-alive>
       </div>
-        <the-footer />
     </div>
   </div>
 
 </template>
 <script>
 import TheNavigation from './components/Assets/TheNavigation'
-import TheFooter from './components/Assets/TheFooter'
 import { mapActions, mapState } from 'vuex'
 
 export default {
   components: {
-    TheNavigation,
-    TheFooter
+    TheNavigation
   },
   data () {
     return {
