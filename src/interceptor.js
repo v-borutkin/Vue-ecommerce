@@ -6,7 +6,7 @@ axios.defaults.baseURL = 'http://77.66.177.88:8181/api/v1'
 axios.interceptors.request.use(
   config => {
     const token = localStorage.getItem('token')
-    if (token && !config.url.includes('http://geohelper.info/api/v1/')) {
+    if (token) {
       config.headers.Authorization = 'Token ' + token
     }
     return config
