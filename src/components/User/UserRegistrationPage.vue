@@ -111,10 +111,7 @@ export default {
       'REGISTRATION'
     ]),
     registration: function () {
-      this.$v.password.$touch()
-      this.$v.email.$touch()
-      this.$v.passwordConfirm.$touch()
-      this.$v.username.$touch()
+      this.$v.$touch()
       if (document.querySelectorAll('.error-api')) {
         document.querySelectorAll('.error-api').forEach(e => e.parentNode.removeChild(e))
       }

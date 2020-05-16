@@ -53,11 +53,11 @@ export default {
       })
     },
     async AUTH ({ commit, dispatch }, { username, password }) {
-      return await Axios.post('/rest-User/login/', {
+      return await Axios.post('/rest-auth/login/', {
         username, password
       }).then(response => {
         localStorage.setItem('token', response.data.key)
-        dispatch('GET_CART_LIST_FROM_API')
+        dispatch('cart/GET_CART_LIST_FROM_API', {}, { root: true })
         commit('IS_AUTH', true)
         commit('AUTH', response.data.user)
         router.back(-1)
@@ -66,7 +66,7 @@ export default {
     LOGOUT ({ commit, dispatch }) {
       commit('IS_AUTH', false)
       localStorage.removeItem('token')
-      dispatch('CART_LIST_CLEAR')
+      dispatch('cart/CART_LIST_CLEAR', {}, { root: true })
     },
     TO_AUTH ({ commit }) {
       commit('IS_AUTH', true)

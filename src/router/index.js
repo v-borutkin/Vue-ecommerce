@@ -24,7 +24,7 @@ const routes = [
   { path: '/blog/:id', name: 'Post', component: Post, props: true },
   { path: '/favorite/', name: 'Favorite', component: FavoriteList },
   { path: '/favorite/:id', name: 'FavoriteItem', component: FavoriteItem },
-  { path: '/User', name: 'Auth', component: Auth },
+  { path: '/auth', name: 'Auth', component: Auth },
   { path: '/registration', name: 'Registration', component: Registration },
   { path: '/cart', name: 'Cart', component: Cart },
   { path: '/ordercheckout', name: 'OrderCheckout', component: OrderCheckout },

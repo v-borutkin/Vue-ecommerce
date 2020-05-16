@@ -76,8 +76,7 @@ export default {
       this.username = value
     },
     login () {
-      this.$v.password.$touch()
-      this.$v.username.$touch()
+      this.$v.$touch()
       if (!this.$v.$error) {
         this.AUTH({
           username: this.username,
