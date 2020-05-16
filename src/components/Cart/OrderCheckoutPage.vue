@@ -5,7 +5,6 @@
       <h2>Оформление заказа</h2>
       <p class="lead">После оформления заказа с вами свяжутся наши менеджеры для уточнения информации.</p>
     </div>
-
     <div class="row">
       <div class="col-md-4 order-md-2 mb-4">
         <h4 class="d-flex justify-content-between align-items-center mb-3">
@@ -42,42 +41,79 @@
       </div>
       <div class="col-md-8 order-md-1">
         <h4 class="mb-3">Оформление доставки</h4>
-        <form class="needs-validation">
+        <form class="form-signin">
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="firstName">Имя</label>
-              <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
-              <div class="invalid-feedback">
-                Valid first name is required.
+              <input type="text"
+                     class="form-control"
+                     :class="{'is-invalid': $v.firstName.$error}"
+                     id="firstName"
+                     :value="firstName"
+                     @blur="setFirstName($event.target.value)">
+              <div class="invalid-feedback" v-if="!$v.firstName.minLength || !$v.firstName.maxLength && $v.$dirty">
+                Имя должно содержать минимум {{$v.firstName.$params.minLength.min}}
+                знака и максимум {{$v.firstName.$params.maxLength.max}}
+              </div>
+              <div class="invalid-feedback" v-if="!$v.firstName.required && $v.$dirty">
+                Обязательное поле
               </div>
             </div>
             <div class="col-md-6 mb-3">
               <label for="lastName">Фамилия</label>
-              <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
-              <div class="invalid-feedback">
-                Valid last name is required.
+              <input type="text"
+                     class="form-control"
+                     :class="{'is-invalid': $v.lastName.$error}"
+                     id="lastName"
+                     :value="lastName"
+                     @blur="setLastName($event.target.value)">
+              <div class="invalid-feedback" v-if="!$v.lastName.minLength || !$v.lastName.maxLength && $v.$dirty">
+                Фамилия должна содержать минимум {{$v.lastName.$params.minLength.min}}
+                знака и максимум {{$v.lastName.$params.maxLength.max}}
+              </div>
+              <div class="invalid-feedback" v-if="!$v.lastName.required && $v.$dirty">
+                Обязательное поле
               </div>
             </div>
           </div>
 
           <div class="mb-3">
             <label for="email">Электронный адрес <span class="text-muted">(Необязательно)</span></label>
-            <input type="email" class="form-control" id="email" placeholder="you@example.com">
-            <div class="invalid-feedback">
-              Please enter a valid email address for shipping updates.
+            <input type="email"
+                   class="form-control"
+                   :class="{'is-invalid': $v.email.$error}"
+                   id="email"
+                   placeholder="you@example.com"
+                   :value="email"
+                   @blur="setEmailName($event.target.value)">
+            <div class="invalid-feedback" v-if="!$v.email.minLength || !$v.email.maxLength && $v.$dirty">
+              Электронная почта должна содержать минимум {{$v.email.$params.minLength.min}}
+              знака и максимум {{$v.email.$params.maxLength.max}}
             </div>
           </div>
 
           <div class="mb-3">
             <label for="address">Адрес доставки</label>
-            <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
-            <div class="invalid-feedback">
-              Please enter your shipping address.
+            <input type="text"
+                   class="form-control"
+                   :class="{'is-invalid': $v.address.$error}"
+                   id="address"
+                   :value="address"
+                   @blur="setAddress($event.target.value)">
+            <div class="invalid-feedback" v-if="!$v.address.minLength || !$v.address.maxLength && $v.$dirty">
+              Адресс должен содержать минимум {{$v.address.$params.minLength.min}}
+              знака и максимум {{$v.address.$params.maxLength.max}}
+            </div>
+            <div class="invalid-feedback" v-if="!$v.address.required && $v.$dirty">
+              Обязательное поле
             </div>
           </div>
           <hr class="mb-4">
           <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="save-info">
+            <input type="checkbox"
+                   class="custom-control-input"
+                   id="save-info"
+                   v-model.trim="isSaveInfo">
             <label class="custom-control-label" for="save-info">Сохранить информацию для следующих заказов</label>
           </div>
           <hr class="mb-4">
@@ -105,23 +141,71 @@
             </div>
           </div>
           <hr class="mb-4">
-          <button class="btn btn-primary btn-lg btn-block" type="submit">Оформить</button>
+          <button class="btn btn-primary btn-lg btn-block" type="submit" @click.prevent="confirm">Оформить</button>
         </form>
       </div>
     </div>
   </div>
 </template>
 <script>
+import { required, minLength, maxLength, email } from 'vuelidate/lib/validators'
 import { mapGetters, mapState } from 'vuex'
+
 export default {
   name: 'OrderCheckout',
   data () {
     return {
-      paymentMethod: 1,
-      address: ''
+      lastName: '',
+      firstName: '',
+      email: '',
+      isSaveInfo: false,
+      address: '',
+      paymentMethod: 1
     }
   },
-
+  validations: {
+    lastName: {
+      required,
+      minLength: minLength(2),
+      maxLength: maxLength(24)
+    },
+    firstName: {
+      required,
+      minLength: minLength(2),
+      maxLength: maxLength(24)
+    },
+    email: {
+      email,
+      minLength: minLength(4),
+      maxLength: maxLength(30)
+    },
+    address: {
+      required,
+      minLength: minLength(6),
+      maxLength: maxLength(60)
+    }
+  },
+  methods: {
+    setFirstName (value) {
+      this.firstName = value
+      this.$v.firstName.$touch()
+    },
+    setLastName (value) {
+      this.lastName = value
+      this.$v.lastName.$touch()
+    },
+    setEmailName (value) {
+      this.email = value
+      this.$v.email.$touch()
+    },
+    setAddress (value) {
+      this.address = value
+      this.$v.address.$touch()
+    },
+    confirm () {
+      this.$v.$touch()
+    }
+  },
   computed: {
     ...mapState('cart', [
       'cartList',
@@ -131,13 +215,12 @@ export default {
     ...mapGetters('cart', [
       'GET_PROMO_PRICE'
     ])
-  },
-  mounted () {
-
   }
 }
 </script>
 
-<style>
-
+<style scoped>
+  .invalid-feedback {
+    display: block;
+  }
 </style>
