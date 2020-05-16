@@ -5,23 +5,29 @@
         <h3 class="text-success mt-3">Comments</h3>
         <div class="panel">
           <div class="panel-body  justify-content-center">
+            <form>
             <p v-show="parentText">{{parentText}}</p>
             <textarea class="form-control"
+                      :class="{'is-invalid': $v.message.$error}"
                       rows="2"
                       placeholder="Добавьте Ваш комментарий"
-                      v-model="message"
+                      v-model.trim="message"
                       ref="textarea"
                       name="textarea"
-                      @click="userClickForTextarea"
-            >
+                      @click="userClickForTextarea">
             </textarea>
+              <div class="invalid-feedback" v-if="!$v.message.minLength || !$v.message.maxLength && $v.$dirty">
+                Комментарий должен быть минимум {{$v.message.$params.minLength.min}}
+                знака и максимум {{$v.message.$params.maxLength.max}}
+              </div>
             <div class="clearfix">
               <input type="submit"
                      class="btn btn-sm btn-primary pull-left mt-1"
                      value="Добавить"
                      :disabled="!isAuth"
-                     @click="sendMessage">
+                     @click.prevent="sendMessage">
             </div>
+            </form>
           </div>
         </div>
         <ul class="comments mt-4">
@@ -40,12 +46,20 @@
 
 <script>
 import vCommentItem from './vCommentItem'
+import { minLength, maxLength, required } from 'vuelidate/lib/validators'
 import { mapActions, mapState } from 'vuex'
 export default {
   name: 'Comments',
   props: ['comments', 'id'],
   components: {
     vCommentItem
+  },
+  validations: {
+    message: {
+      required,
+      minLength: minLength(2),
+      maxLength: maxLength(245)
+    }
   },
   data () {
     return {
@@ -82,21 +96,24 @@ export default {
     },
     sendMessage () {
       if (this.isAuth) {
+        this.$v.message.$touch()
         let clildId = ''
         if (this.childId) {
           clildId = this.childId
         }
-        this.SET_COMMENT_TO_API({
-          text: this.message,
-          post: this.id,
-          author: this.user.userId,
-          childrenId: clildId
-        }).then(() => {
-          this.FETCH_COMMENTS_FROM_API(this.id)
-          this.message = ''
-        }).catch(error => {
-          alert(`произошла ошибка + ${error.response}`)
-        })
+        if (!this.$v.$error) {
+          this.SET_COMMENT_TO_API({
+            text: this.message,
+            post: this.id,
+            author: this.user.userId,
+            childrenId: clildId
+          }).then(() => {
+            this.FETCH_COMMENTS_FROM_API(this.id)
+            this.message = ''
+          }).catch(error => {
+            alert(`произошла ошибка + ${error.response}`)
+          })
+        }
       }
     }
   }
