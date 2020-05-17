@@ -35,6 +35,10 @@
       </div>
       <button class="btn btn-lg btn-primary btn-block mt-2" type="submit" @click.prevent="login">Sign in</button>
     </form>
+    <div class="mt-3">
+      <router-link to="/registration">нет аккаунта</router-link>
+      <router-link to="/password-reset" class="ml-2">не помню пароль</router-link>
+    </div>
     <div v-if="errors">
       <p style="color: red" v-for="(error, key) in errors" :key="key">{{error[0]}}</p>
     </div>
