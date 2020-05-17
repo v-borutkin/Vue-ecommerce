@@ -1,7 +1,14 @@
 <template>
   <b-container>
       <b-col>
-        <div v-if="posts" class="d-flex flex-row flex-wrap">
+        <div v-if="posts" class="d-flex
+          flex-wrap
+          flex-md-row
+          flex-column
+          justify-content-sm-center
+          justify-content-lg-around
+          align-items-center
+          col-12">
           <b-card id="products" v-for="post in posts"
                   :key="post.id"
             tag="article"
