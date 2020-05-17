@@ -11,10 +11,9 @@
           col-12">
           <b-card id="products" v-for="post in posts"
                   :key="post.id"
-            tag="article"
-            style="max-width: 20rem;"
-            class="mb-2 item"
-          >
+                  tag="article"
+                  style="max-width: 20rem;"
+                  class="mb-2 item">
             <div>
               <img :src="imgUrl(post.image)" alt="Card image">
             </div>
