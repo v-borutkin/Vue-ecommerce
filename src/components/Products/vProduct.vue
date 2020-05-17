@@ -5,7 +5,7 @@
                 img-alt="Image"
                 img-top
                 tag="article"
-                class="item align-items-stretch">
+                class="item">
           <b-card-title>
             <router-link :to="'/products/'+ product.id">{{product.name}}</router-link>
           </b-card-title>

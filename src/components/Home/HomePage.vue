@@ -3,7 +3,14 @@
     <v-slider></v-slider>
     <b-container>
         <b-col>
-          <div class="d-flex">
+          <div class="d-flex
+          flex-wrap
+          flex-xl-nowrap
+          flex-md-row
+          flex-column
+          justify-content-sm-center
+          justify-content-lg-between
+          align-items-center">
             <div v-for="product in products.slice(0,5)" :key="product.id">
               <v-product :product="product"/>
             </div>

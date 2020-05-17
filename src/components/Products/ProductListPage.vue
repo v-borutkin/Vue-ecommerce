@@ -1,8 +1,16 @@
 <template>
     <b-container >
       <b-col>
-        <div class="d-flex flex-row flex-wrap">
-          <div v-for="product in products" :key="product.id">
+        <div class="d-flex
+          flex-wrap
+          flex-xl-nowrap
+          flex-md-row
+          flex-column
+          justify-content-sm-center
+          justify-content-lg-between
+          align-items-center
+          col-12">
+          <div v-for="product in products" class="mt-2 ml-2" :key="product.id">
             <v-product :product="product"/>
           </div>
         </div>
