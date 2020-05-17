@@ -36,8 +36,7 @@
             :key="comment.id"
             :comment="comment"
             :isAuth="isAuth"
-            @sendReplyComment="sendReply"
-          />
+            @sendReplyComment="sendReply"/>
         </ul>
       </div>
     </div>
