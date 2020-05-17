@@ -116,6 +116,11 @@ export default {
 }
 </script>
 <style scoped>
+  .productButtons {
+    position: absolute;
+    bottom: 20px;
+    right: 0;
+  }
   .item {
     width: 255px;
     height: 420px;
