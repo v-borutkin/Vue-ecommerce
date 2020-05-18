@@ -39,6 +39,9 @@ export default {
     }
   },
   actions: {
+    async RECOVERY_PASSWORD ({ commit }, email) {
+      return await Axios.post('/rest-auth/password/reset/', { email })
+    },
     async REGISTRATION_CONFIRM ({ commit }, registrationToken) {
       return Axios.post('/rest-User/registration/verify-email/', {
         key: registrationToken
