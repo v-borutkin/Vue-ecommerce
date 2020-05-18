@@ -46,9 +46,9 @@ export default {
   actions: {
     async ORDER_CONFIRM ({ commit }, { firstName, lastName, email, address, isSaveInfo }) {
       await Axios.post('/order/', {
-        last_name: lastName,
-        first_name: firstName,
-        email: email,
+        receiver_surname: lastName,
+        receiver_name: firstName,
+        receiver_mail: email,
         delivery_address: address,
         is_save_info: isSaveInfo
       })
