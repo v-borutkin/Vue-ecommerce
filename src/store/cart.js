@@ -44,6 +44,15 @@ export default {
     }
   },
   actions: {
+    async ORDER_CONFIRM ({ commit }, { firstName, lastName, email, address, isSaveInfo }) {
+      await Axios.post('/order/', {
+        last_name: lastName,
+        first_name: firstName,
+        email: email,
+        delivery_address: address,
+        is_save_info: isSaveInfo
+      })
+    },
     async SEND_PROMO ({ commit }, promoCode) {
       return await Axios.post('/promo/', {
         promo_code: promoCode
@@ -57,7 +66,7 @@ export default {
       })
         .then(() => {
           dispatch('GET_CART_LIST_FROM_API')
-          dispatch('GET_PRODUCTS_FROM_API')
+          dispatch('products/FETCH_PRODUCTS_FROM_API', { }, { root: true })
         })
     },
     async CART_ELEMENT_PLUS ({ dispatch, state }, { productId, quantity }) {

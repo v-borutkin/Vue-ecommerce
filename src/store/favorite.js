@@ -15,14 +15,14 @@ export default {
   actions: {
     async SET_FAVORITE ({ commit, dispatch }, good) {
       Axios.post('/favorite/', { good })
-        .then(response => {
-          dispatch('GET_PRODUCTS_FROM_API')
+        .then(() => {
+          dispatch('products/FETCH_PRODUCTS_FROM_API', { }, { root: true })
         })
     },
     async DEL_FAVORITE ({ commit, dispatch }, good) {
       Axios.delete(`/favorite/${good}`)
-        .then(response => {
-          dispatch('GET_PRODUCTS_FROM_API')
+        .then(() => {
+          dispatch('products/FETCH_PRODUCTS_FROM_API', { }, { root: true })
         })
     }
   },
