@@ -34,7 +34,7 @@
       <v-pagination
                     v-model="currentPage"
                     :page-count="paginationCount"
-                    :classes="bootstrapPaginationClasses" >
+                    :classes="bootstrapPaginationClasses">
       </v-pagination>
     </b-container>
 </template>

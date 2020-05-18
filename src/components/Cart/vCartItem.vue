@@ -19,12 +19,10 @@
                  value="+"
                  class="plus"
                  @click="$emit('plus', item.good.id, item.quantity)">
-
-          <input type="number"
-                 v-model.lazy="item.quantity"
-                 disabled
-                 title="Qty" class="qty">
-
+            <input type="number"
+                   v-model.lazy="item.quantity"
+                   disabled
+                   title="Qty" class="qty">
           <input type="button"
                  value="-"
                  class="minus"

@@ -2,14 +2,13 @@
   <div class="container">
     <div v-if="cartList.length" class="card shopping-cart">
       <div class="card-body">
-
-        <v-cart-item v-for="item in cartList"
-                   :item="item"
-                   :key="item.id"
-                   v-on:delete="deleteFromCart"
-                   v-on:plus="plus"
-                   v-on:minus="minus"
-                   v-on:changeQuantity="changeQuantity"/>
+          <v-cart-item v-for="item in cartList"
+                     :item="item"
+                     :key="item.id"
+                     v-on:delete="deleteFromCart"
+                     v-on:plus="plus"
+                     v-on:minus="minus"
+                     v-on:changeQuantity="changeQuantity"/>
         <hr>
       </div>
       <div class="card-footer">
