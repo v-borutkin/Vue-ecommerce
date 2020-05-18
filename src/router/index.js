@@ -13,7 +13,7 @@ const Cart = () => import('@/components/Cart/CartPage')
 const Home = () => import('@/components/Home/HomePage')
 const RegistrationConform = () => import('@/components/User/UserRegistrationConfirmPage')
 const OrderCheckout = () => import('@/components/Cart/OrderCheckoutPage')
-const UserRecoveryPassword = () => import('@/components/User/UserRecoveryPassword')
+const UserRecoveryPassword = () => import('@/components/User/UserRecoveryPasswordPage')
 
 Vue.use(VueRouter)
 
@@ -47,8 +47,8 @@ const routes = [
     name: 'Auth',
     component: Auth,
     beforeEnter: (from, to, next) => {
-      if (store.state['user/isAuth']) next()
-      else next('/')
+      if (!store.state.user.isAuth) next()
+      else { next('/') }
     }
   },
   { path: '/registration', name: 'Registration', component: Registration },
