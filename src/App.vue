@@ -3,9 +3,11 @@
     <div class="wrapper">
       <the-navigation :cartLength="cartList.length"></the-navigation>
       <div class="content">
-        <keep-alive include="Products, Home, Cart">
-          <router-view/>
-        </keep-alive>
+          <keep-alive include="Products, Home, Cart">
+            <transition name="fade" mode="out-in">
+              <router-view/>
+            </transition>
+          </keep-alive>
       </div>
     </div>
   </div>
@@ -46,6 +48,12 @@ export default {
 }
 </script>
 <style scoped>
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .3s ease-out;
+  }
+  .fade-enter,  .fade-leave-to {
+    opacity: 0;
+  }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
