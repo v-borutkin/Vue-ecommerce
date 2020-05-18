@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <div class="col-12 col-sm-12 col-md-2 text-center">
+    <div class="col-12 col-sm-12 col-md-2 mt-2 text-center">
       <img class="img-responsive" :src="imgUrl(item.good.photo)" alt="prewiew" width="120" height="80">
     </div>
     <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
@@ -9,11 +9,18 @@
         <small>{{item.good.short_text}}</small>
       </h4>
     </div>
-    <div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
+    <div class="col-12
+                col-sm-12
+                text-sm-center
+                col-md-4
+                mt-3
+                text-md-right
+                justify-content-around
+                row">
       <div class="col-3 col-sm-3 col-md-6 text-md-right" style="padding-top: 5px">
         <h6><strong>{{item.amount}} <span class="text-muted">$</span></strong></h6>
       </div>
-      <div class="col-4 col-sm-4 col-md-4">
+      <div class="col-4 col-sm-4 col-mt-2">
         <div class="quantity">
           <input type="button"
                  value="+"

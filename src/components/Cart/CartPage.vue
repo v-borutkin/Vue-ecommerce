@@ -4,7 +4,7 @@
       <div class="card-body">
           <v-cart-item v-for="item in cartList"
                      :item="item"
-                     :key="item.id"
+                     :key="item.id" class="mb-4"
                      v-on:delete="deleteFromCart"
                      v-on:plus="plus"
                      v-on:minus="minus"
