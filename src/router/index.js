@@ -12,6 +12,7 @@ const Cart = () => import('@/components/Cart/CartPage')
 const Home = () => import('@/components/Home/HomePage')
 const RegistrationConform = () => import('@/components/User/UserRegistrationConfirmPage')
 const OrderCheckout = () => import('@/components/Cart/OrderCheckoutPage')
+const UserRecoveryPassword = () => import('@/components/User/UserRecoveryPassword')
 
 Vue.use(VueRouter)
 
@@ -28,6 +29,7 @@ const routes = [
   { path: '/registration', name: 'Registration', component: Registration },
   { path: '/cart', name: 'Cart', component: Cart },
   { path: '/ordercheckout', name: 'OrderCheckout', component: OrderCheckout },
+  { path: '/password-reset', name: 'UserRecoveryPassword', component: UserRecoveryPassword },
   { path: '/accounts/confirm-email/:token', name: 'RegistrationConfirm', component: RegistrationConform, props: true }
 ]
 
