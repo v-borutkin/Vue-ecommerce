@@ -29,7 +29,7 @@ const routes = [
     name: 'Favorite',
     component: FavoriteList,
     beforeEnter: (from, to, next) => {
-      if (store.state['user/isAuth']) next()
+      if (store.getters['user/IS_AUTH_TOKEN']) next()
       else next('/login')
     }
   },
@@ -38,7 +38,7 @@ const routes = [
     name: 'FavoriteItem',
     component: FavoriteItem,
     beforeEnter: (from, to, next) => {
-      if (store.state['user/isAuth']) next()
+      if (store.getters['user/IS_AUTH_TOKEN']) next()
       else next('/login')
     }
   },
@@ -47,7 +47,7 @@ const routes = [
     name: 'Auth',
     component: Auth,
     beforeEnter: (from, to, next) => {
-      if (!store.state.user.isAuth) next()
+      if (!store.getters['user/IS_AUTH_TOKEN']) next()
       else { next('/') }
     }
   },

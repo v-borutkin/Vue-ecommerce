@@ -15,11 +15,8 @@ export default {
     }
   },
   getters: {
-    IS_AUTH (state) {
-      return state.isAuth
-    },
-    GET_USER (state) {
-      return state.user
+    IS_AUTH_TOKEN (state) {
+      return !!localStorage.getItem('token')
     }
   },
   mutations: {
