@@ -4,6 +4,7 @@ Blog (posts, commentaries)
 Authorization
 Registration
 Data validation
+Jest unit tests
 ```
 
 # vuecommerce
