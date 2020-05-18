@@ -149,7 +149,7 @@
 </template>
 <script>
 import { required, minLength, maxLength, email } from 'vuelidate/lib/validators'
-import { mapGetters, mapState } from 'vuex'
+import { mapGetters, mapState, mapActions } from 'vuex'
 
 export default {
   name: 'OrderCheckout',
@@ -186,6 +186,10 @@ export default {
     }
   },
   methods: {
+    ...mapActions('cart', [
+      'CART_LIST_CLEAR',
+      'ORDER_CONFIRM'
+    ]),
     setFirstName (value) {
       this.firstName = value
       this.$v.firstName.$touch()
@@ -204,6 +208,23 @@ export default {
     },
     confirm () {
       this.$v.$touch()
+
+      if (!this.$v.$error) {
+        this.ORDER_CONFIRM({
+          firstName: this.firstName,
+          lastName: this.lastName,
+          email: this.email,
+          address: this.address,
+          isSaveInfo: this.isSaveInfo
+        })
+          .then(() => {
+            alert('Заказ оформлен, с вами свяжутся наши менеджеры')
+            this.CART_LIST_CLEAR()
+          })
+          .catch(() => {
+            alert('Произошла ошибка, попробуйте позднее')
+          })
+      }
     }
   },
   computed: {
