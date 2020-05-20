@@ -17,14 +17,14 @@
               <button class="btn btn-primary"> {{cartLength}} Корзина</button>
             </router-link>
           <b-nav-item-dropdown right v-if="isAuth">
-
             <template v-slot:button-content>
-              <b-avatar variant="info" src="https://placekitten.com/300/300"></b-avatar>
+              <b-avatar variant="info" src="https://placekitten.com/300/300"/>
                 <em>{{user.userName}}</em>
             </template>
-            <b-dropdown-item href="#">Профиль</b-dropdown-item>
-            <b-dropdown-item href="#">Избранное</b-dropdown-item>
-            <b-dropdown-item href="#">Список заказов</b-dropdown-item>
+
+            <b-dropdown-item to="/profile">Профиль</b-dropdown-item>
+            <b-dropdown-item to="/favorites">Избранное</b-dropdown-item>
+            <b-dropdown-item to="/orders">Список заказов</b-dropdown-item>
             <b-dropdown-item href="#" @click="userLogout">Выйти</b-dropdown-item>
           </b-nav-item-dropdown>
           <div v-else class="flex flex-row mt-2">
