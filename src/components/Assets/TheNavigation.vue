@@ -23,6 +23,8 @@
                 <em>{{user.userName}}</em>
             </template>
             <b-dropdown-item href="#">Профиль</b-dropdown-item>
+            <b-dropdown-item href="#">Избранное</b-dropdown-item>
+            <b-dropdown-item href="#">Список заказов</b-dropdown-item>
             <b-dropdown-item href="#" @click="userLogout">Выйти</b-dropdown-item>
           </b-nav-item-dropdown>
           <div v-else class="flex flex-row mt-2">
