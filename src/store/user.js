@@ -63,6 +63,12 @@ export default {
         router.back(-1)
       })
     },
+    async SEND_NEW_PASSWORD ({ commit }, { newPassword, newPasswordConfirm }) {
+      return await Axios.post('/rest-auth/password/change/', {
+        new_password1: newPassword,
+        new_password2: newPasswordConfirm
+      })
+    },
     LOGOUT ({ commit, dispatch }) {
       commit('IS_AUTH', false)
       localStorage.removeItem('token')

@@ -14,6 +14,7 @@ const Home = () => import('@/components/Home/HomePage')
 const RegistrationConform = () => import('@/components/User/UserRegistrationConfirmPage')
 const OrderCheckout = () => import('@/components/Cart/OrderCheckoutPage')
 const UserRecoveryPassword = () => import('@/components/User/UserRecoveryPasswordPage')
+const UserProfilePage = () => import('@/components/User/UserProfilePage')
 
 Vue.use(VueRouter)
 
@@ -63,7 +64,16 @@ const routes = [
     }
   },
   { path: '/password-reset', name: 'UserRecoveryPassword', component: UserRecoveryPassword },
-  { path: '/accounts/confirm-email/:token', name: 'RegistrationConfirm', component: RegistrationConform, props: true }
+  { path: '/accounts/confirm-email/:token', name: 'RegistrationConfirm', component: RegistrationConform, props: true },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: UserProfilePage,
+    beforeEnter: (from, to, next) => {
+      if (store.getters['user/IS_AUTH_TOKEN']) next()
+      else next('/')
+    }
+  }
 ]
 
 const router = new VueRouter({
