@@ -23,7 +23,7 @@
 <script>
 import vSlider from '../Assets/vSlider'
 import vProduct from '../Products/vProduct'
-import { mapState, mapActions } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
   components: {
@@ -40,12 +40,10 @@ export default {
     ])
   },
   methods: {
-    ...mapActions('products', [
-      'FETCH_PRODUCTS_FROM_API'
-    ])
+
   },
   mounted () {
-    this.FETCH_PRODUCTS_FROM_API(0)
+
   }
 }
 </script>

@@ -32,6 +32,9 @@ export default {
     ])
   },
   methods: {
+    ...mapActions('products', [
+      'FETCH_PRODUCTS_FROM_API'
+    ]),
     ...mapActions('cart', [
       'GET_CART_LIST_FROM_API'
     ]),
@@ -43,11 +46,35 @@ export default {
     if (localStorage.getItem('token')) {
       this.TO_AUTH()
       this.GET_CART_LIST_FROM_API()
+      this.FETCH_PRODUCTS_FROM_API(0)
     }
   }
 }
 </script>
-<style scoped>
+<style>
+  .loading-indicator:before {
+    content: '';
+    background: #000000cc;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+  }
+
+  .loading-indicator:after {
+    content: 'Loading';
+    position: fixed;
+    width: 100%;
+    top: 50%;
+    left: 0;
+    z-index: 1001;
+    color:white;
+    text-align:center;
+    font-weight:bold;
+    font-size:1.5rem;
+  }
   .fade-enter-active, .fade-leave-active {
     transition: opacity .3s ease-out;
   }

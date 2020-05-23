@@ -5,6 +5,7 @@ axios.defaults.baseURL = 'http://77.66.177.88:8181/api/v1'
 
 axios.interceptors.request.use(
   config => {
+    document.body.classList.add('loading-indicator')
     const token = localStorage.getItem('token')
     if (token) {
       config.headers.Authorization = 'Token ' + token
@@ -15,6 +16,7 @@ axios.interceptors.request.use(
 
 axios.interceptors.response.use(
   data => {
+    document.body.classList.remove('loading-indicator')
     return data
   },
   error => {

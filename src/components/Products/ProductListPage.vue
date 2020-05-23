@@ -35,9 +35,6 @@ export default {
     ])
   },
   methods: {
-    ...mapActions('products', [
-      'FETCH_PRODUCTS_FROM_API'
-    ]),
     ...mapActions('cart', [
       'ADD_TO_CART'
     ])
