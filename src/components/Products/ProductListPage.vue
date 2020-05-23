@@ -3,7 +3,7 @@
       <b-col>
         <div class="d-flex
           flex-wrap
-          flex-xl-nowrap
+          flex-xl-wrap
           flex-md-row
           flex-column
           justify-content-sm-center

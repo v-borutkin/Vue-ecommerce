@@ -31,7 +31,7 @@
           </b-card>
         </div>
       </b-col>
-      <v-pagination
+      <v-pagination v-if="paginationCount > 1"
                     v-model="currentPage"
                     :page-count="paginationCount"
                     :classes="bootstrapPaginationClasses">
