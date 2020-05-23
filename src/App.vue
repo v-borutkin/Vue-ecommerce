@@ -43,10 +43,10 @@ export default {
     ])
   },
   mounted () {
+    this.FETCH_PRODUCTS_FROM_API(0)
     if (localStorage.getItem('token')) {
       this.TO_AUTH()
       this.GET_CART_LIST_FROM_API()
-      this.FETCH_PRODUCTS_FROM_API(0)
     }
   }
 }
