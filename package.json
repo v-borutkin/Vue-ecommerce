@@ -14,6 +14,7 @@
     "core-js": "^3.6.5",
     "jest": "^26.0.1",
     "nprogress": "^0.2.0",
+    "pug-plain-loader": "^1.0.0",
     "sinon": "^9.0.2",
     "vue": "^2.6.11",
     "vue-plain-pagination": "^0.3.0",
@@ -42,11 +43,13 @@
     "mutationobserver-shim": "^0.3.3",
     "popper.js": "^1.16.0",
     "portal-vue": "^2.1.6",
+    "pug": "^2.0.4",
     "sass": "^1.26.5",
     "sass-loader": "^8.0.0",
     "vue-cli-plugin-bootstrap-vue": "^0.6.0",
     "vue-template-compiler": "^2.6.11"
   },
+
   "jest": {
     "moduleFileExtensions": [
       "js",

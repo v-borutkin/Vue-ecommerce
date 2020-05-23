@@ -10,9 +10,6 @@
             <router-link :to="'/products/'+ product.id">{{product.name}}</router-link>
           </b-card-title>
           <b-card-text>
-            {{product.manufacturer}}
-          </b-card-text>
-          <b-card-text>
             {{product.short_text}}
           </b-card-text>
           <div class="productButtons d-flex d-inline-flex justify-content-around">

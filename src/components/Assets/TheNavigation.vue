@@ -1,40 +1,26 @@
-<template>
-  <div>
-    <b-navbar toggleable="lg" type="dark" variant="info">
-      <b-navbar-brand>
-        <router-link to="/" exact> Vuecommerce </router-link>
-      </b-navbar-brand>
-
-      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-
-      <b-collapse id="nav-collapse" is-nav>
-        <b-navbar-nav v-for="(link, index) in navLinks " :key="index">
-          <router-link :to="link.url" class="ml-2">{{link.title}}</router-link>
-        </b-navbar-nav>
-
-        <b-navbar-nav class="ml-auto">
-            <router-link class="ml-2 mt-1" to="/cart">
-              <button class="btn btn-primary"> {{cartLength}} Корзина</button>
-            </router-link>
-          <b-nav-item-dropdown right v-if="isAuth">
-            <template v-slot:button-content>
-              <b-avatar variant="info" src="https://placekitten.com/300/300"/>
-                <em>{{user.userName}}</em>
-            </template>
-
-            <b-dropdown-item to="/profile">Профиль</b-dropdown-item>
-            <b-dropdown-item to="/favorites">Избранное</b-dropdown-item>
-            <b-dropdown-item to="/orders">Список заказов</b-dropdown-item>
-            <b-dropdown-item href="#" @click="userLogout">Выйти</b-dropdown-item>
-          </b-nav-item-dropdown>
-          <div v-else class="flex flex-row mt-2">
-            <router-link to="/auth" class="ml-2">Войти</router-link>
-            <router-link to="/registration" class="ml-2">Регистрация</router-link>
-          </div>
-        </b-navbar-nav>
-      </b-collapse>
-    </b-navbar>
-  </div>
+<template lang="pug">
+  div
+    b-navbar(toggleable='lg', type='dark', variant='info')
+      b-navbar-brand
+        router-link(to='/', exact)  Vuecommerce
+      b-navbar-toggle(target='nav-collapse')
+      b-collapse#nav-collapse(is-nav)
+        b-navbar-nav(v-for='(link, index) in navLinks ', :key='index')
+          router-link.ml-2(:to='link.url') {{link.title}}
+        b-navbar-nav.ml-auto
+          router-link.ml-2.mt-1(to='/cart')
+            button.btn.btn-primary  {{cartLength}} Корзина
+          b-nav-item-dropdown(right, v-if='isAuth')
+            template(v-slot:button-content)
+              b-avatar(variant='info', src='https://placekitten.com/300/300/')
+              em {{user.userName}}
+            b-dropdown-item(to='/profile') Профиль
+            b-dropdown-item(to='/favorites') Избранное
+            b-dropdown-item(to='/orders') Заказы
+            b-dropdown-item(@click='userLogout') Выйти
+          .flex.flex-row.mt-2(v-else)
+            router-link.ml-2(to='/auth') Войти
+            router-link.ml-2(to='/registration') Регистрация
 </template>
 
 <script>

@@ -1,16 +1,11 @@
-<template>
-  <b-container>
-    <b-card class="item">
-      <b-img :src="imgUrl(post.image)" width="680" />
-      <h1>{{ post.title }}</h1>
-      <h6>{{ post.author }}</h6>
-      <p>{{ post.text }}</p>
-    </b-card>
-    <the-comments
-      :comments="comments"
-      :id="id"
-    />
-  </b-container>
+<template lang="pug">
+  b-container
+    b-card.item
+      b-img(:src='imgUrl(post.image)', width='680')
+        h1 {{ post.title }}
+        h6 {{ post.author }}
+        p {{ post.text }}
+    the-comments(:comments='comments', :id='id')
 </template>
 
 <script>

@@ -1,42 +1,18 @@
-<template>
-  <b-container>
-      <b-col>
-        <div v-if="posts" class="d-flex
-          flex-wrap
-          flex-md-row
-          flex-column
-          justify-content-sm-center
-          justify-content-lg-around
-          align-items-center
-          col-12">
-          <b-card id="products" v-for="post in posts"
-                  :key="post.id"
-                  tag="article"
-                  style="max-width: 20rem;"
-                  class="mb-2 item">
-            <div>
-              <img :src="imgUrl(post.image)" alt="Card image">
-            </div>
-
-              <b-card-title class="mt-2">
-                <router-link :to="'blog/' + post.id">{{post.title}}</router-link>
-              </b-card-title>
-
-            <b-card-sub-title class="mb-3">
-              <a href="#">Автомобиль</a>
-            </b-card-sub-title>
-              <b-card-text>
-                {{post.short_text}}
-              </b-card-text>
-          </b-card>
-        </div>
-      </b-col>
-      <v-pagination v-if="paginationCount > 1"
-                    v-model="currentPage"
-                    :page-count="paginationCount"
-                    :classes="bootstrapPaginationClasses">
-      </v-pagination>
-    </b-container>
+<template lang="pug">
+  b-container
+    b-col
+      .d-flex.flex-wrap.flex-md-row.flex-column.justify-content-sm-center.justify-content-lg-around.align-items-center
+      .col-12(v-if='posts')
+        b-card#products.mb-2.item(v-for='post in posts', :key='post.id', tag='article', style='max-width: 20rem;')
+          div
+            img(:src='imgUrl(post.image)', alt='Card image')
+          b-card-title.mt-2
+            router-link(:to="'blog/' + post.id") {{post.title}}
+          b-card-sub-title.mb-3
+            a(href='#') Автомобиль
+          b-card-text
+            | {{post.short_text}}
+    v-pagination(v-if='paginationCount > 1', v-model='currentPage', :page-count='paginationCount', :classes='bootstrapPaginationClasses')
 </template>
 
 <script>

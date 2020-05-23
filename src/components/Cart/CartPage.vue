@@ -1,48 +1,40 @@
-<template>
-  <div class="container">
-    <div v-if="cartList.length" class="card shopping-cart">
-      <div class="card-body">
-          <v-cart-item v-for="item in cartList"
-                     :item="item"
-                     :key="item.id" class="mb-4"
-                     v-on:delete="deleteFromCart"
-                     v-on:plus="plus"
-                     v-on:minus="minus"
-                     v-on:changeQuantity="changeQuantity"/>
-        <hr>
-      </div>
-      <div class="card-footer">
-        <div class="form-group pull-left">
-          <form>
-            <input class="form-control"
-                   @input="setPromo($event.target.value)"
-                   :class="[{'is-invalid': $v.promoText.$error}]"
-                   :value="promoText">
-            <div class="invalid-feedback" v-if="!$v.promoText.minLength || !$v.promoText.maxLength">
-              Промокод должен содержать минимум {{$v.promoText.$params.minLength.min}}
-              знака и максимум {{$v.promoText.$params.maxLength.max}}
-            </div>
-            <small id="emailHelp" class="form-text text-muted">Введите промокод</small>
-            <input type="submit" class="btn btn-outline-info" @click.prevent="sendPromo">
-          </form>
-        </div>
-        <div class="pull-right" style="margin: 10px">
-          <button class="btn btn-success pull-right btn-order">
-            <router-link to="/ordercheckout">Оформить заказ</router-link>
-          </button>
-          <div v-if="GET_PROMO_PRICE" class="pull-right" style="margin: 5px; color: green">
-            Активирован промокод <b>{{promoCodeInfo.description}} (-{{promoCodeInfo.discount_value}}$)</b> Итоговая цена: <b style="text-decoration: line-through"></b> <b>{{GET_PROMO_PRICE}}</b>
-          </div>
-          <div v-else class="pull-right" style="margin: 5px">
-            Total price: <b>{{totalPrice}}</b>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div v-else class="card">
-      <h2>Пустая корзина</h2>
-    </div>
-  </div>
+<template lang="pug">
+  .container
+    .card.shopping-cart(v-if='cartList.length')
+      .card-body
+        v-cart-item.mb-4(v-for='item in cartList',
+                         :item='item', :key='item.id',
+                         @delete='deleteFromCart',
+                         @plus='plus',
+                         @minus='minus',
+                         @changequantity='changeQuantity')
+          hr
+      .card-footer
+        .form-group.pull-left
+          form
+            input.form-control(@input='setPromo($event.target.value)',
+                              :class="[{'is-invalid': $v.promoText.$error}]",
+                              :value='promoText')
+            .invalid-feedback(v-if='!$v.promoText.minLength || !$v.promoText.maxLength')
+              | Промокод должен содержать минимум {{$v.promoText.$params.minLength.min}}
+              | знака и максимум {{$v.promoText.$params.maxLength.max}}
+            small#emailHelp.form-text.text-muted Введите промокод
+            input.btn.btn-outline-info(type='submit', @click.prevent='sendPromo')
+        .pull-right(style='margin: 10px')
+          button.btn.btn-success.pull-right.btn-order
+            router-link(to='/ordercheckout') Оформить заказ
+          .pull-right(v-if='GET_PROMO_PRICE', style='margin: 5px; color: green')
+            | Активирован промокод
+            b {{promoCodeInfo.description}} (-{{promoCodeInfo.discount_value}}$)
+            | Итоговая цена:
+            b(style='text-decoration: line-through')
+            b {{GET_PROMO_PRICE}}
+          .pull-right(v-else, style='margin: 5px')
+            | Total price:
+            b {{totalPrice}}
+    .card(v-else)
+      h2 Пустая корзина
+
 </template>
 
 <script>

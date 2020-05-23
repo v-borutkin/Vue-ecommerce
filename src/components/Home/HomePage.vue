@@ -1,21 +1,12 @@
-<template>
-  <div id="app">
-    <v-slider></v-slider>
-    <b-container>
-        <b-col>
-          <div class="d-flex
-          flex-wrap
-          flex-md-row
-          flex-column
-          justify-content-md-between align-content-center">
-            <div v-for="product in products.slice(0,3)" :key="product.id">
-              <v-product :product="product"/>
-            </div>
-          </div>
-          <b-button block variant="primary" class="mt-4" to="/products/">Все продукты</b-button>
-        </b-col>
-    </b-container>
-  </div>
+<template lang="pug">
+.app
+  v-slider
+  b-container
+    b-col
+      .d-flex.flex-wrap.flex-md-row.flex-column.justify-content-md-between.align-content-center
+        div(v-for='product in products.slice(0,3)' :key='product.id')
+          v-product(:product="product")
+        b-button(block variant="primary" class="mt-4" to="/products/") Все продукты
 </template>
 <script>
 import vSlider from '../Assets/vSlider'
@@ -48,7 +39,7 @@ export default {
   .item {
     margin: 10px 10px;
   }
-  #app {
+  .app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
