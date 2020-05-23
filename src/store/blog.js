@@ -7,11 +7,15 @@ Vue.use(Vuex)
 export default {
   namespaced: true,
   state: {
+    _myData: false,
     posts: [],
     post: {},
     paginationCount: 1
   },
   mutations: {
+    set_myData (state, payload) {
+      state._myData = payload
+    },
     loadPosts (state, payload) {
       state.posts = payload.data.results
       state.paginationCount = Math.ceil(payload.data.count / 6)
@@ -25,6 +29,7 @@ export default {
       try {
         const postsApi = await Axios.get(`/posts/?page=${currentPage}`)
         commit('loadPosts', postsApi)
+        commit('set_myData', true)
       } catch (e) {
       }
     },

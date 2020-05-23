@@ -3,7 +3,7 @@
     <div class="wrapper">
       <the-navigation :cartLength="cartList.length"></the-navigation>
       <div class="content">
-          <keep-alive include="Products, Home, Cart">
+          <keep-alive include="Blog">
             <transition name="fade" mode="out-in">
               <router-view/>
             </transition>

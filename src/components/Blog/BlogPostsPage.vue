@@ -63,11 +63,13 @@ export default {
     }
   },
   mounted () {
-    this.fetchPostsFromApi()
+    console.log(this.posts)
+    if (this._myData === false) this.fetchPostsFromApi()
   },
   computed: {
     ...mapState('blog', [
       'posts',
+      '_myData',
       'paginationCount'
     ])
   },
