@@ -1,48 +1,31 @@
-<template>
-  <b-container class="col-2">
-    <form class="form-signin">
-      <img class="mb-4" src="/docs/4.4/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-      <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-      <div>
-        <label for="Username" class="sr-only" >Username</label>
-        <input id="Username" class="form-control"
-               :class="[{'is-invalid': $v.username.$error}, {'is-valid': !$v.username.$error}]"
-               placeholder="Username" autofocus
-               @input="setUsername($event.target.value)">
-        <div class="invalid-feedback" v-if="!$v.username.minLength || !$v.username.maxLength">
-          Имя пользователя должно содержать минимум {{$v.username.$params.minLength.min}}
-          знака и максимум {{$v.username.$params.maxLength.max}}
-        </div>
-        <div class="invalid-feedback" v-if="!$v.username.required">
-          Обязательное поле
-        </div>
-      </div>
-      <div>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password"
-               id="inputPassword"
-               class="form-control mt-2"
-               :class="[{'is-invalid': $v.password.$error}, {'is-valid': !$v.password.$error}]"
-               placeholder="Password"
-               @input="setPassword($event.target.value)">
-        <div class="invalid-feedback" v-if="!$v.password.minLength || !$v.password.maxLength">
-          Пароль должен содержать минимум {{$v.password.$params.minLength.min}}
-          знака и максимум {{$v.password.$params.maxLength.max}}
-        </div>
-        <div class="invalid-feedback" v-if="!$v.password.required">
-          Обязательное поле
-        </div>
-      </div>
-      <button class="btn btn-lg btn-primary btn-block mt-2" type="submit" @click.prevent="login">Sign in</button>
-    </form>
-    <div class="mt-3">
-      <router-link to="/registration">нет аккаунта</router-link>
-      <router-link to="/password-reset" class="ml-2">не помню пароль</router-link>
-    </div>
-    <div v-if="errors">
-      <p style="color: red" v-for="(error, key) in errors" :key="key">{{error[0]}}</p>
-    </div>
-  </b-container>
+<template lang="pug">
+  b-container.col-2
+    form.form-signin
+      img.mb-4(src='/docs/4.4/assets/brand/bootstrap-solid.svg', alt='', width='72', height='72')
+      h1.h3.mb-3.font-weight-normal Войдите
+      div
+        label.sr-only(for='Username') Логин
+        input#Username.form-control(:class="[{'is-invalid': $v.username.$error}, {'is-valid': !$v.username.$error}]", placeholder='Username', autofocus='', @input='setUsername($event.target.value)')
+        .invalid-feedback(v-if='!$v.username.minLength || !$v.username.maxLength')
+          | Логин должен содержать минимум{{$v.username.$params.minLength.min}}
+          | знака и максимум {{$v.username.$params.maxLength.max}}
+        .invalid-feedback(v-if='!$v.username.required')
+          | Обязательное поле
+      div
+        label.sr-only(for='inputPassword') Password
+        input#inputPassword.form-control.mt-2(type='password', :class="[{'is-invalid': $v.password.$error}, {'is-valid': !$v.password.$error}]", placeholder='Password', @input='setPassword($event.target.value)')
+        .invalid-feedback(v-if='!$v.password.minLength || !$v.password.maxLength')
+          | Пароль должен содержать минимум {{$v.password.$params.minLength.min}}
+          | знака и максимум {{$v.password.$params.maxLength.max}}
+        .invalid-feedback(v-if='!$v.password.required')
+          |  Обязательное поле
+      button.btn.btn-lg.btn-primary.btn-block.mt-2(type='submit', @click.prevent='login') Войти
+    .mt-3
+      router-link(to='/registration') нет аккаунта
+      router-link.ml-2(to='/password-reset') не помню пароль
+    div(v-if='errors')
+      p(style='color: red', v-for='(error, key) in errors', :key='key') {{error[0]}}
+
 </template>
 
 <script>

@@ -1,47 +1,27 @@
-<template>
-<b-container>
-  <div class="user-info mt-5">
-    Ваше имя: {{ user.userName }}
-  </div>
-  <hr />
-  <h3 class="mt-5">Изменить пароль</h3>
-  <form class="form-newPassword col-12">
-    <div class="col-4">
-      <input class="form-control mt-2"
-             :class="[{'is-invalid': $v.newPassword.$error}]"
-             type="text"
-             id="newPassword"
-             placeholder="Введите пароль"
-             v-model="newPassword">
-      <div class="invalid-feedback" v-if="!$v.newPassword.minLength || !$v.newPassword.maxLength">
-        Пароль должен содержать минимум {{$v.newPassword.$params.minLength.min}}
-        знака и максимум {{$v.newPassword.$params.maxLength.max}}
-      </div>
-      <div class="invalid-feedback" v-if="!$v.newPassword.required">
-        Обязательное поле
-      </div>
-    </div>
-    <div class="col-4">
-      <input class="form-control mt-2"
-             :class="[{'is-invalid': $v.newPasswordConfirm.$error}]"
-             type="text"
-             id="newPasswordConfirm"
-             placeholder="Повторите пароль"
-             v-model="newPasswordConfirm">
-      <div class="invalid-feedback" v-if="!$v.newPasswordConfirm.required">
-        Обязательное поле
-      </div>
-      <div class="invalid-feedback" v-if="!$v.newPasswordConfirm.sameAs">
-        Пароли не совпадают
-      </div>
-    </div>
-    <button class="btn btn-success mt-2" type="submit" @click.prevent="sendNewPassword">Изменить пароль</button>
+<template lang="pug">
+  b-container
+    .user-info.mt-5
+      | Ваше имя: {{ user.userName }}
+    hr
+    h3.mt-5 Изменить пароль
+    form.form-newPassword.col-12
+      .col-4
+        input#newPassword.form-control.mt-2(:class="[{'is-invalid': $v.newPassword.$error}]", type='text', placeholder='Введите пароль', v-model='newPassword')
+        .invalid-feedback(v-if='!$v.newPassword.minLength || !$v.newPassword.maxLength')
+          | Пароль должен содержать минимум {{$v.newPassword.$params.minLength.min}}
+          | знака и максимум {{$v.newPassword.$params.maxLength.max}}
+        .invalid-feedback(v-if='!$v.newPassword.required')
+          | Обязательное поле
+      .col-4
+        input#newPasswordConfirm.form-control.mt-2(:class="[{'is-invalid': $v.newPasswordConfirm.$error}]", type='text', placeholder='Повторите пароль', v-model='newPasswordConfirm')
+        .invalid-feedback(v-if='!$v.newPasswordConfirm.required')
+          | Обязательное поле
+        .invalid-feedback(v-if='!$v.newPasswordConfirm.sameAs')
+          | Пароли не совпадают
+      button.btn.btn-success.mt-2(type='submit', @click.prevent='sendNewPassword') Изменить пароль
+      .mt-4.error-api(v-if='errors')
+        p(style='color: red', v-for='(error, key) in errors', :key='key') {{error[0]}}
 
-    <div v-if="errors" class="mt-4 error-api">
-      <p style="color: red" v-for="(error, key) in errors" :key="key">{{error[0]}}</p>
-    </div>
-  </form>
-</b-container>
 </template>
 
 <script>

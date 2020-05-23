@@ -1,7 +1,5 @@
-<template>
-  <b-container>
-
-  </b-container>
+<template lang="pug">
+  b-container
 </template>
 
 <script>

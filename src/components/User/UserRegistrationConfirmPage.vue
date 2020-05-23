@@ -1,6 +1,6 @@
-<template>
-<h2 v-if="isRegistration">Вы успешно зарегистрированы, тепреь вы можете авторизоваться</h2>
-  <h2 v-else>Что-то пошло не так</h2>
+<template lang="pug">
+  h2(v-if="isRegistration") Вы успешно зарегистрированы, тепреь вы можете авторизоваться
+  h2(v-else) Что-то пошло не так
 </template>
 
 <script>
