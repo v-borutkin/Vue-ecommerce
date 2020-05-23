@@ -39,7 +39,6 @@ export default {
     }
   },
   mounted () {
-    console.log(this.posts)
     if (this._myData === false) this.fetchPostsFromApi()
   },
   computed: {
@@ -59,7 +58,7 @@ export default {
   },
   watch: {
     currentPage () {
-      this.FETCH_POSTS_FROM_API(this.currentPage)
+      this.fetchPostsFromApi()
     }
   }
 }

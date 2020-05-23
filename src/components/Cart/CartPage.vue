@@ -99,7 +99,7 @@ export default {
       })
     },
     deleteFromCart (id) {
-      this.DELETE_FROM_CART(id)
+      this.DELETE_FROM_CART({ productId: id })
     },
     changeQuantity (productId, quantity) {
       this.CART_ELEMENT_CHANGE_COUNT({

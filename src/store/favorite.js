@@ -21,16 +21,16 @@ export default {
           commit('SET_FAVORITE_PRODUCTS', response.data.results)
         })
     },
-    async SET_FAVORITE ({ commit, dispatch }, good) {
-      Axios.post('/favorite/', { good })
+    async SET_FAVORITE ({ commit, dispatch }, { productId, category = 0, page = 1 }) {
+      Axios.post('/favorite/', { good: productId })
         .then(() => {
-          dispatch('products/FETCH_PRODUCTS_FROM_API', { }, { root: true })
+          dispatch('products/FETCH_PRODUCTS_FROM_API', { category, page }, { root: true })
         })
     },
-    async DEL_FAVORITE ({ commit, dispatch }, good) {
-      Axios.delete(`/favorite/${good}`)
+    async DEL_FAVORITE ({ commit, dispatch }, { productId, category = 0, page = 1 }) {
+      Axios.delete(`/favorite/${productId}`)
         .then(() => {
-          dispatch('products/FETCH_PRODUCTS_FROM_API', { }, { root: true })
+          dispatch('products/FETCH_PRODUCTS_FROM_API', { category, page }, { root: true })
           dispatch('FETCH_FAVORITE_PRODUCTS_FROM_API')
         })
     }

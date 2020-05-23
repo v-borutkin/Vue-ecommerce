@@ -9,11 +9,13 @@ export default {
   state: {
     products: [],
     product: [],
-    recommendedProducts: []
+    recommendedProducts: [],
+    paginationCount: 1
   },
   mutations: {
     setProducts (state, payload) {
-      state.products = payload
+      state.products = payload.results
+      state.paginationCount = Math.ceil(payload.count / 6)
     },
     setProduct (state, payload) {
       state.product = payload
@@ -23,10 +25,11 @@ export default {
     }
   },
   actions: {
-    async  FETCH_PRODUCTS_FROM_API ({ commit }) {
+    async  FETCH_PRODUCTS_FROM_API ({ commit }, { category = 0, page }) {
       try {
-        const productsApi = await Axios.get('/goods/?category=0')
-        commit('setProducts', productsApi.data.results)
+        await Axios.get(`/goods/?category=${category}&page=${page}`).then(response => {
+          commit('setProducts', response.data)
+        })
       } catch (e) {
       }
     },

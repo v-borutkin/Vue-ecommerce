@@ -28,7 +28,7 @@
 import { mapActions, mapState } from 'vuex'
 import imgUrl from '../../mixins/imgUrl'
 export default {
-  props: ['product'],
+  props: ['product', 'category', 'page'],
   mixins: [imgUrl],
   computed: {
     ...mapState('user', [
@@ -51,30 +51,54 @@ export default {
       if (!this.isAuth) {
         alert('Необходимо авторизоваться')
       } else {
-        this.SET_FAVORITE(id)
+        this.SET_FAVORITE({
+          productId: id,
+          category: this.category,
+          page: this.page
+        })
       }
     },
     delFavorite (id) {
       if (!this.isAuth) {
         alert('Необходимо авторизоваться')
       } else {
-        this.DEL_FAVORITE(id)
+        this.DEL_FAVORITE({
+          productId: id,
+          category: this.category,
+          page: this.page
+        })
       }
     },
     addToCart (id) {
       if (!this.isAuth) {
         alert('Необходимо авторизоваться')
       } else {
-        this.ADD_TO_CART(id)
+        this.ADD_TO_CART({
+          productId: id,
+          category: this.category,
+          page: this.page
+        }).then(() => {
+          this.FETCH_PRODUCTS_FROM_API({
+            category: this.category,
+            page: this.page
+          })
+        })
       }
     },
     deleteFromCart (id) {
       if (!this.isAuth) {
         alert('Необходимо авторизоваться')
       } else {
-        this.DELETE_FROM_CART(id)
+        this.DELETE_FROM_CART({
+          productId: id,
+          category: this.category,
+          page: this.page
+        })
           .then(() => {
-            this.FETCH_PRODUCTS_FROM_API()
+            this.FETCH_PRODUCTS_FROM_API({
+              category: this.category,
+              page: this.page
+            })
           })
       }
     }

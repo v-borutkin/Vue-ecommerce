@@ -58,7 +58,7 @@ export default {
         promo_code: promoCode
       })
     },
-    async ADD_TO_CART ({ getters, dispatch }, productId) {
+    async ADD_TO_CART ({ getters, dispatch }, { productId, category = 0, page = 1 }) {
       await Axios.post('/to-cart/', {
         good: productId,
         cart: getters.getCartId,
@@ -66,9 +66,18 @@ export default {
       })
         .then(() => {
           dispatch('GET_CART_LIST_FROM_API')
-          dispatch('products/FETCH_PRODUCTS_FROM_API', { }, { root: true })
+          dispatch('products/FETCH_PRODUCTS_FROM_API', { category, page }, { root: true })
           dispatch('favorite/FETCH_FAVORITE_PRODUCTS_FROM_API', { }, { root: true })
         })
+    },
+    async DELETE_FROM_CART ({ commit, dispatch }, { productId, category = 0, page = 1 }) {
+      await Axios.delete(`/cart-edit/${productId}`).then(() => {
+        dispatch('GET_CART_LIST_FROM_API')
+        dispatch('products/FETCH_PRODUCTS_FROM_API', {
+          category, page
+        }, { root: true })
+        dispatch('favorite/FETCH_FAVORITE_PRODUCTS_FROM_API', { }, { root: true })
+      })
     },
     async CART_ELEMENT_PLUS ({ dispatch, state }, { productId, quantity }) {
       const q = quantity + state.step
@@ -94,13 +103,6 @@ export default {
           commit('SET_CART_PRICE', response.data.results[0].amount_items)
           commit('SET_CART_PRODUCT_LIST', response.data.results[0].goods)
         })
-    },
-    async DELETE_FROM_CART ({ commit, dispatch }, payload) {
-      await Axios.delete(`/cart-edit/${payload}`).then(() => {
-        dispatch('GET_CART_LIST_FROM_API')
-        dispatch('products/FETCH_PRODUCTS_FROM_API', { }, { root: true })
-        dispatch('favorite/FETCH_FAVORITE_PRODUCTS_FROM_API', { }, { root: true })
-      })
     },
     async CART_LIST_CLEAR ({ commit }) {
       commit('CART_LIST_CLEAR', [])
