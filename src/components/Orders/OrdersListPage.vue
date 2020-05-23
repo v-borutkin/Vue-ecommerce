@@ -1,7 +1,6 @@
-<template>
-    <div class="container">
-      <h1 class="mt-5">Заказы</h1>
-    </div>
+<template lang="pug">
+  .container
+    h1.mt-5 Заказы
 </template>
 
 <script>
