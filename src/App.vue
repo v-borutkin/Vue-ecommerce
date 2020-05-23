@@ -3,7 +3,7 @@
     <div class="wrapper">
       <the-navigation :cartLength="cartList.length"></the-navigation>
       <div class="content">
-          <keep-alive include="Blog">
+          <keep-alive>
             <transition name="fade" mode="out-in">
               <router-view/>
             </transition>
@@ -59,29 +59,7 @@ export default {
     transition: all;
     transition-timing-function: ease
   }
-  .loading-indicator:before {
-    content: '';
-    background: #000000cc;
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-  }
 
-  .loading-indicator:after {
-    content: 'Loading';
-    position: fixed;
-    width: 100%;
-    top: 50%;
-    left: 0;
-    z-index: 1001;
-    color:white;
-    text-align:center;
-    font-weight:bold;
-    font-size:1.5rem;
-  }
   .fade-enter-active, .fade-leave-active {
     transition: opacity .3s ease-out;
   }

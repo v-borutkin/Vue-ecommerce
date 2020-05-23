@@ -105,9 +105,7 @@ export default {
       if (!this.isAuth) {
         alert('Необходимо авторизоваться')
       } else {
-        this.ADD_TO_CART(id).then(() => {
-          this.FETCH_PRODUCTS_FROM_API()
-        })
+        this.ADD_TO_CART(id)
       }
     },
     deleteFromCart (id) {
@@ -125,12 +123,6 @@ export default {
 </script>
 
 <style scoped>
-  .fade-enter-active, .fade-leave-active {
-    transition: opacity .2s ease-out;
-  }
-  .fade-enter,  .fade-leave-to {
-    opacity: 0;
-  }
   .productButtons {
     position: absolute;
     bottom: 20px;

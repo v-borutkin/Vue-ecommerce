@@ -13,6 +13,7 @@
     "bootstrap-vue": "^2.13.1",
     "core-js": "^3.6.5",
     "jest": "^26.0.1",
+    "nprogress": "^0.2.0",
     "sinon": "^9.0.2",
     "vue": "^2.6.11",
     "vue-plain-pagination": "^0.3.0",

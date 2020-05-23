@@ -38,9 +38,6 @@ export default {
     ...mapActions('cart', [
       'ADD_TO_CART'
     ])
-  },
-  mounted () {
-    this.FETCH_PRODUCTS_FROM_API()
   }
 }
 </script>

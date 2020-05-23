@@ -67,6 +67,7 @@ export default {
         .then(() => {
           dispatch('GET_CART_LIST_FROM_API')
           dispatch('products/FETCH_PRODUCTS_FROM_API', { }, { root: true })
+          dispatch('favorite/FETCH_FAVORITE_PRODUCTS_FROM_API', { }, { root: true })
         })
     },
     async CART_ELEMENT_PLUS ({ dispatch, state }, { productId, quantity }) {
@@ -97,6 +98,7 @@ export default {
     async DELETE_FROM_CART ({ commit, dispatch }, payload) {
       await Axios.delete(`/cart-edit/${payload}`).then(() => {
         dispatch('GET_CART_LIST_FROM_API')
+        dispatch('favorite/FETCH_FAVORITE_PRODUCTS_FROM_API', { }, { root: true })
       })
     },
     async CART_LIST_CLEAR ({ commit }) {

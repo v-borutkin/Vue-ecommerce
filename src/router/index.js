@@ -6,12 +6,12 @@ const Posts = () => import('@/components/Blog/BlogPostsPage')
 const Products = () => import('@/components/Products/ProductListPage')
 const Post = () => import('@/components/Blog/BlogPostPage')
 const FavoriteList = () => import('@/components/Favorite/FavoriteListPage')
-const FavoriteItem = () => import('@/components/Favorite/FavoriteCardPage')
 const ProductCard = () => import('@/components/Products/ProductCardPage')
 const Auth = () => import('@/components/User/UserAuthPage')
 const Cart = () => import('@/components/Cart/CartPage')
 const Home = () => import('@/components/Home/HomePage')
 const RegistrationConform = () => import('@/components/User/UserRegistrationConfirmPage')
+const Orders = () => import('@/components/Orders/OrdersListPage')
 const OrderCheckout = () => import('@/components/Cart/OrderCheckoutPage')
 const UserRecoveryPassword = () => import('@/components/User/UserRecoveryPasswordPage')
 const UserProfilePage = () => import('@/components/User/UserProfilePage')
@@ -29,15 +29,6 @@ const routes = [
     path: '/favorite/',
     name: 'Favorite',
     component: FavoriteList,
-    beforeEnter: (from, to, next) => {
-      if (store.getters['user/IS_AUTH_TOKEN']) next()
-      else next('/login')
-    }
-  },
-  {
-    path: '/favorite/:id',
-    name: 'FavoriteItem',
-    component: FavoriteItem,
     beforeEnter: (from, to, next) => {
       if (store.getters['user/IS_AUTH_TOKEN']) next()
       else next('/login')
@@ -69,6 +60,24 @@ const routes = [
     path: '/profile',
     name: 'Profile',
     component: UserProfilePage,
+    beforeEnter: (from, to, next) => {
+      if (store.getters['user/IS_AUTH_TOKEN']) next()
+      else next('/')
+    }
+  },
+  {
+    path: '/favorites',
+    name: 'Favorites',
+    component: FavoriteList,
+    beforeEnter: (from, to, next) => {
+      if (store.getters['user/IS_AUTH_TOKEN']) next()
+      else next('/')
+    }
+  },
+  {
+    path: '/orders',
+    name: 'Orders',
+    component: Orders,
     beforeEnter: (from, to, next) => {
       if (store.getters['user/IS_AUTH_TOKEN']) next()
       else next('/')

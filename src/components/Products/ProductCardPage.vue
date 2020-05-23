@@ -60,7 +60,7 @@
       <h2 class="mt-3">С этим товаром покупают</h2>
       <div class="d-flex flex-row mt-5 justify-content-around">
         <div v-for="product in recommendedProducts" :key="product.id">
-          <product :product="product"/>
+          <v-product :product="product"/>
         </div>
       </div>
     </b-col>
@@ -70,7 +70,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
-import product from './vProduct'
+import vProduct from './vProduct'
 import imgUrl from '../../mixins/imgUrl'
 export default {
   name: 'Product',
@@ -81,7 +81,7 @@ export default {
     }
   },
   components: {
-    product
+    vProduct
   },
   data () {
     return {
@@ -161,12 +161,6 @@ export default {
 </script>
 
 <style scoped>
-  .fade-enter-active, .fade-leave-active {
-    transition: opacity .2s ease-out;
-  }
-  .fade-enter,  .fade-leave-to {
-    opacity: 0;
-  }
   .productButtons{
     width: 100%;
   }
