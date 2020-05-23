@@ -107,11 +107,4 @@ export default {
     align-content: center;
     justify-content: center;
   }
-  .error-api {
-    color: #dc3545;
-    font-size: 80%;
-    margin-top: .25rem;
-    transition: all;
-    transition-timing-function: ease
-  }
 </style>

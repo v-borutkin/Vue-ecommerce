@@ -52,6 +52,13 @@ export default {
 }
 </script>
 <style>
+  .error-api {
+    color: #dc3545;
+    font-size: 80%;
+    margin-top: .25rem;
+    transition: all;
+    transition-timing-function: ease
+  }
   .loading-indicator:before {
     content: '';
     background: #000000cc;

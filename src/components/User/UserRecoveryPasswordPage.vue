@@ -69,12 +69,6 @@ export default {
 </script>
 
 <style scoped>
-  .fade-enter-active, .fade-leave-active {
-    transition: opacity .2s ease-out;
-  }
-  .fade-enter,  .fade-leave-to {
-    opacity: 0;
-  }
   .form-signin {
     display: flex;
     flex-flow: column nowrap;
