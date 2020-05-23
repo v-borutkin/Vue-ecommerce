@@ -1,39 +1,39 @@
 <template lang="pug">
   b-container(style='display: flex;justify-content: center; align-content: center;')
-  form.form-signin.col-6
-    h1.h3.mb-3.font-weight-normal Регистрация
-    div
-      label(for='username') Ваше имя
-      input#username.form-control(type='text', ref='username', :class="{'is-invalid': $v.username.$error}", placeholder='Username', v-model='username')
-      .invalid-feedback(v-if='!$v.username.minLength || !$v.username.maxLength')
-        | Имя пользователя должно содержать минимум {{$v.username.$params.minLength.min}}
-        | знака и максимум {{$v.username.$params.maxLength.max}}
-      .invalid-feedback(v-if='!$v.username.required')
-        | Обязательное поле
-    .mt-2
-      label(for='inputEmail') Электронная почта
-      input#inputEmail.form-control(type='text', ref='email', :class="{'is-invalid': $v.email.$error}", placeholder='Email address', v-model='email')
-      .invalid-feedback(v-if='!$v.email.required')
-        | Обязательное поле
-      .invalid-feedback(v-if='!$v.email.email')
-        |  Введите корректный электронный адрес
-    .mt-2(ref='password1')
-      label(for='inputPassword') Пароль
-      input#inputPassword.form-control(type='password', placeholder='Password', :class="{'is-invalid': $v.password.$error}", v-model='password')
-      .invalid-feedback(v-if='!$v.password.minLength || !$v.password.maxLength')
-        | Пароль должен содержать минимум {{$v.password.$params.minLength.min}}
-        | знака и максимум {{$v.password.$params.maxLength.max}}
-      .invalid-feedback(v-if='!$v.password.required')
-        | Обязательное поле
-    .mt-2(ref='password2')
-      label(for='inputPasswordConfirm') Подтвердите пароль
-      input#inputPasswordConfirm.form-control(type='password', placeholder='Password', :class="{'is-invalid': $v.passwordConfirm.$error}", v-model='passwordConfirm')
-      .invalid-feedback(v-if='!$v.passwordConfirm.required')
-        | Обязательное поле
-      .invalid-feedback(v-if='!$v.passwordConfirm.sameAs')
-        | Пароли не совпадают
-    button.btn.btn-lg.btn-primary.mt-2(type='submit', @click.prevent='registration') Регистрация
-    p.mt-5.mb-3.text-muted 2020
+    form.form-signin.col-6
+      h1.h3.mb-3.font-weight-normal Регистрация
+      div
+        label(for='username') Ваше имя
+        input#username.form-control(type='text', ref='username', :class="{'is-invalid': $v.username.$error}", placeholder='Username', v-model='username')
+        .invalid-feedback(v-if='!$v.username.minLength || !$v.username.maxLength')
+          | Имя пользователя должно содержать минимум {{$v.username.$params.minLength.min}}
+          | знака и максимум {{$v.username.$params.maxLength.max}}
+        .invalid-feedback(v-if='!$v.username.required')
+          | Обязательное поле
+      .mt-2
+        label(for='inputEmail') Электронная почта
+        input#inputEmail.form-control(type='text', ref='email', :class="{'is-invalid': $v.email.$error}", placeholder='Email address', v-model='email')
+        .invalid-feedback(v-if='!$v.email.required')
+          | Обязательное поле
+        .invalid-feedback(v-if='!$v.email.email')
+          |  Введите корректный электронный адрес
+      .mt-2(ref='password1')
+        label(for='inputPassword') Пароль
+        input#inputPassword.form-control(type='password', placeholder='Password', :class="{'is-invalid': $v.password.$error}", v-model='password')
+        .invalid-feedback(v-if='!$v.password.minLength || !$v.password.maxLength')
+          | Пароль должен содержать минимум {{$v.password.$params.minLength.min}}
+          | знака и максимум {{$v.password.$params.maxLength.max}}
+        .invalid-feedback(v-if='!$v.password.required')
+          | Обязательное поле
+      .mt-2(ref='password2')
+        label(for='inputPasswordConfirm') Подтвердите пароль
+        input#inputPasswordConfirm.form-control(type='password', placeholder='Password', :class="{'is-invalid': $v.passwordConfirm.$error}", v-model='passwordConfirm')
+        .invalid-feedback(v-if='!$v.passwordConfirm.required')
+          | Обязательное поле
+        .invalid-feedback(v-if='!$v.passwordConfirm.sameAs')
+          | Пароли не совпадают
+      button.btn.btn-lg.btn-primary.mt-2(type='submit', @click.prevent='registration') Регистрация
+      p.mt-5.mb-3.text-muted 2020
 </template>
 
 <script>
