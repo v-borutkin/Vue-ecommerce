@@ -1,17 +1,11 @@
-<template>
-  <div id="app">
-    <div class="wrapper">
-      <the-navigation :cartLength="cartList.length"></the-navigation>
-      <div class="content">
-          <keep-alive>
-            <transition name="fade" mode="out-in">
-              <router-view/>
-            </transition>
-          </keep-alive>
-      </div>
-    </div>
-  </div>
-
+<template lang="pug">
+  #app
+    .wrapper
+      the-navigation(:cartLength="cartList.length")
+      .content
+        keep-alive
+          transition(name="fade" mode="out-in")
+            router-view
 </template>
 <script>
 import TheNavigation from './components/Assets/TheNavigation'
