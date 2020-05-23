@@ -20,6 +20,7 @@ axios.interceptors.response.use(
     return data
   },
   error => {
+    document.body.classList.remove('loading-indicator')
     if (error.response.status === 401) {
       localStorage.removeItem('token')
       store.commit('AUTH', false)
