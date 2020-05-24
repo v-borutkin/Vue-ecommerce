@@ -115,9 +115,18 @@ export default {
   .item img {
     display: block;
     padding-top: 10px;
-    height: 43%;
+    height: 40%;
     margin: 0 auto;
     object-fit: contain;
+  }
+  h4 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-height: 30px;
+    max-height: 90px;
   }
   .item {
     width: 255px;
