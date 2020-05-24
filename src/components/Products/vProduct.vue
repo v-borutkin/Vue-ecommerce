@@ -1,5 +1,5 @@
 <template lang="pug">
-  b-card.item(:key='product.id', :img-src='imgUrl(product.photo)', img-alt='Image', img-top='', tag='article')
+  b-card.item.img(:key='product.id', :img-src='imgUrl(product.photo)', img-alt='Image', tag='article')
     b-card-title
       router-link(:to="'/products/'+ product.id") {{product.name}}
     b-card-text
@@ -112,9 +112,16 @@ export default {
     bottom: 20px;
     right: 0;
   }
+  .item img {
+    display: block;
+    padding-top: 10px;
+    height: 43%;
+    margin: 0 auto;
+    object-fit: contain;
+  }
   .item {
     width: 255px;
-    height: 420px;
+    height: 450px;
   }
   .productButtons{
     width: 100%;

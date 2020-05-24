@@ -2,7 +2,7 @@
   div
     b-container
       b-card
-        b-img(:src='imgUrl(product.photo)', width='480')
+        b-img(:src='imgUrl(product.photo)')
         h1 {{ product.name }}
         h6 {{ product.description }}
         p {{ product.price }}
@@ -147,5 +147,12 @@ export default {
 <style scoped>
   .productButtons{
     width: 100%;
+  }
+   img {
+    display: block;
+    padding-top: 10px;
+    width: 30%;
+    margin: 0 auto;
+    object-fit: contain;
   }
 </style>

@@ -2,9 +2,8 @@
   b-container
     b-col
       .d-flex.flex-xl-wrap.flex-md-row.flex-column.justify-content-sm-center.justify-content-lg-between.align-items-center.col-12
-        transition(name="fade" mode="out-in")
         .mt-2.ml-2(v-for="product in products" :key="product.id")
-          v-product(:product="product", :category=0, :page="currentPage")
+          v-product(:product="product", :category=0, :page="currentPage" :key="product.id")
     v-pagination(v-if='paginationCount > 1', v-model='currentPage', :page-count='paginationCount', :classes='bootstrapPaginationClasses')
   </template>
 <script>
@@ -49,6 +48,6 @@ export default {
   }
 }
 </script>
-<style scoped>
+<style>
 
 </style>
