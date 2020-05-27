@@ -70,6 +70,7 @@ export default {
       }
     },
     addToCart (id) {
+      console.log(this.category)
       if (!this.isAuth) {
         alert('Необходимо авторизоваться')
       } else {

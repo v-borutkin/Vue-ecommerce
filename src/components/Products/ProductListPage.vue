@@ -7,7 +7,7 @@
       b-col
         .d-flex.flex-md-wrap.flex-md-row.flex-column.justify-content-sm-center.justify-content-lg-between.align-items-center.col-12
           .mt-2.ml-2(v-for="product in products" :key="product.id")
-            v-product(:product="product", :category=category, :page="currentPage" :key="product.id")
+            v-product(:product="product", :category="category", :page="currentPage" :key="product.id")
     div
       v-pagination(v-if='paginationCount > 1', v-model='currentPage', :page-count='paginationCount', :classes='bootstrapPaginationClasses')
   </template>
