@@ -27,7 +27,7 @@ export default {
   actions: {
     async  FETCH_PRODUCTS_FROM_API ({ commit }, { category = 0, page }) {
       try {
-        await Axios.get(`/goods/?category=${category}&page=${page}`).then(response => {
+        await Axios.get(`/goods/category=${category}?page=${page}`).then(response => {
           commit('setProducts', response.data)
         })
       } catch (e) {

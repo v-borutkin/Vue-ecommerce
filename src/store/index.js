@@ -9,6 +9,7 @@ import favorite from './favorite'
 import products from './products'
 import comments from './comments'
 import cart from './cart'
+import categories from './categories'
 
 Vue.use(Vuex)
 export default new Vuex.Store({ // TODO сделать единый отлов ошибок
@@ -25,6 +26,7 @@ export default new Vuex.Store({ // TODO сделать единый отлов �
     favorite,
     products,
     comments,
-    cart
+    cart,
+    categories
   }
 })

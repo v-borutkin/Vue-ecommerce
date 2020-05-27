@@ -38,7 +38,7 @@ export default {
   },
   mounted () {
     this.FETCH_PRODUCTS_FROM_API({
-      category: 1,
+      category: 0,
       page: 1
     })
     if (localStorage.getItem('token')) {
