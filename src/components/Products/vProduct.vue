@@ -77,11 +77,6 @@ export default {
           productId: id,
           category: this.category,
           page: this.page
-        }).then(() => {
-          this.FETCH_PRODUCTS_FROM_API({
-            category: this.category,
-            page: this.page
-          })
         })
       }
     },
@@ -94,12 +89,6 @@ export default {
           category: this.category,
           page: this.page
         })
-          .then(() => {
-            this.FETCH_PRODUCTS_FROM_API({
-              category: this.category,
-              page: this.page
-            })
-          })
       }
     }
   }

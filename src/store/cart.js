@@ -67,7 +67,6 @@ export default {
         .then(() => {
           dispatch('GET_CART_LIST_FROM_API')
           dispatch('products/FETCH_PRODUCTS_FROM_API', { category, page }, { root: true })
-          dispatch('favorite/FETCH_FAVORITE_PRODUCTS_FROM_API', { }, { root: true })
         })
     },
     async DELETE_FROM_CART ({ commit, dispatch }, { productId, category = 0, page = 1 }) {
