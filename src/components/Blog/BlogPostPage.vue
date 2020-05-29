@@ -2,9 +2,9 @@
   b-container
     b-card.item
       b-img(:src='imgUrl(post.image)', width='680')
-        h1 {{ post.title }}
-        h6 {{ post.author }}
-        p {{ post.text }}
+      h1 {{ post.title }}
+      h6 {{ post.author }}
+      p {{ post.text }}
     the-comments(:comments='comments', :id='id')
 </template>
 
@@ -41,12 +41,18 @@ export default {
     ])
   },
   mounted () {
-    this.FETCH_POSTS_FROM_API(this.id)
     this.FETCH_POST_FROM_API(this.id)
+    console.log(this.post.title)
   }
 }
 </script>
 
 <style scoped>
-
+  img {
+      display: block;
+      padding-top: 10px;
+      width: 20%;
+      margin: 0 auto;
+      object-fit: contain;
+    }
 </style>

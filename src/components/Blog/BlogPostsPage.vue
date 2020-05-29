@@ -4,8 +4,7 @@
       .d-flex.flex-wrap.flex-md-row.flex-column.justify-content-sm-center.justify-content-lg-around.align-items-center
       .col-12(v-if='posts')
         b-card#products.mb-2.item(v-for='post in posts', :key='post.id', tag='article', style='max-width: 20rem;')
-          div
-            img(:src='imgUrl(post.image)', alt='Card image')
+          img(:src='imgUrl(post.image)', alt='Card image')
           b-card-title.mt-2
             router-link(:to="'blog/' + post.id") {{post.title}}
           b-card-sub-title.mb-3
@@ -66,6 +65,13 @@ export default {
 <style scoped>
   .item {
     margin: 10px 10px;
+  }
+  img {
+    display: block;
+    padding-top: 10px;
+    width: 20%;
+    margin: 0 auto;
+    object-fit: contain;
   }
   h6 a{
     color: #6c757d;

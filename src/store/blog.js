@@ -25,7 +25,7 @@ export default {
     }
   },
   actions: {
-    async  FETCH_POSTS_FROM_API ({ commit, dispatch }, currentPage) {
+    async  FETCH_POSTS_FROM_API ({ commit }, currentPage) {
       try {
         const postsApi = await Axios.get(`/posts/?page=${currentPage}`)
         commit('loadPosts', postsApi)
@@ -33,10 +33,11 @@ export default {
       } catch (e) {
       }
     },
-    async FETCH_POST_FROM_API ({ commit, dispatch }, id) {
+    async FETCH_POST_FROM_API ({ commit }, id) {
       try {
-        const postApi = await Axios.get(`/post-ops/${id}`)
-        commit('loadPost', postApi.data)
+        await Axios.get(`/post-ops/${id}`).then(response => {
+          commit('loadPost', response.data)
+        })
       } catch (e) {
       }
     }
