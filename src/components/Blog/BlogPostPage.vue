@@ -42,7 +42,6 @@ export default {
   },
   mounted () {
     this.FETCH_POST_FROM_API(this.id)
-    console.log(this.post.title)
   }
 }
 </script>
