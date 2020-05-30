@@ -17,8 +17,8 @@
                 input.btn.btn-sm.btn-primary.pull-left.mt-1(type='submit', value='Добавить', :disabled='!isAuth',
                   @click.prevent='sendMessage')
         ul.comments.mt-4
-          v-comment-item(v-for='comment in comments', :key='comment.id', :comment='comment', :isauth='isAuth',
-            @sendreplycomment='sendReply')
+          v-comment-item(v-for='comment in comments', :key='comment.id', :comment='comment', :isAuth='isAuth',
+            @sendReplyComment='sendReply')
 
 </template>
 

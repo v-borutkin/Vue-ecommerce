@@ -4,7 +4,7 @@
       img.avatar(src='https://bootdey.com/img/Content/user_1.jpg', alt='')
       .post-comments
         .header_comment.d-inline-flex.meta.justify-content-between
-          p {{ comment.created_date  | dateFilter}}
+          p {{ formatDate(comment.created_date)}}
           a.author(href='#') {{ comment.author }}
           b-button.btn.btn-info.rounded-right(size='sm', v-if='isReply', :disabled='!isAuth',
                                               @click.prevent='sendReply(comment.id, comment.text)')
@@ -12,13 +12,16 @@
         p(:style='{ fontStyle: textStyle }')
           | {{comment.text}}
         comment-item(v-for='comment in comment.child_comment', :key='comment.id', :comment='comment',
-                                                               :isauth='isAuth', :isreply='false', textstyle='italic')
+                                                               :isAuth='isAuth', :isReply='false', textstyle='italic')
 
 </template>
 
 <script>
+import formatDate from '../../mixins/formatDate'
+
 export default {
   name: 'CommentItem',
+  mixins: [formatDate],
   props: {
     comment: {
       type: Object,
