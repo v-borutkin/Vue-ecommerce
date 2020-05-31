@@ -16,6 +16,8 @@
       h4 {{ post.author }}
       h6 {{ post.category }}
       p {{ post.text }}
+      .date
+        p {{formatDate(post.created_date)}}
     the-comments(:comments='comments', :id='id')
 </template>
 
@@ -23,9 +25,10 @@
 import TheComments from './TheComments'
 import imgUrl from '../../mixins/imgUrl'
 import { mapActions, mapState } from 'vuex'
+import formatDate from '../../mixins/formatDate'
 export default {
   props: ['id'],
-  mixins: [imgUrl],
+  mixins: [imgUrl, formatDate],
   name: 'Post',
   components: {
     TheComments

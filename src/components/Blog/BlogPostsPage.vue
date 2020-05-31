@@ -5,7 +5,7 @@
       .col-12(v-if='posts')
         b-card#products.mb-2.item(v-for='post in posts', :key='post.id', tag='article', style='max-width: 20rem;')
           img(:src='imgUrl(post.image)', alt='Card image')
-          b-card-title.mt-2
+          b-card-title.mt-1
             router-link(:to="'blog/' + post.id") {{post.title}}
           b-card-text
             <svg class="bi bi-person" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -24,6 +24,8 @@
                 <path fill-rule="evenodd" d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.134 13.134 0 0 0 1.66 2.043C4.12 11.332 5.88 12.5 8 12.5c2.12 0 3.879-1.168 5.168-2.457A13.134 13.134 0 0 0 14.828 8a13.133 13.133 0 0 0-1.66-2.043C11.879 4.668 10.119 3.5 8 3.5c-2.12 0-3.879 1.168-5.168 2.457A13.133 13.133 0 0 0 1.172 8z"/>
                 <path fill-rule="evenodd" d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
               </svg>  {{post.viewed}}
+          .date
+            p {{formatDate(post.created_date)}}
     v-pagination(v-if='paginationCount > 1', v-model='currentPage', :page-count='paginationCount', :classes='bootstrapPaginationClasses')
 </template>
 
@@ -31,12 +33,13 @@
 import { mapActions, mapState } from 'vuex'
 import vPagination from 'vue-plain-pagination'
 import imgUrl from '../../mixins/imgUrl'
+import formatDate from '../../mixins/formatDate'
 
 export default {
   components: {
     vPagination
   },
-  mixins: [imgUrl],
+  mixins: [imgUrl, formatDate],
   data () {
     return {
       isLoading: true,
