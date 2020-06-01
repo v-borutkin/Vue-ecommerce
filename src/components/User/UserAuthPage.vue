@@ -1,5 +1,5 @@
 <template lang="pug">
-  b-container.col-2
+  b-container
     form.form-signin
       img.mb-4(src='/docs/4.4/assets/brand/bootstrap-solid.svg', alt='', width='72', height='72')
       h1.h3.mb-3.font-weight-normal Войдите
@@ -19,7 +19,7 @@
           | знака и максимум {{$v.password.$params.maxLength.max}}
         .invalid-feedback(v-if='!$v.password.required')
           |  Обязательное поле
-      button.btn.btn-lg.btn-primary.btn-block.mt-2(type='submit', @click.prevent='login') Войти
+      button.btn.col-2.btn-lg.btn-primary.btn-block.mt-2(type='submit', @click.prevent='login') Войти
     .mt-3
       router-link(to='/registration') нет аккаунта
       router-link.ml-2(to='/password-reset') не помню пароль

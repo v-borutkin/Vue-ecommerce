@@ -20,7 +20,6 @@
         p {{formatDate(post.created_date)}}
     the-comments(:comments='comments', :id='id')
 </template>
-
 <script>
 import TheComments from './TheComments'
 import imgUrl from '../../mixins/imgUrl'
