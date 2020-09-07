@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     ...mapActions('products', [
-      'FETCH_PRODUCTS_FROM_API'
+      'getProducts'
     ]),
     ...mapActions('cart', [
       'GET_CART_LIST_FROM_API'
@@ -37,7 +37,7 @@ export default {
     ])
   },
   mounted () {
-    this.FETCH_PRODUCTS_FROM_API({
+    this.getProducts({
       category: 0,
       page: 1
     })

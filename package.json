@@ -49,7 +49,6 @@
     "vue-cli-plugin-bootstrap-vue": "^0.6.0",
     "vue-template-compiler": "^2.6.11"
   },
-
   "jest": {
     "moduleFileExtensions": [
       "js",

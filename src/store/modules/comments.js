@@ -1,8 +1,3 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import Axios from '../interceptor'
-
-Vue.use(Vuex)
 
 export default {
   namespaced: true,
@@ -17,8 +12,8 @@ export default {
   actions: {
     async FETCH_COMMENTS_FROM_API ({ commit, dispatch }, postID) {
       try {
-        const commentsApi = await Axios.get(`/comments/post_id=${postID}`)
-        commit('loadComments', commentsApi.data.results)
+        // const commentsApi = await Axios.get(`/comments/post_id=${postID}`)
+        // commit('loadComments', commentsApi.data.results)
       } catch (e) {
       }
     },
@@ -35,7 +30,7 @@ export default {
       } else {
         pes.post = post
       }
-      await Axios.post(`/comments/${childrenId}`, pes)
+      // await Axios.post(`/comments/${childrenId}`, pes)
     }
   },
   getters: {

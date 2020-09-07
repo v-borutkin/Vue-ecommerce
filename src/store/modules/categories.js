@@ -1,9 +1,4 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import Axios from '../interceptor'
-
-Vue.use(Vuex)
-
+import { getCategories } from '@/services/entities/categories'
 export default {
   namespaced: true,
   state: {
@@ -16,9 +11,12 @@ export default {
   },
   actions: {
     async FETCH_CATEGORIES_FROM_API ({ commit }) {
-      await Axios.get('/category/').then(response => {
-        commit('setCategory', response.data.results)
-      })
+      try {
+        const categories = await getCategories()
+        commit('setCategory', categories)
+      } catch (e) {
+        return Promise.reject(e)
+      }
     }
   }
 }
