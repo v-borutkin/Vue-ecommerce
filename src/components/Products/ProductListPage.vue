@@ -1,16 +1,25 @@
-<template lang="pug">
-  b-container
-    .d-flex.flex-column.flex-md-row.justify-content-sm-center.align-items-center.align-items-md-start
-      div.categories
-        ul.categories-list
-          li(v-for="category in categories" @click="setCategory(category.id)") {{category.name}}
-      b-col
-        .d-flex.flex-md-wrap.flex-md-row.flex-column.justify-content-sm-center.justify-content-lg-between.align-items-center.col-12
-          .mt-2.ml-2(v-for="product in products" :key="product.id")
-            v-product(:product="product", :category="category", :page="currentPage" :key="product.id")
-    div
-      v-pagination(v-if='paginationCount > 1', v-model='currentPage', :page-count='paginationCount', :classes='bootstrapPaginationClasses')
-  </template>
+<template>
+  <b-container>
+    <div class="d-flex flex-column flex-md-row justify-content-sm-center align-items-center align-items-md-start">
+      <div class="categories">
+        <!-- <ul class="categories-list">
+          <li v-for="category in categories" @click="setCategory(category.id)">{{category.name}}</li>
+        </ul> -->
+      </div>
+      <b-col>
+        <div class="d-flex flex-md-wrap flex-md-row flex-column justify-content-sm-center justify-content-lg-between align-items-center col-12">
+          <div class="mt-2 ml-2" v-for="product in products" :key="product.id">
+            <v-product :product="product" :category="category" :page="currentPage" :key="product.id"></v-product>
+          </div>
+        </div>
+      </b-col>
+      </div>
+    <div>
+      <v-pagination v-if="paginationCount &gt; 1" v-model="currentPage" :page-count="paginationCount" :classes="bootstrapPaginationClasses"></v-pagination>
+    </div>
+  </b-container>
+</template>
+
 <script>
 import { mapActions, mapState } from 'vuex'
 import vProduct from './vProduct'
@@ -34,28 +43,30 @@ export default {
     }
   },
   computed: {
-    ...mapState('products', [
-      'products',
-      'paginationCount'
-    ]),
+    ...mapState({
+      products: (state) => state.products.products,
+      paginationCount: (state) => state.products.paginationCount
+    }),
     ...mapState('categories', ['categories'])
   },
   methods: {
     setCategory (id) {
       this.category = id
     },
-    ...mapActions('products', ['FETCH_PRODUCTS_FROM_API']),
+    ...mapActions({
+      getProducts: 'products/getProducts'
+    }),
     ...mapActions('categories', ['FETCH_CATEGORIES_FROM_API'])
   },
   watch: {
     category () {
-      this.FETCH_PRODUCTS_FROM_API({
+      this.getProducts({
         category: this.category,
         page: this.currentPage
       })
     },
     currentPage () {
-      this.FETCH_PRODUCTS_FROM_API({
+      this.getProducts({
         category: this.category,
         page: this.currentPage
       })
