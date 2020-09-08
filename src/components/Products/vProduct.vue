@@ -45,7 +45,7 @@ export default {
       'DEL_FAVORITE'
     ]),
     ...mapActions('products', [
-      'FETCH_PRODUCTS_FROM_API'
+      'getProduct'
     ]),
     setFavorite (id) {
       if (!this.isAuth) {

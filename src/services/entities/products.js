@@ -7,3 +7,15 @@ export async function getProducts (params) {
     params
   })
 }
+export async function getProduct (id) {
+  return request({
+    method: 'GET',
+    url: `http://77.66.177.88:8181/api/v1/goods-ops/${id}`
+  })
+}
+export async function getRandomProduct () {
+  return request({
+    method: 'GET',
+    url: '/goods-random/'
+  })
+}

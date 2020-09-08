@@ -67,14 +67,9 @@ export default {
   components: {
     vProduct
   },
-  data () {
-    return {
-
-    }
-  },
   watch: {
     '$route.params.id' () {
-      this.FETCH_PRODUCT_FROM_API(parseInt(this.id))
+      this.getProduct(parseInt(this.id))
     }
   },
   computed: {
@@ -96,49 +91,49 @@ export default {
       'DEL_FAVORITE'
     ]),
     ...mapActions('products', [
-      'FETCH_PRODUCT_FROM_API',
-      'FETCH_RECOMMENDED_PRODUCTS_FROM_API'
+      'getRandomProduct',
+      'getProduct'
     ]),
     setFavorite (id) {
-      if (!this.isAuth) {
-        alert('Необходимо авторизоваться')
-      } else {
+      if (this.isAuth) {
         this.SET_FAVORITE(parseInt(id)).then(() => {
-          this.FETCH_PRODUCT_FROM_API(parseInt(id))
+          this.getProduct(parseInt(id))
         })
+      } else {
+        alert('Необходимо авторизоваться')
       }
     },
     delFavorite (id) {
-      if (!this.isAuth) {
-        alert('Необходимо авторизоваться')
-      } else {
+      if (this.isAuth) {
         this.DEL_FAVORITE(parseInt(id)).then(() => {
-          this.FETCH_PRODUCT_FROM_API(parseInt(id))
+          this.getProduct(parseInt(id))
         })
+      } else {
+        alert('Необходимо авторизоваться')
       }
     },
     addToCart (id) {
-      if (!this.isAuth) {
-        alert('Необходимо авторизоваться')
-      } else {
+      if (this.isAuth) {
         this.ADD_TO_CART({ productId: parseInt(id) }).then(() => {
-          this.FETCH_PRODUCT_FROM_API(parseInt(id))
+          this.getProduct(parseInt(id))
         })
+      } else {
+        alert('Необходимо авторизоваться')
       }
     },
     deleteFromCart (id) {
-      if (!this.isAuth) {
-        alert('Необходимо авторизоваться')
-      } else {
+      if (this.isAuth) {
         this.DELETE_FROM_CART({ productId: parseInt(id) }).then(() => {
-          this.FETCH_PRODUCT_FROM_API(parseInt(id))
+          this.getProduct(parseInt(id))
         })
+      } else {
+        alert('Необходимо авторизоваться')
       }
     }
   },
   mounted () {
-    this.FETCH_RECOMMENDED_PRODUCTS_FROM_API()
-    this.FETCH_PRODUCT_FROM_API(parseInt(this.id))
+    this.getRandomProduct()
+    this.getProduct(parseInt(this.id))
   }
 }
 

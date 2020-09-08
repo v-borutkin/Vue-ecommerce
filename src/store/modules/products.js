@@ -1,5 +1,7 @@
 import {
-  getProducts
+  getProducts,
+  getProduct,
+  getRandomProduct
 } from '@/services/entities/products'
 
 export default {
@@ -15,11 +17,11 @@ export default {
       state.products = payload.results
       state.paginationCount = Math.ceil(payload.count / 6)
     },
-    setProduct (state, payload) {
-      state.product = payload
+    setProduct (state, product) {
+      state.product = product
     },
-    setRecommendedProducts (state, payload) {
-      state.recommendedProducts = payload
+    setRecommendedProducts (state, products) {
+      state.recommendedProducts = products
     }
   },
   actions: {
@@ -30,18 +32,22 @@ export default {
       } catch (e) {
         Promise.reject(e)
       }
+    },
+    async  getRandomProduct ({ commit }) {
+      try {
+        const productsApi = await getRandomProduct()
+        commit('setRecommendedProducts', productsApi.results)
+      } catch (e) {
+        return Promise.reject(e)
+      }
+    },
+    async getProduct ({ commit }, id) {
+      try {
+        const product = await getProduct(id)
+        commit('setProduct', product)
+      } catch (e) {
+        return Promise.reject(e)
+      }
     }
-    // async  FETCH_RECOMMENDED_PRODUCTS_FROM_API ({ commit }) {
-    //   try {
-    //     const productsApi = await Axios.get('/goods-random/')
-    //     commit('setRecommendedProducts', productsApi.data.results)
-    //   } catch (e) {
-
-    //   }
-    // },
-    // async FETCH_PRODUCT_FROM_API ({ commit }, id) {
-    //   const productApi = await Axios.get(`http://77.66.177.88:8181/api/v1/goods-ops/${id}`)
-    //   commit('setProduct', productApi.data)
-    // }
   }
 }
