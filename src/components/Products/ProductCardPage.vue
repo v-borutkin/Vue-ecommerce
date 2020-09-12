@@ -80,7 +80,7 @@ export default {
   mixins: [imgUrl],
   props: {
     id: {
-      type: Number,
+      type: String,
       default: null,
       required: true
     }
