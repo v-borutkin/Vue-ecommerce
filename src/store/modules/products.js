@@ -22,6 +22,14 @@ export default {
     },
     setRecommendedProducts (state, products) {
       state.recommendedProducts = products
+    },
+    addFavorite (state, productId) {
+      state.products.find((item) => item.id === productId).isFavorite = true
+      state.product.isFavorite = true
+    },
+    delFavorite (state, productId) {
+      state.products.find((item) => item.id === productId).isFavorite = false
+      state.product.isFavorite = false
     }
   },
   actions: {

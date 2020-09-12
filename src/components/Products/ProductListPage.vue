@@ -45,9 +45,9 @@ export default {
   computed: {
     ...mapState({
       products: (state) => state.products.products,
-      paginationCount: (state) => state.products.paginationCount
-    }),
-    ...mapState('categories', ['categories'])
+      paginationCount: (state) => state.products.paginationCount,
+      categories: (state) => state.categories.categories
+    })
   },
   methods: {
     setCategory (id) {

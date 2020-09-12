@@ -49,7 +49,7 @@ export default {
     ]),
     setFavorite (id) {
       if (!this.isAuth) {
-        alert('Необходимо авторизоваться')
+        this.$toasted.error('Need authorization')
       } else {
         this.SET_FAVORITE({
           productId: id,
@@ -60,7 +60,7 @@ export default {
     },
     delFavorite (id) {
       if (!this.isAuth) {
-        alert('Необходимо авторизоваться')
+        this.$toasted.error('Need authorization')
       } else {
         this.DEL_FAVORITE({
           productId: id,
@@ -71,7 +71,7 @@ export default {
     },
     addToCart (id) {
       if (!this.isAuth) {
-        alert('Необходимо авторизоваться')
+        this.$toasted.error('Need authorization')
       } else {
         this.ADD_TO_CART({
           productId: id,
@@ -82,7 +82,7 @@ export default {
     },
     deleteFromCart (id) {
       if (!this.isAuth) {
-        alert('Необходимо авторизоваться')
+        this.$toasted.error('Need authorization')
       } else {
         this.DELETE_FROM_CART({
           productId: id,
