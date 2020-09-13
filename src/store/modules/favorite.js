@@ -19,34 +19,27 @@ export default {
         return Promise.reject(e)
       }
     },
-    async setFavorite ({ commit, rootState }, productId) {
-      commit('addFavorite', productId)
-      commit('products/addFavorite', productId)
-
+    async setFavorite ({ commit }, productId) {
+      commit('products/addFavorite', productId, { root: true })
       try {
-        await setFavorite(productId)
+        await setFavorite({ good: productId })
       } catch (e) {
-        commit('delFavorite', productId)
         commit('products/delFavorite', productId)
+        return Promise.reject(e)
       }
     },
-    async deleteFavorite ({ commit }, productId) {
-      commit('delFavorite', productId)
-      commit('products/delFavorite', productId)
-
+    async deleteFavorite ({ store, commit }, productId) {
+      commit('products/delFavorite', productId, { root: true })
       try {
-        await delFavorite(productId)
+        await delFavorite({ good: productId })
       } catch (e) {
-        commit('addFavorite', productId)
-        commit('products/addFavorite', productId)
+        commit('products/addFavorite', productId, { root: true })
+        return Promise.reject(e)
       }
     }
   },
   mutations: {
-    setProductFavoriteList (state, payload) {
-      state.favoriteProducts = payload
-    },
-    addFavorite (rootState, state, productId) {
+    addFavorite ({ state, rootState }, productId) {
       state.favoriteProducts.push(rootState.products.products.find((item) => item.id === productId))
     },
     delFavorite (state, productId) {

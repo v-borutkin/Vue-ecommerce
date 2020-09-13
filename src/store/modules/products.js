@@ -24,12 +24,14 @@ export default {
       state.recommendedProducts = products
     },
     addFavorite (state, productId) {
-      state.products.find((item) => item.id === productId).isFavorite = true
-      state.product.isFavorite = true
+      if (state.products.find((item) => item.id === productId)) {
+        state.products.find((item) => item.id === productId).in_favorite = true
+      }
+      state.product.in_favorite = true
     },
     delFavorite (state, productId) {
-      state.products.find((item) => item.id === productId).isFavorite = false
-      state.product.isFavorite = false
+      state.products.find((item) => item.id === productId).in_favorite = false
+      state.product.in_favorite = false
     }
   },
   actions: {

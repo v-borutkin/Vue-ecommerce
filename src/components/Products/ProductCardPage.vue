@@ -33,7 +33,7 @@
           </div>
           <div :class="$style.addToFavorite">
             <transition name="fade" mode="out-in">
-              <b-button v-if="!product.in_favorite" variant="outline-success" @click="setFavorite()" key="0">
+              <b-button v-if="!product.in_favorite" variant="outline-success" @click="addFavorite(id)" key="0">
                 <svg class="bi bi-star" width="1em" height="1em" viewbox="0 0 16 16" fill="currentColor"
                      xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd"
@@ -95,7 +95,7 @@ export default {
   },
   computed: {
     ...mapState({
-      user: (state) => state.user.isAuth,
+      isAuth: (state) => state.user.isAuth,
       product: (state) => state.products.product,
       recommendedProducts: (state) => state.products.recommendedProducts
     })
@@ -109,7 +109,7 @@ export default {
       setFavorite: 'favorite/setFavorite',
       deleteFavorite: 'favorite/deleteFavorite'
     }),
-    setFavorite () {
+    addFavorite () {
       if (this.isAuth) {
         this.setFavorite(this.id)
       } else {

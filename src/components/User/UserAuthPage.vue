@@ -53,9 +53,9 @@ export default {
     }
   },
   methods: {
-    ...mapActions('user', [
-      'AUTH'
-    ]),
+    ...mapActions({
+      auth: 'user/auth'
+    }),
     setPassword (value) {
       this.password = value
     },
@@ -65,7 +65,7 @@ export default {
     login () {
       this.$v.$touch()
       if (!this.$v.$error) {
-        this.AUTH({
+        this.auth({
           username: this.username,
           password: this.password
         }).catch(error => {
