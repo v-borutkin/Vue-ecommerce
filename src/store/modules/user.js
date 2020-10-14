@@ -1,10 +1,4 @@
-import {
-  passwordReset,
-  registrationConfirm,
-  registration,
-  auth,
-  sendNewPassword
-} from '@/services/entities/user'
+import { auth, passwordReset, registration, registrationConfirm, sendNewPassword } from '@/services/entities/user'
 import router from '@/router'
 
 export default {
@@ -45,10 +39,11 @@ export default {
     async auth ({ commit, dispatch }, { username, password }) {
       try {
         const user = await auth({ username, password })
+
         localStorage.setItem('token', user.key)
         dispatch('cart/GET_CART_LIST_FROM_API', {}, { root: true })
-        commit('IS_AUTH', true)
-        commit('AUTH', user)
+        commit('isAuth', true)
+        commit('auth', user)
         router.back(-1)
       } catch (e) {
         return Promise.reject(e)
@@ -64,14 +59,16 @@ export default {
         return Promise.reject(e)
       }
     },
-    LOGOUT ({ commit, dispatch }) {
+    logout ({ commit, dispatch }) {
       commit('IS_AUTH', false)
       localStorage.removeItem('token')
+      localStorage.removeItem('userId')
+      localStorage.removeItem('userName')
       dispatch('cart/CART_LIST_CLEAR', {}, { root: true })
     },
-    TO_AUTH ({ commit }) {
-      commit('IS_AUTH', true)
-      commit('UPDATE_USER')
+    toAuth ({ commit }) {
+      commit('isAuth', true)
+      commit('userUpdate')
     }
   },
   getters: {
@@ -80,22 +77,18 @@ export default {
     }
   },
   mutations: {
-    IS_AUTH (state, payload) {
-      state.isAuth = payload
+    isAuth (state, user) {
+      state.isAuth = user
     },
-    AUTH (state, payload) {
-      state.user.userId = payload.id
-      localStorage.setItem('userId', payload.id)
-
-      state.user.userName = payload.username
-      localStorage.setItem('userName', payload.username)
+    auth (state, { user }) {
+      state.user.userId = user.username
+      localStorage.setItem('userId', user.username)
+      state.user.userName = user.username
+      localStorage.setItem('userName', user.username)
     },
-    UPDATE_USER (state) {
-      const userName = localStorage.getItem('userName')
-      const userId = localStorage.getItem('userId')
-
-      state.user.userId = userId
-      state.user.userName = userName
+    userUpdate (state) {
+      state.user.userId = localStorage.getItem('userId')
+      state.user.userName = localStorage.getItem('userName')
     }
   }
 }

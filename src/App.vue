@@ -26,14 +26,14 @@ export default {
     ])
   },
   methods: {
+    ...mapActions({
+      toAuth: 'user/toAuth'
+    }),
     ...mapActions('products', [
       'getProducts'
     ]),
     ...mapActions('cart', [
       'GET_CART_LIST_FROM_API'
-    ]),
-    ...mapActions('user', [
-      'TO_AUTH'
     ])
   },
   mounted () {
@@ -42,7 +42,7 @@ export default {
       page: 1
     })
     if (localStorage.getItem('token')) {
-      this.TO_AUTH()
+      this.toAuth()
       this.GET_CART_LIST_FROM_API()
     }
   }

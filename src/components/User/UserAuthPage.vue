@@ -35,8 +35,8 @@ export default {
   name: 'Auth',
   data () {
     return {
-      username: '',
-      password: '',
+      username: null,
+      password: null,
       errors: []
     }
   },
