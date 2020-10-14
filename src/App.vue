@@ -15,26 +15,17 @@ export default {
   components: {
     TheNavigation
   },
-  data () {
-    return {
-
-    }
-  },
   computed: {
-    ...mapState('cart', [
-      'cartList'
-    ])
+    ...mapState({
+      cartList: (state) => state.cart.cartList
+    })
   },
   methods: {
     ...mapActions({
-      toAuth: 'user/toAuth'
-    }),
-    ...mapActions('products', [
-      'getProducts'
-    ]),
-    ...mapActions('cart', [
-      'GET_CART_LIST_FROM_API'
-    ])
+      toAuth: 'user/toAuth',
+      getProducts: 'products/getProducts',
+      GET_CART_LIST_FROM_API: 'cart/GET_CART_LIST_FROM_API'
+    })
   },
   mounted () {
     this.getProducts({

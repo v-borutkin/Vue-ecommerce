@@ -60,7 +60,7 @@ export default {
       }
     },
     logout ({ commit, dispatch }) {
-      commit('IS_AUTH', false)
+      commit('isAuth', false)
       localStorage.removeItem('token')
       localStorage.removeItem('userId')
       localStorage.removeItem('userName')

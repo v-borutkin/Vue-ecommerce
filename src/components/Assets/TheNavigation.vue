@@ -10,10 +10,12 @@
           <router-link class="ml-2" :to="link.url">{{link.title}}</router-link>
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto">
-          <router-link class="ml-2 mt-1" to="/cart"><button class="btn btn-primary"> {{cartLength}} Корзина</button></router-link>
+          <router-link class="ml-2 mt-1" to="/cart">
+            <button class="btn btn-primary"> {{cartLength}} Корзина</button>
+          </router-link>
           <b-nav-item-dropdown right="right" v-if="isAuth">
             <template #button-content>
-              <b-avatar variant="info" src="https://placekitten.com/300/300/" />
+              <b-avatar variant="info" src="https://placekitten.com/300/300/"/>
               <em>{{user.userName}}</em>
             </template>
             <b-dropdown-item to="/profile">Профиль</b-dropdown-item>
@@ -33,9 +35,15 @@
 
 <script>
 import { mapActions, mapState } from 'vuex'
+
 export default {
   name: 'Navigation',
-  props: ['cartLength'],
+  props: {
+    cartLength: {
+      type: Number,
+      default: 0
+    }
+  },
   computed: {
     ...mapState({
       navLinks: (state) => state.navigation.navLinks,
@@ -43,27 +51,26 @@ export default {
       user: (state) => state.user.user
     })
   },
-  mounted () {
-    console.log(this.user)
-  },
   methods: {
-    ...mapActions('user', [
-      'LOGOUT'
-    ]),
+    ...mapActions({
+      logout: 'user/logout'
+    }),
     userLogout () {
-      this.LOGOUT()
+      this.logout()
     }
   }
 }
 </script>
 
 <style scoped>
- a{
-   color: rgba(255,255,255,.5)
- }
+  a {
+    color: rgba(255, 255, 255, .5)
+  }
+
   a.router-link-active {
     color: #f66;
   }
+
   li.router-link-active a {
     color: #f66;
   }

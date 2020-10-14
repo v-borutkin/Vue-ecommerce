@@ -17,21 +17,10 @@ export default {
   components: {
     vSlider, vProduct
   },
-  data () {
-    return {
-
-    }
-  },
   computed: {
-    ...mapState('products', [
-      'products'
-    ])
-  },
-  methods: {
-
-  },
-  mounted () {
-
+    ...mapState({
+      products: (state) => state.products.products
+    })
   }
 }
 </script>
