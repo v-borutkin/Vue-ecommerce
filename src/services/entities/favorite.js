@@ -15,10 +15,9 @@ export async function setFavorite (productId) {
   })
 }
 
-export async function delFavorite (productId) {
+export async function delFavorite ({ good }) {
   return request({
     method: 'DELETE',
-    url: '/favorite/',
-    data: productId
+    url: `/favorite/${good}`
   })
 }

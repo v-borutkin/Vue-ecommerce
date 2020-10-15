@@ -1,3 +1,7 @@
+import {
+  loadPosts,
+  loadPost
+} from '@/services/entities/blog'
 
 export default {
   namespaced: true,
@@ -11,30 +15,29 @@ export default {
     set_myData (state, payload) {
       state._myData = payload
     },
-    loadPosts (state, payload) {
-      state.posts = payload.data.results
-      state.paginationCount = Math.ceil(payload.data.count / 6)
+    setPosts (state, posts) {
+      state.posts = posts.results
+      state.paginationCount = Math.ceil(posts.count / 6)
     },
-    loadPost (state, payload) {
-      state.post = payload
+    setPost (state, post) {
+      state.post = post
+    }
+  },
+  actions: {
+    async  loadPosts ({ commit }, currentPage) {
+      try {
+        const posts = await loadPosts({ page: currentPage })
+        commit('setPosts', posts)
+        commit('set_myData', true)
+      } catch (e) {
+      }
+    },
+    async loadPost ({ commit }, id) {
+      try {
+        const post = await loadPost(id)
+        commit('setPost', post)
+      } catch (e) {
+      }
     }
   }
-  // actions: {
-  //   async  FETCH_POSTS_FROM_API ({ commit }, currentPage) {
-  //     try {
-  //       const postsApi = await Axios.get(`/posts/?page=${currentPage}`)
-  //       commit('loadPosts', postsApi)
-  //       commit('set_myData', true)
-  //     } catch (e) {
-  //     }
-  //   },
-  //   async FETCH_POST_FROM_API ({ commit }, id) {
-  //     try {
-  //       await Axios.get(`/post-ops/${id}`).then(response => {
-  //         commit('loadPost', response.data)
-  //       })
-  //     } catch (e) {
-  //     }
-  //   }
-  // }
 }
