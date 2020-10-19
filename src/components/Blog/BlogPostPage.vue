@@ -30,7 +30,7 @@
         <p>{{formatDate(post.created_date)}}</p>
       </div>
     </b-card>
-    <the-comments :comments="comments" :id="id"></the-comments>
+    <the-comments :comments="comments" :id="id" @sendMessage="sendMessage"/>
   </b-container>
 </template>
 <script>
@@ -45,25 +45,37 @@ export default {
   components: {
     TheComments
   },
-  data () {
-    return {
-    }
-  },
-  methods: {
-    ...mapActions({
-      loadPosts: 'blog/loadPosts',
-      loadPost: 'blog/loadPost',
-      sendComment: 'comment/sendComment'
-    })
-  },
   computed: {
     ...mapState({
       post: (state) => state.blog.post,
-      comments: (state) => state.blog.comments
+      comments: (state) => state.comments.comments
     })
   },
   mounted () {
-    this.loadPost(this.id)
+    this.fetchData()
+  },
+  methods: {
+    async fetchData () {
+      await Promise.all([
+        this.loadPost(this.id),
+        this.getComments(this.id)
+      ])
+    },
+    ...mapActions({
+      loadPosts: 'blog/loadPosts',
+      loadPost: 'blog/loadPost',
+      sendComment: 'comment/sendComment',
+      getComments: 'comments/getComments',
+      setComment: 'comments/setComment'
+    }),
+    sendMessage (message) {
+      this.SET_COMMENT_TO_API(message).then(() => {
+        this.loadPosts(this.id)
+        this.message = ''
+      }).catch(error => {
+        alert(`произошла ошибка + ${error.response}`)
+      })
+    }
   }
 }
 </script>

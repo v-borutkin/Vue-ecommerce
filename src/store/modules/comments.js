@@ -1,3 +1,4 @@
+import { loadComments } from '@/services/entities/comments'
 
 export default {
   namespaced: true,
@@ -5,30 +6,31 @@ export default {
     comments: []
   },
   mutations: {
-    loadComments (state, payload) {
+    getComments (state, payload) {
       state.comments = payload
     }
   },
   actions: {
-    async FETCH_COMMENTS_FROM_API ({ commit, dispatch }, postID) {
+    async getComments ({ commit }, postID) {
       try {
-        // const commentsApi = await Axios.get(`/comments/post_id=${postID}`)
-        // commit('loadComments', commentsApi.data.results)
+        const comments = await loadComments({ post_id: postID })
+        commit('getComments', comments.results)
       } catch (e) {
+        return Promise.reject(e)
       }
     },
 
     async SET_COMMENT_TO_API ({ commit, dispatch }, { text, post, author, childrenId = '' }) {
-      const pes = {
+      const comment = {
         text,
         post,
         author,
         moderation: false
       }
       if (childrenId) {
-        delete pes.post
+        delete comment.post
       } else {
-        pes.post = post
+        comment.post = post
       }
       // await Axios.post(`/comments/${childrenId}`, pes)
     }
