@@ -75,9 +75,6 @@ export default {
       childId: null
     }
   },
-  mounted () {
-    this.fetchData()
-  },
   computed: {
     ...mapState({
       isAuth: (state) => state.user.isAuth,
@@ -99,16 +96,12 @@ export default {
     sendMessage () {
       if (this.isAuth) {
         this.$v.message.$touch()
-        let clildId = ''
-        if (this.childId) {
-          clildId = this.childId
-        }
         if (!this.$v.$error) {
           this.$emit('sendMessage', {
             text: this.message,
             post: this.id,
             author: this.user.userId,
-            childrenId: clildId
+            childrenId: this.childId || ''
           })
         }
       }

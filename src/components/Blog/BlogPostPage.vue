@@ -68,13 +68,15 @@ export default {
       getComments: 'comments/getComments',
       setComment: 'comments/setComment'
     }),
-    sendMessage (message) {
-      this.SET_COMMENT_TO_API(message).then(() => {
-        this.loadPosts(this.id)
+    async sendMessage (message) {
+      try {
+        await this.setComment(message)
+        this.getComments(this.id)
         this.message = ''
-      }).catch(error => {
-        alert(`произошла ошибка + ${error.response}`)
-      })
+        this.$toasted.success('Комментарий успешно добавлен')
+      } catch (e) {
+        this.$toasted.error(e.response)
+      }
     }
   }
 }

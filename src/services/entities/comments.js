@@ -8,10 +8,10 @@ export async function loadComments (params) {
   })
 };
 
-export async function setComment (params) {
+export async function setBlogPostComment (params) {
   return request({
-    method: 'GET',
-    url: '/comments/',
+    method: 'POST',
+    url: `/comments/${params?.childrenId}`,
     data: params
   })
 };

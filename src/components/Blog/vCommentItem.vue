@@ -1,19 +1,16 @@
-<template lang="pug">
-  div
-    li.clearfix
-      img.avatar(src='https://bootdey.com/img/Content/user_1.jpg', alt='')
-      .post-comments
-        .header_comment.d-inline-flex.meta.justify-content-between
-          p {{ formatDate(comment.created_date)}}
-          a.author(href='#') {{ comment.author }}
-          b-button.btn.btn-info.rounded-right(size='sm', v-if='isReply', :disabled='!isAuth',
-                                              @click.prevent='sendReply(comment.id, comment.text)')
-            | Reply
-        p(:style='{ fontStyle: textStyle }')
-          | {{comment.text}}
-        comment-item(v-for='comment in comment.child_comment', :key='comment.id', :comment='comment',
-                                                               :isAuth='isAuth', :isReply='false', textstyle='italic')
-
+<template>
+  <div>
+    <li class="clearfix"><img class="avatar" src="https://bootdey.com/img/Content/user_1.jpg" alt="" />
+      <div class="post-comments">
+        <div class="header_comment d-inline-flex meta justify-content-between">
+          <p>{{ formatDate(comment.created_date)}}</p><a class="author" href="#">{{ comment.author }}</a>
+          <b-button class="btn btn-info rounded-right" size="sm" v-if="isReply" :disabled="!isAuth" @click.prevent="sendReply(comment.id, comment.text)">Reply</b-button>
+        </div>
+        <p :style="{ fontStyle: textStyle }">{{comment.text}}</p>
+        <comment-item v-for="comment in comment.child_comment" :key="comment.id" :comment="comment" :isAuth="isAuth" :isReply="false" textstyle="italic"></comment-item>
+      </div>
+    </li>
+  </div>
 </template>
 
 <script>

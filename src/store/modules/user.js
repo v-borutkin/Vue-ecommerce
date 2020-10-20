@@ -81,8 +81,8 @@ export default {
       state.isAuth = user
     },
     auth (state, { user }) {
-      state.user.userId = user.username
-      localStorage.setItem('userId', user.username)
+      state.user.userId = user.id
+      localStorage.setItem('userId', user.id)
       state.user.userName = user.username
       localStorage.setItem('userName', user.username)
     },

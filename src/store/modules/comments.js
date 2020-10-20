@@ -1,4 +1,4 @@
-import { loadComments } from '@/services/entities/comments'
+import { loadComments, setBlogPostComment } from '@/services/entities/comments'
 
 export default {
   namespaced: true,
@@ -20,19 +20,19 @@ export default {
       }
     },
 
-    async SET_COMMENT_TO_API ({ commit, dispatch }, { text, post, author, childrenId = '' }) {
+    async setComment ({ commit, dispatch }, message) {
       const comment = {
-        text,
-        post,
-        author,
+        ...message,
         moderation: false
       }
-      if (childrenId) {
+      if (message.childrenId) {
         delete comment.post
-      } else {
-        comment.post = post
       }
-      // await Axios.post(`/comments/${childrenId}`, pes)
+      try {
+        await setBlogPostComment(comment)
+      } catch (e) {
+        return Promise.reject(e)
+      }
     }
   },
   getters: {
