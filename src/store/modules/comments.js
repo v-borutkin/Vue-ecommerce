@@ -34,10 +34,5 @@ export default {
         return Promise.reject(e)
       }
     }
-  },
-  getters: {
-    GET_COMMENTS (state) {
-      return state.comments
-    }
   }
 }
