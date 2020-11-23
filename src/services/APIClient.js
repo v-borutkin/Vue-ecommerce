@@ -1,11 +1,12 @@
 import axios from 'axios'
 import NProgress from 'nprogress'
+import { port } from '@/consts'
 NProgress.configure({ easing: 'ease', speed: 500 })
 
 let APIClient
 export function initAPIClient (store) {
   APIClient = axios.create({
-    baseURL: 'http://77.66.177.88:8181/api/v1',
+    baseURL: `${port}/api/v1`,
     timeout: 30000
   })
   APIClient.interceptors.request.use(
